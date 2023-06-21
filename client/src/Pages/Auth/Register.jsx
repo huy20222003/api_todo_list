@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { Link, redirect } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Api_URL, LOCAL_STORAGE_TOKEN_NAME } from '../../constant';
 import { AuthContext } from '../../Context/AuthContext';
 
@@ -15,6 +15,7 @@ function Register() {
     );
 
     const {registerUser} = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const {fullName, username, email, password, comfirmPassword} = registerForm;
 
@@ -30,9 +31,10 @@ function Register() {
 
         try {
             const registerData = await registerUser(registerForm);
-            localStorage.setItem(LOCAL_STORAGE_TOKEN_NAME, registerData.accessToken);
             if(!registerData.status) {
                 console.log('An error has occurred');
+            } else {
+                localStorage.setItem(LOCAL_STORAGE_TOKEN_NAME, registerData.accessToken);
             }
         } catch (error) {
             console.log(error);

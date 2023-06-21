@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import {Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthContext';
 import { LOCAL_STORAGE_TOKEN_NAME } from '../../constant';
 
@@ -13,6 +13,7 @@ function Login() {
 
     const {username, password} = loginForm;
     const { loginUser } = useContext(AuthContext);
+    const navigate = useNavigate();
 
     const handleChangeLoginForm = (e)=> {
         setLoginForm({...loginForm, [e.target.name]: e.target.value});
@@ -26,6 +27,7 @@ function Login() {
                 console.log('An error has occurred');
             } else {
                 localStorage.setItem(LOCAL_STORAGE_TOKEN_NAME, loginData.accessToken);
+                navigate('/dashbroad/todos');
             }
         } catch (error) {
             console.log(error);

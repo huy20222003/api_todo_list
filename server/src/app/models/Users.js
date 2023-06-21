@@ -41,7 +41,7 @@ const Users = new Schema({
     },
     image: {
         type: String,
-        default: ""
+        default: "https://antimatter.vn/wp-content/uploads/2022/11/anh-avatar-trang-fb-mac-dinh.jpg"
     }
 });
 
