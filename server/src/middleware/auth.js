@@ -18,7 +18,6 @@ async function verify(req, res, next) {
       
           // Kiểm tra và phân quyền truy cập tại đây
           // ...
-      
           next(); // Cho phép đi tiếp tới middleware hoặc route tiếp theo
         }
       } catch (error) {

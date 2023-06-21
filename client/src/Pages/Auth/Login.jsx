@@ -21,6 +21,7 @@ function Login() {
         e.preventDefault();
         try {
             const loginData = await loginUser(loginForm);
+            console.log(loginData);
             if(!loginData.status) {
                 console.log('co loi');
             }
@@ -32,7 +33,7 @@ function Login() {
 
     return (
         <div className="bg-[url('./assets/images/anh-coder.jpg')] w-screen h-screen flex justify-center items-center">
-            <form className="bg-white rounded-lg w-96 text-center h-fit py-5">
+            <form className="bg-white rounded-lg w-96 text-center h-fit py-5" onSubmit={handleSubmitLoginForm}>
                 <div className="my-7">
                     <h1 className="text-2xl font-bold indent-1">
                         Login Form
@@ -67,7 +68,6 @@ function Login() {
                 <div className="my-5">
                     <button 
                         type="submit" 
-                        onSubmit={handleSubmitLoginForm}
                         className="text-white  bg-fuchsia-500 text-center rounded-full w-[300px] h-10">
                         Login
                     </button>

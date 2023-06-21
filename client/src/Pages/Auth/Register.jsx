@@ -41,7 +41,9 @@ function Register() {
 
     return (
         <div className="bg-[url('./assets/images/anh-coder.jpg')] w-screen h-screen flex justify-center items-center">
-            <form className="bg-white rounded-lg w-96 text-center h-fit py-5" action='http://localhost:3000/api/auth/register' method='POST'>
+            <form 
+                className="bg-white rounded-lg w-96 text-center h-fit py-5" 
+                onSubmit={handleSubmitRegisterForm}>
                 <div className="my-7">
                     <h1 className="text-2xl font-bold indent-1">
                         Register Form
@@ -112,7 +114,6 @@ function Register() {
                 <div className="my-5">
                     <button 
                         type="submit" 
-                        onSubmit={handleSubmitRegisterForm}
                         className="text-white  bg-fuchsia-500 text-center rounded-full w-[300px] h-10">
                         Register
                     </button>
