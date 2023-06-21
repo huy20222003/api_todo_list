@@ -1,9 +1,9 @@
 POST http://localhost:3000/api/auth/login
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuZXdVc2VyIjp7ImZ1bGxOYW1lIjoiMTIzNDU2NzMiLCJ1c2VybmFtZSI6ImFiY2RlZmciLCJlbWFpbCI6IjEyM0BnYW1pbC5jb20iLCJwYXNzd29yZCI6IjEyMzQ1NjciLCJjb21maXJtUGFzc3dvcmQiOiIxMjM0NTY3IiwiX2lkIjoiNjQ4ZWQ4NGEyZTg2YjYwMmZhMGRlOTY4In0sImlhdCI6MTY4NzA4MzA4Mn0.Jca-gnlgCmEA_7KgA5vl7LK85yPlvBdgn1mJc_fA7DA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY0OGVkN2I5OGJhMjI5YzVlNzBhYmYyYyIsImZ1bGxOYW1lIjoiMTIzNDU2NzMiLCJ1c2VybmFtZSI6ImFiY2RlZiIsImVtYWlsIjoiMTIzQGdhbWlsLmNvbSIsInBhc3N3b3JkIjoiJDJhJDA4JEFWc3Z6NEFsQlYxc3RpREU5aEk5VHVUM25ia2F4WXZqYmNJTjlBeEcyV3JJZVR6MlJOZElLIiwiY29tZmlybVBhc3N3b3JkIjoiJDJhJDA4JG1iMXhGV0Z0LjJXNG5hNS9vNGtLTmV6dFBFak1UNHRLc0F2VzV4UTJQSi4yNlhIZkJwMy5LIiwiX192IjowfSwiaWF0IjoxNjg3MDkyNTIzfQ.CF0nr6zBSIZTK4abGGRvSyRFiMMcqI7ducTwYm3Uh3w
 
 {
-    "username": "abcdef",
+    "username": "abcdefg",
     "password": "1234567"
 }
 
@@ -15,7 +15,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDhlYjI1O
 
 {
     "fullName": "12345673",
-    "username": "abcdefg",
+    "username": "abcdefghk",
     "email": "123@gamil.com",
     "password": "1234567",
     "comfirmPassword": "1234567"
@@ -56,7 +56,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6I
 
 ###
 
-POST http://localhost:3000/api/todos/search/?name=post 122345
+POST http://localhost:3000/api/todos/search/?name=post 12
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY0OGVkN2I5OGJhMjI5YzVlNzBhYmYyYyIsImZ1bGxOYW1lIjoiMTIzNDU2NzMiLCJ1c2VybmFtZSI6ImFiY2RlZiIsImVtYWlsIjoiMTIzQGdhbWlsLmNvbSIsInBhc3N3b3JkIjoiJDJhJDA4JEFWc3Z6NEFsQlYxc3RpREU5aEk5VHVUM25ia2F4WXZqYmNJTjlBeEcyV3JJZVR6MlJOZElLIiwiY29tZmlybVBhc3N3b3JkIjoiJDJhJDA4JG1iMXhGV0Z0LjJXNG5hNS9vNGtLTmV6dFBFak1UNHRLc0F2VzV4UTJQSi4yNlhIZkJwMy5LIiwiX192IjowfSwiaWF0IjoxNjg3MDk0MTI4fQ.-nxNx-vav_EkCnnEL5NbWHktxk1bQeMdlPMkjWoOf_M
 

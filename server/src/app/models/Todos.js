@@ -6,6 +6,11 @@ const Todos = new Schema({
         type: String, 
         default: '',
         required: true,
+        minLength: 1
+    },
+    description: {
+        type: String,
+        default: ''
     },
     status: {
         type: String,

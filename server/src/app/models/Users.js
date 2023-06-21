@@ -39,6 +39,10 @@ const Users = new Schema({
         trim: true,
         minLength: 7
     },
+    image: {
+        type: String,
+        default: ""
+    }
 });
 
 Users.pre('save', async function (next) {
