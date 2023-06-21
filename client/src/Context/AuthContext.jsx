@@ -40,38 +40,29 @@ export const AuthProvider = ({children})=> {
     }, []);
 
     //register User
-    const registerUser = async (registerForm)=> {
+    const registerUser = async (registerForm) => {
         try {
-            const res = await axios.post(`${Api_URL}/auth/register`, registerForm);
-            if(res.data.status) {
-                localStorage.setItem(LOCAL_STORAGE_TOKEN_NAME, res.data.accessToken);
-            }
-
-            await loadUser();
-
-            return res.data;
+          const res = await axios.post(`${Api_URL}/auth/register`, registerForm);
+          await loadUser();
+      
+          return res.data;
         } catch (error) {
-            if (error.response.data){ 
-                return error.response.data;
-            } else {
-                return { 
-                    status: false, 
-                    message: error.message 
-                }
-            }
+          if (error.response && error.response.data) {
+            return error.response.data;
+          } else {
+            return {
+              status: false,
+              message: error.message,
+            };
+          }
         }
-    }
+      };
+      
 
     //login User
     const loginUser = async (loginForm)=> {
         try {
 			const response = await axios.post(`${Api_URL}/auth/login`, loginForm);
-			if (response.data.success) {
-				localStorage.setItem(
-					LOCAL_STORAGE_TOKEN_NAME,
-					response.data.accessToken
-				)
-            }
 			await loadUser()
 
 			return response.data

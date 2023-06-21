@@ -17,11 +17,11 @@ app.use(morgan('combine'));
 const database = require('./config/database');
 database.connect();
 
-//router
-route(app);
-
 //cors
 app.use(cors());
 app.options('*', cors());
+
+//router
+route(app);
 
 app.listen(PORT, () => console.log(`App listening on port ${PORT}`));

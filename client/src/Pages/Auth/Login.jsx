@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
-import {Link} from 'react-router-dom';
+import {Link } from 'react-router-dom';
 import { AuthContext } from '../../Context/AuthContext';
+import { LOCAL_STORAGE_TOKEN_NAME } from '../../constant';
 
 function Login() {
     const [loginForm, setLoginForm] = useState(
@@ -21,9 +22,10 @@ function Login() {
         e.preventDefault();
         try {
             const loginData = await loginUser(loginForm);
-            console.log(loginData);
             if(!loginData.status) {
-                console.log('co loi');
+                console.log('An error has occurred');
+            } else {
+                localStorage.setItem(LOCAL_STORAGE_TOKEN_NAME, loginData.accessToken);
             }
         } catch (error) {
             console.log(error);
@@ -63,6 +65,9 @@ function Login() {
                             onChange={handleChangeLoginForm}
                             className="border-2 rounded border-slate-500 p-2 w-[300px]"  
                             placeholder="Enter your password"/>
+                    </div>
+                    <div className="text-right mr-10 mt-[-9px]">
+                        <span className="text-sm cursor-pointer hover:text-violet-600">Forgot password?</span>
                     </div>
                 </div>
                 <div className="my-5">

@@ -1,7 +1,6 @@
 import { useState, useContext } from 'react';
-import {Link} from 'react-router-dom';
-import axios from 'axios';
-import { Api_URL } from '../../constant';
+import { Link, redirect } from 'react-router-dom';
+import { Api_URL, LOCAL_STORAGE_TOKEN_NAME } from '../../constant';
 import { AuthContext } from '../../Context/AuthContext';
 
 function Register() {
@@ -26,13 +25,14 @@ function Register() {
     const handleSubmitRegisterForm = async (e)=>{
         e.preventDefault();
         if(password != comfirmPassword) {
-            console.log('NOT OK');
+            console.log('Password does not match');
         }
 
         try {
             const registerData = await registerUser(registerForm);
+            localStorage.setItem(LOCAL_STORAGE_TOKEN_NAME, registerData.accessToken);
             if(!registerData.status) {
-                console.log('co loi');
+                console.log('An error has occurred');
             }
         } catch (error) {
             console.log(error);
@@ -109,6 +109,9 @@ function Register() {
                             onChange={handelChangeRegisterForm}
                             className="border-2 rounded border-slate-500 p-2 w-[300px]"  
                             placeholder="Enter your comfirm Password"/>
+                    </div>
+                    <div className="text-right mr-10 mt-[-9px]">
+                        <span className="text-sm cursor-pointer hover:text-violet-600">Forgot password?</span>
                     </div>
                 </div>
                 <div className="my-5">
