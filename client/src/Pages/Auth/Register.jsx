@@ -39,6 +39,7 @@ function Register() {
         } catch (error) {
             console.log(error);
         }
+        setRegisterForm({fullName: '', username: '', email: '', password: '', comfirmPassword: ''});
     }
 
     return (

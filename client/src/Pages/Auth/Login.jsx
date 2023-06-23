@@ -27,11 +27,12 @@ function Login() {
                 console.log('An error has occurred');
             } else {
                 localStorage.setItem(LOCAL_STORAGE_TOKEN_NAME, loginData.accessToken);
-                navigate('/dashbroad/todos');
+                navigate('/dashbroad');
             }
         } catch (error) {
             console.log(error);
         }
+        setLoginForm({username: '', password: ''});
     }
 
 

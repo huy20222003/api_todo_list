@@ -12,7 +12,7 @@ const Todos = new Schema({
         type: String,
         default: ''
     },
-    status: {
+    label: {
         type: String,
         default: '',
         required: true

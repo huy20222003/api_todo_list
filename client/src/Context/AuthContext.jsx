@@ -75,10 +75,21 @@ export const AuthProvider = ({children})=> {
 		}
     }
 
+    //logout
+    const logoutUser = ()=> {
+        localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
+		dispatch(setAuth({
+            isAuthenticated: false, 
+            user: null
+        }));
+    }
+
     const AuthContextData = {
+        authState,
         loadUser,
         registerUser,
-        loginUser
+        loginUser,
+        logoutUser
     }
 
     return (

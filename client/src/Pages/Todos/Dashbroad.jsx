@@ -1,14 +1,17 @@
-import { useEffect, useContext } from "react";
-import { TodosContext } from "../../Context/TodosContext";
+import Sidebar from "../../Components/layoutContent/Sidebar";
+import Content from "../../Components/layoutContent/Content";
 
 const Dashbroad = ()=> {
-    const { getAll } = useContext(TodosContext);
-    useEffect(()=>{
-        getAll();
-    }, []);
 
     return(
-        <>Dashbroad</>
+        <div className="flex">
+            <div>
+                <Sidebar />
+            </div>
+            <div className="w-full">
+                <Content />
+            </div>
+        </div>
     );
 }
 

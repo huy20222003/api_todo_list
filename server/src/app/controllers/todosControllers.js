@@ -11,13 +11,13 @@ class todosControllers {
     }
 
     async create(req, res) {
-        const { name, status } = req.body;
-        if(!name || !status) {
+        const { name, description, label } = req.body;
+        if(!name || !label) {
             res.status(400).json({ status: false, message: 'Missing name or status' });
         }
 
         try {
-            const newTodo = new Todos({ name, status, userId: req.user._id });
+            const newTodo = new Todos({ name, description, label, userId: req.user._id });
             await newTodo.save();
             res.status(200).json({ status: true, message: 'Add todo successfull!' });
         } catch (error) {
@@ -26,9 +26,9 @@ class todosControllers {
     }
 
     async edit(req, res) {
-        const { name, status } = req.body;
-        if(!name || !status) {
-            res.status(400).json({ status: false, message: 'Missing name or status' });
+        const { name, label } = req.body;
+        if(!name || !label) {
+            res.status(400).json({ status: false, message: 'Missing name or label' });
         }
 
         try {
