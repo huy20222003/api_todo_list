@@ -14,7 +14,7 @@ async function verify(req, res, next) {
         } else {
           // Xác thực token
           const decoded = jwt.verify(token, 'TOKEN_SECRET');
-          req.user = decoded.user; // Lưu thông tin người dùng vào request
+          req._id = decoded.user._id; // Lưu thông tin người dùng vào request
       
           // Kiểm tra và phân quyền truy cập tại đây
           // ...

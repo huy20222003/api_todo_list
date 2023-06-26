@@ -2,8 +2,8 @@ import { useReducer, useState } from "react";
 import { createContext } from "react";
 import axios from 'axios';
 import { initTodosState, reducer } from "../Reducer/TodosReducer/reducer";
-import { Api_URL, LOCAL_STORAGE_TOKEN_NAME } from "../constant";
-import { setTodo, getAllTodos } from "../Reducer/TodosReducer/action";
+import { Api_URL } from "../constant";
+import { getAllTodos, createTodo, editTodo, deleteTodo, searchTodo } from "../Reducer/TodosReducer/action";
 
 
 export const TodosContext = createContext();
@@ -11,11 +11,10 @@ export const TodosContext = createContext();
 export const TodosProvider = ({children})=> {
 
     const [showAddModal, setShowAddModal] = useState(false);
+    const [showEditModal, setShowEditModal] = useState(false);
+    const [id, setId] = useState('');
     const [todoState, dispatch] = useReducer(reducer, initTodosState);
 
-    const setTodos = (data)=> {
-        dispatch(setTodo(data));
-    }
 
     const getAll = async ()=> {
         try {
@@ -36,11 +35,46 @@ export const TodosProvider = ({children})=> {
     }
 
     //create
-    const createTodo = async (TodoData)=> {
+    const createTodos = async (TodoData)=> {
         try {
             const response = await axios.post(`${Api_URL}/todos/create`, TodoData);
-            console.log(response);
+            dispatch(createTodo(response.data.newTodo));
+            return response.data;
+        } catch (error) {
+            if (error.response && error.response.data) {
+                return error.response.data;
+              } else {
+                return {
+                  status: false,
+                  message: error.message,
+                };
+            }
+        }
+    }
+
+    //edit todo
+    const editTodos = async (todoId, editForm)=> {
+        try {
+            const response = await axios.put(`${Api_URL}/todos/edit/${todoId}`, editForm);
             await getAll();
+            return response.data;
+        } catch (error) {
+            if (error.response && error.response.data) {
+                return error.response.data;
+              } else {
+                return {
+                  status: false,
+                  message: error.message,
+                };
+            }
+        }
+    }
+
+    //delete todo
+    const deleteTodos = async (todoId)=> {
+        try {
+            const response = await axios.delete(`${Api_URL}/todos/delete/${todoId}`);
+            dispatch(deleteTodo(todoId));
         } catch (error) {
             if (error.response && error.response.data) {
                 return error.response.data;
@@ -54,10 +88,10 @@ export const TodosProvider = ({children})=> {
     }
 
     //search
-    const searchTodo = async (searchValue)=> {
+    const searchTodos = async (searchValue)=> {
         try {
             const response = await axios.post(`${Api_URL}/todos/search?name=${searchValue}`);
-
+            dispatch(searchTodo(response.data.todo));
             return response.data;
         } catch (error) {
             if (error.response && error.response.data) {
@@ -74,11 +108,16 @@ export const TodosProvider = ({children})=> {
     const TodosContextData = {
         showAddModal,
         setShowAddModal,
+        showEditModal,
+        setShowEditModal,
+        id, 
+        setId,
         todoState,
-        setTodos,
         getAll,
-        createTodo,
-        searchTodo
+        createTodos,
+        editTodos,
+        deleteTodos,
+        searchTodos
     }
 
     return (

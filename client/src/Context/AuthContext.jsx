@@ -11,34 +11,57 @@ export const AuthProvider = ({children})=> {
     const [authState, dispatch] = useReducer(reducer, initStateAuth);
 
     //load user
-    const loadUser = async ()=> {
-        const localStorageToken = localStorage.getItem(LOCAL_STORAGE_TOKEN_NAME);
-        if(localStorageToken) {
-            setAuthToken(localStorageToken);
-        }
-
+    const loadUser = async () => {
+      
         try {
-            const response = await axios.get(`${Api_URL}/auth`);
-            if(response.data.status) {
-                dispatch(setAuth({
-                    isAuthenticated: true,
-                    user: response.data.user
-                }));
-            }
-        } catch (error) {
-            localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
-            setAuthToken(null);
-            dispatch(setAuth({
+          const localStorageToken = localStorage.getItem(LOCAL_STORAGE_TOKEN_NAME);
+      
+          if (localStorageToken) {
+            setAuthToken(localStorageToken);
+          } else {
+            dispatch(
+              setAuth({
                 isAuthenticated: false,
                 user: null
-            }));
+              })
+            );
+            return;
+          }
+      
+          const response = await axios.get(`${Api_URL}/auth`);
+      
+          if (response.data.status) {
+            dispatch(
+              setAuth({
+                isAuthenticated: true,
+                user: response.data.user
+              })
+            );
+          } else {
+            dispatch(
+              setAuth({
+                isAuthenticated: false,
+                user: null
+              })
+            );
+            localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
+            setAuthToken(null);
+          }
+        } catch (error) {
+          console.log('Load User Error:', error);
+          dispatch(
+            setAuth({
+              isAuthenticated: false,
+              user: null
+            })
+          );
         }
-    }
+      };
 
-    useEffect(()=> {
+      useEffect(()=>{
         loadUser();
-    }, []);
-
+      }, []);
+      
     //register User
     const registerUser = async (registerForm) => {
         try {
@@ -78,9 +101,9 @@ export const AuthProvider = ({children})=> {
     //logout
     const logoutUser = ()=> {
         localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
-		dispatch(setAuth({
-            isAuthenticated: false, 
-            user: null
+        dispatch(setAuth({
+                isAuthenticated: false, 
+                user: null
         }));
     }
 

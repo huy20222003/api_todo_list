@@ -1,11 +1,4 @@
-import { CREATE_TODO, DELETE_TODO, EDIT_TODO, GET_ALL_TODOS, SEARCH_TODO, SET_TODO } from "./constant";
-
-export const setTodo = (payload)=> {
-    return {
-        type: SET_TODO,
-        payload
-    };
-}
+import { CREATE_TODO, DELETE_TODO, EDIT_TODO, GET_ALL_TODOS, SEARCH_TODO } from "./constant";
 
 export const getAllTodos = (payload)=> {
     return {

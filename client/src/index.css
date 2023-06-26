@@ -12,3 +12,20 @@
 body {
   font-family: 'Roboto', sans-serif;
 }
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.4;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@layer utilities {
+  .animate-fadeIn {
+    animation: scaleIn 0.3s linear;
+  }
+}

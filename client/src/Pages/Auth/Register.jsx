@@ -1,6 +1,6 @@
 import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { Api_URL, LOCAL_STORAGE_TOKEN_NAME } from '../../constant';
+import { LOCAL_STORAGE_TOKEN_NAME } from '../../constant';
 import { AuthContext } from '../../Context/AuthContext';
 
 function Register() {
@@ -35,6 +35,7 @@ function Register() {
                 console.log('An error has occurred');
             } else {
                 localStorage.setItem(LOCAL_STORAGE_TOKEN_NAME, registerData.accessToken);
+                navigate('/auth/login');
             }
         } catch (error) {
             console.log(error);
@@ -45,16 +46,16 @@ function Register() {
     return (
         <div className="bg-[url('./assets/images/anh-coder.jpg')] w-screen h-screen flex justify-center items-center">
             <form 
-                className="bg-white rounded-lg w-96 text-center h-fit py-5" 
+                className="bg-white rounded-lg w-[340px] lg:w-96 sm:w-[350px] text-center h-fit pb-2" 
                 onSubmit={handleSubmitRegisterForm}>
                 <div className="my-7">
-                    <h1 className="text-2xl font-bold indent-1">
+                    <h1 className="text-xl lg:text-2xl font-bold indent-1">
                         Register Form
                     </h1>
                 </div>
                 <div>
-                    <div className="mb-3">
-                        <span className="block font-normal text-left ml-[44px] mb-1 text-sm">
+                    <div className="mb-3 w-full">
+                        <span className="block font-normal text-left ml-[44px] mb-1 lg:text-sm sm:text-sm text-xs">
                             FullName:
                         </span>
                         <input 
@@ -62,11 +63,11 @@ function Register() {
                             name="fullName" 
                             value={fullName} 
                             onChange={handelChangeRegisterForm}
-                            className="border-2 rounded border-slate-500 p-2 w-[300px]"  
+                            className="border-2 rounded border-slate-500 p-2 w-4/5"  
                             placeholder="Enter your fullname"/>
                     </div>
-                    <div className="mb-3">
-                        <span className="block font-normal text-left ml-[44px] mb-1 text-sm">
+                    <div className="mb-3 w-full">
+                        <span className="block font-normal text-left ml-[44px] mb-1 lg:text-sm sm:text-sm text-xs">
                             Username:
                         </span>
                         <input 
@@ -74,11 +75,11 @@ function Register() {
                             name="username" 
                             value={username} 
                             onChange={handelChangeRegisterForm}
-                            className="border-2 rounded border-slate-500 p-2 w-[300px]"  
+                            className="border-2 rounded border-slate-500 p-2 w-4/5"  
                             placeholder="Enter your username"/>
                     </div>
-                    <div className="mb-3">
-                        <span className="block font-normal text-left ml-[44px] mb-1 text-sm">
+                    <div className="mb-3 w-full">
+                        <span className="block font-normal text-left ml-[44px] mb-1 lg:text-sm sm:text-sm text-xs">
                             Email:
                         </span>
                         <input 
@@ -86,11 +87,11 @@ function Register() {
                             name="email" 
                             value={email} 
                             onChange={handelChangeRegisterForm}
-                            className="border-2 rounded border-slate-500 p-2 w-[300px]"  
+                            className="border-2 rounded border-slate-500 p-2 w-4/5"  
                             placeholder="Enter your email"/>
                     </div>
-                    <div className="mb-3">
-                        <span className="block font-normal text-left ml-[44px] mb-1 text-sm">
+                    <div className="mb-3 w-full">
+                        <span className="block font-normal text-left ml-[44px] mb-1 lg:text-sm sm:text-sm text-xs">
                             Password:
                         </span>
                         <input 
@@ -98,11 +99,11 @@ function Register() {
                             name="password" 
                             value={password} 
                             onChange={handelChangeRegisterForm}
-                            className="border-2 rounded border-slate-500 p-2 w-[300px]"  
+                            className="border-2 rounded border-slate-500 p-2 w-4/5"  
                             placeholder="Enter your password"/>
                     </div>
-                    <div className="mb-3">
-                        <span className="block font-normal text-left ml-[44px] mb-1 text-sm">
+                    <div className="mb-3 w-full">
+                        <span className="block font-normal text-left ml-[44px] mb-1 lg:text-sm sm:text-sm text-xs">
                             Comfirm Password:
                         </span>
                         <input 
@@ -110,27 +111,27 @@ function Register() {
                             name="comfirmPassword" 
                             value={comfirmPassword} 
                             onChange={handelChangeRegisterForm}
-                            className="border-2 rounded border-slate-500 p-2 w-[300px]"  
+                            className="border-2 rounded border-slate-500 p-2 w-4/5"  
                             placeholder="Enter your comfirm Password"/>
                     </div>
                     <div className="text-right mr-10 mt-[-9px]">
-                        <span className="text-sm cursor-pointer hover:text-violet-600">Forgot password?</span>
+                        <span className="lg:text-sm sm:text-sm text-xs cursor-pointer hover:text-violet-600">Forgot password?</span>
                     </div>
                 </div>
-                <div className="my-5">
+                <div className="my-4 w-full">
                     <button 
                         type="submit" 
-                        className="text-white  bg-fuchsia-500 text-center rounded-full w-[300px] h-10">
+                        className="text-white  bg-fuchsia-500 text-center rounded-full w-4/5 h-10">
                         Register
                     </button>
                 </div>
                 <div>
-                    <span className="mr-1 font-light">
+                    <span className="mr-1 font-light lg:text-sm sm:text-sm text-xs">
                         Do you already have an account?
                     </span>
                     <Link 
                         to="/auth/login" 
-                        className="text-fuchsia-500">
+                        className="text-fuchsia-500 lg:text-sm sm:text-sm text-xs">
                         Login
                     </Link>
                 </div>

@@ -3,7 +3,7 @@ const Todos = require('../models/Todos');
 class todosControllers {
     async all(req, res) {
         try {
-            const todos = await Todos.find({ userId: req.user._id });
+            const todos = await Todos.find({ userId: req._id });
             res.status(200).json({ status: true, message: 'successfully', todos });
         } catch (error) {
             res.status(403).json({ status: false, message: error });
@@ -17,9 +17,9 @@ class todosControllers {
         }
 
         try {
-            const newTodo = new Todos({ name, description, label, userId: req.user._id });
+            const newTodo = new Todos({ name, description, label, userId: req._id });
             await newTodo.save();
-            res.status(200).json({ status: true, message: 'Add todo successfull!' });
+            res.status(200).json({ status: true, message: 'Add todo successfull!', newTodo });
         } catch (error) {
             res.status(400).json({ status: false, message: error });
         }
@@ -52,7 +52,7 @@ class todosControllers {
         const name = req.query.name;
 
         try {
-            const todo = await Todos.findOne({ name });
+            const todo = await Todos.find({userId: req._id, name: { $regex: name, $options: 'i' }});
             res.status(201).json({ status: true, message: 'Search success', todo });
         } catch (error) {
             res.status(400).json({ status: false, message: error });
