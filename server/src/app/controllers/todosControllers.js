@@ -4,7 +4,7 @@ class todosControllers {
     async all(req, res) {
         try {
             const todos = await Todos.find({ userId: req._id });
-            res.status(200).json({ status: true, message: 'successfully', todos });
+            res.status(200).json({ status: true, message: 'Get Successful!', todos });
         } catch (error) {
             res.status(403).json({ status: false, message: error });
         }
@@ -13,13 +13,13 @@ class todosControllers {
     async create(req, res) {
         const { name, description, label } = req.body;
         if(!name || !label) {
-            res.status(400).json({ status: false, message: 'Missing name or status' });
+            res.status(400).json({ status: false, message: 'Missing name or status!' });
         }
 
         try {
             const newTodo = new Todos({ name, description, label, userId: req._id });
             await newTodo.save();
-            res.status(200).json({ status: true, message: 'Add todo successfull!', newTodo });
+            res.status(200).json({ status: true, message: 'Add todo successful!', newTodo });
         } catch (error) {
             res.status(400).json({ status: false, message: error });
         }
@@ -28,12 +28,16 @@ class todosControllers {
     async edit(req, res) {
         const { name, label } = req.body;
         if(!name || !label) {
-            res.status(400).json({ status: false, message: 'Missing name or label' });
+            res.status(400).json({ status: false, message: 'Missing name or label!' });
         }
 
         try {
-            await Todos.findByIdAndUpdate(req.params._id, req.body);
-            res.status(201).json({ status: true, message: 'Edit successfully!' });
+            const todo = await Todos.findByIdAndUpdate(req.params._id, req.body);
+            if(!todo) {
+                res.status(400).json({ status: true, message: 'Edit failed!' });
+            } else {
+                res.status(201).json({ status: true, message: 'Edit successful!' });
+            }
         } catch (error) {
             res.status(400).json({ status: false, message: error });
         }
@@ -41,8 +45,12 @@ class todosControllers {
 
     async delete(req, res) {
         try {
-            await Todos.findByIdAndDelete(req.params._id);
-            res.status(201).json({ status: true, message: 'Delete successfully!' });
+            const todo = await Todos.findByIdAndDelete(req.params._id);
+            if(!todo) {
+                res.status(400).json({ status: true, message: 'Delete failed!' });
+            } else {
+                res.status(201).json({ status: true, message: 'Delete successful!' });
+            }
         } catch (error) {
             res.status(400).json({ status: false, message: error });
         }
@@ -53,7 +61,11 @@ class todosControllers {
 
         try {
             const todo = await Todos.find({userId: req._id, name: { $regex: name, $options: 'i' }});
-            res.status(201).json({ status: true, message: 'Search success', todo });
+            if(!todo) {
+                res.status(400).json({ status: true, message: 'Search failed!' });
+            } else {
+                res.status(201).json({ status: true, message: 'Search successful!' });
+            }
         } catch (error) {
             res.status(400).json({ status: false, message: error });
         }

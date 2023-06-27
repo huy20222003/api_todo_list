@@ -32,7 +32,7 @@ const Users = new Schema({
         trim: true, 
         minLength: 7
     },
-    comfirmPassword: {
+    confirmPassword: {
         type: String, 
         default: "",
         required: true,
@@ -47,9 +47,9 @@ const Users = new Schema({
 
 Users.pre('save', async function (next) {
     const user = this;
-    if (user.isModified('password') && user.isModified('comfirmPassword')) {
+    if (user.isModified('password') && user.isModified('confirmPassword')) {
         user.password = await bcrypt.hash(user.password, 8);
-        user.comfirmPassword = await bcrypt.hash(user.comfirmPassword, 8);
+        user.confirmPassword = await bcrypt.hash(user.confirmPassword, 8);
     }
     next();
 })

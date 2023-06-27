@@ -1,5 +1,6 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 import { TodosContext } from "../../Context/TodosContext";
 
 const AddTodoForm = () => {
@@ -21,13 +22,14 @@ const AddTodoForm = () => {
     try {
       const addData = await createTodos(addForm);
       if (!addData.status) {
-        console.log('An error has occurred');
+        toast.error('Add todo failed');
       }
+      toast.success('Add todo successfully!');
     } catch (error) {
-      console.log(error);
+      toast.error('Server Error');
     }
     setShowAddModal(false);
-    setAddForm({name: '', description: '', label: ''});
+    setAddForm({ name: '', description: '', label: '' });
   };
 
   return (
@@ -38,30 +40,32 @@ const AddTodoForm = () => {
             <i className="fa-solid fa-xmark mr-5 text-xl text-slate-500 hover:text-black cursor-pointer"></i>
           </div>
           <div className="my-7">
-            <h1 className="text-xl lg:text-2xl font-semibold indent-1">
+            <h1 className="text-xl lg:text-2xl font-semibold ml-2">
               ADD TODO
             </h1>
           </div>
           <div>
             <div className="mb-3 w-full">
-              <span className="block font-normal text-black text-left text-sm ml-[44px] mb-1">
+              <label htmlFor="name" className="block font-normal text-black text-left text-sm ml-[44px] mb-1">
                 Name
-              </span>
+              </label>
               <input
                 type="text"
+                id="name"
                 name="name"
                 value={name}
                 onChange={handleChangeAddForm}
                 className="border-2 rounded border-slate-500 p-2 w-4/5"
-                placeholder="Enter your name Todo"
+                placeholder="Enter your Todo name"
               />
             </div>
             <div className="mb-3 w-full">
-              <span className="block font-normal text-black text-left text-sm ml-[44px] mb-1">
+              <label htmlFor="description" className="block font-normal text-black text-left text-sm ml-[44px] mb-1">
                 Description
-              </span>
+              </label>
               <input
                 type="text"
+                id="description"
                 name="description"
                 value={description}
                 onChange={handleChangeAddForm}
@@ -70,11 +74,11 @@ const AddTodoForm = () => {
               />
             </div>
             <div className="mb-3">
-              <span className="block font-normal text-black text-left text-sm ml-[44px] mb-1">
+              <label htmlFor="label" className="block font-normal text-black text-left text-sm ml-[44px] mb-1">
                 Label
-              </span>
+              </label>
               <div>
-                <select name="label" className="border-2 border-gray-500 p-1 rounded-md" value={label} onChange={handleChangeAddForm}>
+                <select id="label" name="label" className="border-2 border-gray-500 p-1 rounded-md" value={label} onChange={handleChangeAddForm}>
                   <option value="">----Your label----</option>
                   <option value="complete">Complete</option>
                   <option value="pending">Pending</option>
@@ -85,8 +89,8 @@ const AddTodoForm = () => {
           <div className="my-3 w-full">
             <button
               type="submit"
-              className="text-white bg-fuchsia-500 text-center rounded-full w-4/5 h-10"
-            >
+              className="text-white bg-fuchsia-500 hover:bg-fuchsia-600 text-center rounded-full w-4/5 h-10 transition-colors duration-300"
+              >
               Add Todo
             </button>
           </div>
