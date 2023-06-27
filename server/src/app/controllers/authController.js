@@ -27,7 +27,7 @@ class authController {
             if(user) {
                 return res.status(400).json({ status: false, message: 'Username or email already exists!' });
             }else {
-                const newUser = new Users({ fullName, username, email, password, confirmPassword });
+                const newUser = new Users({ fullName, username, email, password, comfirmPassword });
                 const accessToken = jwt.sign({ newUser }, 'TOKEN_SECRET');
                 await newUser.save();
                 return res.status(200).json({ status: true, message: 'Register successful!', accessToken });
@@ -56,7 +56,7 @@ class authController {
                 return res.status(401).json({ status: false, message: 'Invalid username or password!' });
             }
             const accessToken = jwt.sign({ user }, 'TOKEN_SECRET');
-            res.status(201).json({ status: true, message: 'Logged successful! ', accessToken });
+            res.status(201).json({ status: true, message: 'Logged successfully! ', accessToken });
         } catch(error) {
             res.status(400).json({ status: false, message: error });
         }
