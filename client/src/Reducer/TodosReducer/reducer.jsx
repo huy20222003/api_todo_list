@@ -1,4 +1,4 @@
-import { CREATE_TODO, DELETE_TODO, EDIT_TODO, GET_ALL_TODOS, SEARCH_TODO } from "./constant";
+import { CREATE_TODO, DELETE_TODO, EDIT_TODO, FILTER_TODO, GET_ALL_TODOS, SEARCH_TODO } from "./constant";
 
 export const initTodosState = {
     todo: null,
@@ -29,6 +29,10 @@ export const reducer = (state, action)=> {
                 todos: state.todos.filter(todo => todo._id != payload)
             }
         case SEARCH_TODO: 
+            return {
+                todos: payload
+            }
+        case FILTER_TODO: 
             return {
                 todos: payload
             }

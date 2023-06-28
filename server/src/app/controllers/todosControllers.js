@@ -61,10 +61,26 @@ class todosControllers {
 
         try {
             const todo = await Todos.find({userId: req._id, name: { $regex: name, $options: 'i' }});
+            console.log(todo);
             if(!todo) {
                 res.status(400).json({ status: true, message: 'Search failed!' });
             } else {
-                res.status(201).json({ status: true, message: 'Search successful!' });
+                res.status(201).json({ status: true, message: 'Search successful!', todo });
+            }
+        } catch (error) {
+            res.status(400).json({ status: false, message: error });
+        }
+    }
+
+    async filter(req, res) {
+        const label = req.query.label;
+
+        try {
+            const todo = await Todos.find({userId: req._id, label});
+            if(!todo) {
+                res.status(400).json({ status: true, message: 'Filter failed!' });
+            } else {
+                res.status(201).json({ status: true, message: 'Filter successful!', todo });
             }
         } catch (error) {
             res.status(400).json({ status: false, message: error });

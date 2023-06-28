@@ -17,7 +17,6 @@ const TodoItem = () => {
 
   const handleDeleteTodo = (todoId) => {
     deleteTodos(todoId);
-    setId(todoId);
   };
 
   const handleEditTodoId = (todoId) => {

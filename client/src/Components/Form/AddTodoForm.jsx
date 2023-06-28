@@ -55,7 +55,7 @@ const AddTodoForm = () => {
                 name="name"
                 value={name}
                 onChange={handleChangeAddForm}
-                className="border-2 rounded border-slate-500 p-2 w-4/5"
+                className="border-2 rounded border-slate-500 p-2 w-4/5 outline-none"
                 placeholder="Enter your Todo name"
               />
             </div>
@@ -63,35 +63,41 @@ const AddTodoForm = () => {
               <label htmlFor="description" className="block font-normal text-black text-left text-sm ml-[44px] mb-1">
                 Description
               </label>
-              <input
-                type="text"
+              <textarea
                 id="description"
                 name="description"
                 value={description}
                 onChange={handleChangeAddForm}
-                className="border-2 rounded border-slate-500 p-2 w-4/5"
+                className="border-2 rounded border-slate-500 p-2 w-4/5 resize-none outline-none"
                 placeholder="Enter your description"
-              />
+              ></textarea>
             </div>
             <div className="mb-3">
               <label htmlFor="label" className="block font-normal text-black text-left text-sm ml-[44px] mb-1">
                 Label
               </label>
               <div>
-                <select id="label" name="label" className="border-2 border-gray-500 p-1 rounded-md" value={label} onChange={handleChangeAddForm}>
+                <select id="label" name="label" className="border-2 border-gray-500 p-1 rounded-md w-4/5" value={label} onChange={handleChangeAddForm}>
                   <option value="">----Your label----</option>
-                  <option value="complete">Complete</option>
+                  <option value="completed">Completed</option>
                   <option value="pending">Pending</option>
                 </select>
               </div>
             </div>
           </div>
-          <div className="my-3 w-full">
+          <div className="my-3 w-full flex justify-end">
+            <button
+              type="button"
+              className="text-white bg-red-500 hover:bg-red-600 text-center rounded-md w-4/5 md:w-1/5 h-10 transition-colors duration-300 mr-2"
+              onClick={() => setShowAddModal(false)}
+            >
+              Cancel
+            </button>
             <button
               type="submit"
-              className="text-white bg-fuchsia-500 hover:bg-fuchsia-600 text-center rounded-full w-4/5 h-10 transition-colors duration-300"
-              >
-              Add Todo
+              className="text-white bg-fuchsia-500 hover:bg-fuchsia-600 text-center mr-[44px] rounded-md w-4/5 md:w-1/5 h-10 transition-colors duration-300"
+            >
+              Add
             </button>
           </div>
         </form>

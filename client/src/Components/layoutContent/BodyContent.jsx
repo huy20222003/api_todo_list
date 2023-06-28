@@ -1,12 +1,30 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { toast } from 'react-toastify';
 import { TodosContext } from "../../Context/TodosContext";
 import TodoItem from "./TodoItem";
 
 const BodyContent = () => {
-  const { setShowAddModal } = useContext(TodosContext);
+  const [filter, setFilter] = useState('all');
+  const { setShowAddModal, filterTodos } = useContext(TodosContext);
+
+  const handleChangeFilter = async (e)=> {
+    setFilter(e.target.value);
+    try {
+      await filterTodos(e.target.value);
+    } catch (error) {
+      toast.error('Server Error');
+    }
+  }
 
   return (
     <div>
+      <div className="mt-10 ml-5">
+        <select name="label" id="label" value = {filter} onChange={handleChangeFilter} className="border-2 border-gray-400 p-1 rounded-md outline-none">
+          <option value="all">All</option>
+          <option value="completed">Completed</option>
+          <option value="pending">Pending</option>
+        </select>
+      </div>
       <div className="flex flex-wrap">
         <TodoItem />
       </div>

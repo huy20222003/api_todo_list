@@ -8,6 +8,7 @@ import {
   editTodo,
   deleteTodo,
   searchTodo,
+  filterTodo
 } from '../Reducer/TodosReducer/action';
 
 export const TodosContext = createContext();
@@ -92,7 +93,7 @@ export const TodosProvider = ({ children }) => {
   // Search
   const searchTodos = async (searchValue) => {
     try {
-      const response = await axios.post(`${Api_URL}/todos/search?name=${searchValue}`);
+      const response = await axios.get(`${Api_URL}/todos/search?name=${searchValue}`);
       dispatch(searchTodo(response.data.todo));
       return response.data;
     } catch (error) {
@@ -107,6 +108,28 @@ export const TodosProvider = ({ children }) => {
     }
   };
 
+  //filter
+  const filterTodos = async (label)=> {
+    if(label === 'all') {
+      await getAll();
+    } else {
+      try {
+        const response = await axios.get(`${Api_URL}/todos/filter?label=${label}`);
+        dispatch(filterTodo(response.data.todo));
+        return response.data;
+      } catch (error) {
+        if (error.response && error.response.data) {
+          return error.response.data;
+        } else {
+          return {
+            status: false,
+            message: error.message,
+          };
+        }
+      }
+    }
+  }
+
   const TodosContextData = {
     showAddModal,
     setShowAddModal,
@@ -120,6 +143,7 @@ export const TodosProvider = ({ children }) => {
     editTodos,
     deleteTodos,
     searchTodos,
+    filterTodos
   };
 
   return <TodosContext.Provider value={TodosContextData}>{children}</TodosContext.Provider>;

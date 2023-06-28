@@ -6,8 +6,8 @@ import Home from './Pages/Home';
 import Login from './Pages/Auth/Login';
 import Register from './Pages/Auth/Register';
 import Dashboard from './Pages/Todos/Dashboard';
-import Profile from './Pages/Profile/Profile';
-import Setting from './Pages/Profile/Setting';
+import Profile from './Pages/User/Profile';
+import Setting from './Pages/User/Setting';
 
 function App() {
 

@@ -77,7 +77,7 @@ function Login() {
                 <div className="my-4 w-full">
                     <button
                         type="submit"
-                        className="text-white bg-fuchsia-500 text-center rounded-full w-4/5 h-10"
+                        className="text-white bg-fuchsia-500 text-center rounded-full w-4/5 h-10 transition-colors duration-300 hover:bg-fuchsia-600"
                     >
                         Login
                     </button>

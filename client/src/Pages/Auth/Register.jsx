@@ -123,13 +123,13 @@ function Register() {
           </div>
         </div>
         <div className="my-4 w-full">
-          <button type="submit" className="text-white bg-fuchsia-500 text-center rounded-full w-4/5 h-10">
+          <button type="submit" className="text-white bg-fuchsia-500 text-center rounded-full w-4/5 h-10 transition-colors duration-300 hover:bg-fuchsia-600">
             Register
           </button>
         </div>
         <div>
           <span className="mr-1 font-light lg:text-sm sm:text-sm text-xs">Do you already have an account?</span>
-          <Link to="/auth/login" className="text-fuchsia-500 lg:text-sm sm:text-sm text-xs">
+          <Link to="/auth/login" className="text-fuchsia-500 lg:text-sm sm:text-sm text-xs hover:text-violet-600">
             Login
           </Link>
         </div>

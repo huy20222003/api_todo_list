@@ -2,13 +2,14 @@ const express = require('express');
 const router = express.Router();
 const verify = require('../middleware/auth');
 
-const authController = require('../app/controllers/todosControllers');
+const todosControllers = require('../app/controllers/todosControllers');
 
-router.get('/all', verify,  authController.all);
-router.post('/create', verify,  authController.create);
-router.put('/edit/:_id', verify,  authController.edit);
-router.delete('/delete/:_id', verify,  authController.delete);
-router.post('/search', verify,  authController.search);
+router.get('/all', verify,  todosControllers.all);
+router.post('/create', verify,  todosControllers.create);
+router.put('/edit/:_id', verify,  todosControllers.edit);
+router.delete('/delete/:_id', verify,  todosControllers.delete);
+router.get('/search', verify,  todosControllers.search);
+router.get('/filter', verify, todosControllers.filter);
 
 
 module.exports = router;
