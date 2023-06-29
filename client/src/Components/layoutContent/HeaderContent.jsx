@@ -1,5 +1,5 @@
 import { useState, useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { TodosContext } from '../../Context/TodosContext';
 import { AuthContext } from '../../Context/AuthContext';
 
@@ -8,8 +8,7 @@ const HeaderContent = () => {
   const [subMenu, setSubMenu] = useState(false);
   const { searchTodos } = useContext(TodosContext);
   const { authState: { user }, logoutUser } = useContext(AuthContext);
-  const navigate = useNavigate();
-
+  
   const handleSearchTodo = async (e) => {
     setSearchValue(e.target.value);
     try {
@@ -26,7 +25,6 @@ const HeaderContent = () => {
 
   const handleLogout = () => {
     logoutUser();
-    navigate('/auth/login');
   };
 
   return (
@@ -51,24 +49,24 @@ const HeaderContent = () => {
           <span className="mr-1 text-sm font-normal text-white hidden sm:inline">Hi, {user?.username}</span>
           <i className="fa-solid fa-caret-down text-white relative"></i>
           <ul
-            className={`absolute bg-white p-2 rounded-md shadow-xl transform -translate-x-1/2 z-10 ${
+            className={`absolute bg-white p-3 rounded-md shadow-2xl z-10 top-20 w-[95%] sm:w-60 right-3 ${
               subMenu ? 'block' : 'hidden'
             }`}
           >
-            <li className="mb-2">
+            <li className="mb-2 py-3 text-2xl border-b-gray-400 border-b">
               <Link to="/dashboard/profile" className="flex items-center">
                 <i className="fa-solid fa-user mr-3"></i>
                 <span>Account</span>
               </Link>
             </li>
-            <li className="mb-2">
+            <li className="mb-2 py-3 text-2xl border-b-gray-400 border-b">
               <Link to='/dashboard/setting' className="flex items-center">
                 <i className="fa-solid fa-gear mr-3"></i>
                 <span>Settings</span>
               </Link>
             </li>
-            <li className="mb-2" onClick={handleLogout}>
-              <Link to="/auth/login" className="flex items-center">
+            <li className="mb-2 pt-3 text-2xl" onClick={handleLogout}>
+              <Link to="/" className="flex items-center">
                 <i className="fa-solid fa-right-from-bracket mr-3"></i>
                 <span>Logout</span>
               </Link>

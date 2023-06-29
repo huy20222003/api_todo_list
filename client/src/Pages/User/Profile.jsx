@@ -1,15 +1,13 @@
 import { useContext } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import HeaderContent from "../../Components/layoutContent/HeaderContent";
 import { AuthContext } from "../../Context/AuthContext";
 
 const Profile = () => {
   const { authState: { user }, logoutUser } = useContext(AuthContext);
-  const navigate = useNavigate();
 
   const handleLogout = ()=> {
     logoutUser();
-    navigate('/auth/login');
   }
 
   const handleGoBack = ()=> {
@@ -22,8 +20,9 @@ const Profile = () => {
         <HeaderContent />
       </div>
       <div className="w-10/12 mt-8">
-        <div className="mt-14 mb-2 w-full text-center">
-            <i className="fa-solid fa-arrow-left absolute top-0 left-0 mt-16 ml-4 text-gray-600 text-lg cursor-pointer" onClick={handleGoBack}></i>
+        <div className="mt-8 mb-2 w-full relative cursor-pointer" onClick={handleGoBack}>
+            <i className="fa-solid fa-arrow-left absolute top-0 left-0 ml-2 text-gray-600 text-2xl"></i>
+            <span className='ml-10 text-xl'>Back</span>
         </div>
         <div className="mt-14 mb-2 w-full text-center">
           <img src={user?.image} className="w-36 h-36 rounded-full mx-auto" alt={user?.fullName} />
@@ -64,12 +63,12 @@ const Profile = () => {
             </div>
           </form>
           <div className="flex justify-center mt-8 mb-20">
-            <button
+            <Link to= '/'
               className="bg-red-500 text-white py-2 px-4 rounded-md"
               onClick={handleLogout}
             >
               Logout
-            </button>
+            </Link>
           </div>
         </div>
       </div>

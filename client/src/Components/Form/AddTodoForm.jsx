@@ -88,14 +88,14 @@ const AddTodoForm = () => {
           <div className="my-3 w-full flex justify-end">
             <button
               type="button"
-              className="text-white bg-red-500 hover:bg-red-600 text-center rounded-md w-4/5 md:w-1/5 h-10 transition-colors duration-300 mr-2"
+              className="text-white bg-red-500 hover:bg-red-600 text-center rounded-md w-2/5 md:w-1/5 h-10 transition-colors duration-300 mr-2"
               onClick={() => setShowAddModal(false)}
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="text-white bg-fuchsia-500 hover:bg-fuchsia-600 text-center mr-[44px] rounded-md w-4/5 md:w-1/5 h-10 transition-colors duration-300"
+              className="text-white bg-fuchsia-500 hover:bg-fuchsia-600 text-center mr-[34px] rounded-md w-2/5 md:w-1/5 h-10 transition-colors duration-300"
             >
               Add
             </button>

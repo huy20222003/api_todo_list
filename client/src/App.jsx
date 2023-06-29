@@ -8,6 +8,7 @@ import Register from './Pages/Auth/Register';
 import Dashboard from './Pages/Todos/Dashboard';
 import Profile from './Pages/User/Profile';
 import Setting from './Pages/User/Setting';
+import ProtectedRoute from './routes/ProtectedRoute';
 
 function App() {
 

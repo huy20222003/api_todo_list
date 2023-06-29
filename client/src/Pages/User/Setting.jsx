@@ -51,8 +51,9 @@ const Setting = () => {
     <div>
       <HeaderContent />
       <div className="container flex flex-col items-center w-10/12">
-        <div className="mt-14 mb-2 w-full text-center">
-            <i className="fa-solid fa-arrow-left absolute top-0 left-0 mt-16 ml-4 text-gray-600 text-lg cursor-pointer" onClick={handleGoBack}></i>
+        <div className="mt-8 relative mb-2 w-full cursor-pointer" onClick={handleGoBack}>
+            <i className="fa-solid fa-arrow-left absolute top-0 left-0 ml-2 text-gray-600 text-2xl"></i>
+            <span className='ml-10 text-xl'>Back</span>
         </div>
         <h1 className="text-2xl font-bold mb-4 mt-14">Change Password</h1>
         <form className='w-full flex flex-col' onSubmit={handleSubmitPasswordForm}>

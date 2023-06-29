@@ -57,7 +57,7 @@ function Register() {
   };
 
   return (
-    <div className="bg-[url('./assets/images/anh-coder.jpg')] w-screen h-screen flex justify-center items-center">
+    <div className="bg-[url('./assets/images/anh_todo_list.png')] w-screen h-screen flex justify-center items-center">
       <form className="bg-white rounded-lg w-[340px] lg:w-96 sm:w-[350px] text-center h-fit pb-2" onSubmit={handleSubmitRegisterForm}>
         <div className="my-7">
           <h1 className="text-xl lg:text-2xl font-bold ml-1">Register Form</h1>
