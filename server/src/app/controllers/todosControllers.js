@@ -61,7 +61,6 @@ class todosControllers {
 
         try {
             const todo = await Todos.find({userId: req._id, name: { $regex: name, $options: 'i' }});
-            console.log(todo);
             if(!todo) {
                 res.status(400).json({ status: true, message: 'Search failed!' });
             } else {
