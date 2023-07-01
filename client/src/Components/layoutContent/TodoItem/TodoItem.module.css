@@ -1,0 +1,54 @@
+.container {
+    border: 2px solid rgb(59, 130, 246);
+    border-radius: 0.6rem;
+    margin: 1.2rem;
+    min-width: 20rem;
+    height: 14rem;
+    padding: 0.8rem;
+    position: relative;
+    box-shadow: 0 2.5rem 5rem -1.2rem rgba(0, 0, 0, 0.25);;
+}
+
+.todoName {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    font-weight: 500;
+}
+
+.todoDescriptionConatiner {
+    margin-top: 0.4rem;
+}
+
+.todoDescription {
+    font-size: 1.4rem;
+    line-height: 2rem;
+}
+
+.todoFooterContainer {
+    position: absolute;
+    bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.todoLabel {
+    background-color: rgb(96, 165, 250);
+    border-radius: 0.4rem;
+    padding: 0.2rem 0.8rem;
+    color: white;
+    font-size: 1.4rem;
+}
+
+.todoPencil {
+    margin: 0 2.8rem;
+    cursor: pointer;
+    font-size: 1.4rem;
+    color: rgb(96, 165, 250);
+}
+
+.todoTrash {
+    color: rgb(220, 38, 38);
+    cursor: pointer;
+    font-size: 1.4rem;
+}

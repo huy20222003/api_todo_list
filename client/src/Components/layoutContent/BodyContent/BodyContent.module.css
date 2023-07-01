@@ -1,0 +1,46 @@
+.filterContainer {
+    margin: 4rem 0 0 2rem;
+}
+
+.filter {
+    border: 0.2rem solid;
+    border-color: rgb(156, 163, 175);
+    border-radius: 0.6rem;
+    padding: 0.6rem;
+    outline: none;
+    font-size: 1.4rem;
+}
+
+.todoList {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.addButtonContainer {
+    position: absolute;
+    bottom: 3.2rem;
+    right: 1.6rem;
+}
+
+.toolTip {
+    background-color: rgb(56, 189, 248);
+    margin: 0 0 0.8rem 0;
+    color: white;
+    border-radius: 0.6rem;
+    padding: 0.8rem 1.6rem;
+}
+
+.addButton {
+    background-color: rgb(56, 189, 248);
+    color: white;
+    border-radius: 50%;
+    font-size: 2rem;
+    cursor: pointer;
+    padding: 1.5rem;
+    position: relative;
+}
+
+.addButton:hover {
+    transform: scale(1.25);
+    transition: 0.5s ease;
+}

@@ -1,8 +1,9 @@
 import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { AuthContext } from '../../Context/AuthContext';
-import { LOCAL_STORAGE_TOKEN_NAME } from '../../constant';
+import { AuthContext } from '../../../Context/AuthContext';
+import { LOCAL_STORAGE_TOKEN_NAME } from '../../../constant';
+import styles from './Login.module.css';
 
 function Login() {
     const [loginForm, setLoginForm] = useState({
@@ -36,16 +37,16 @@ function Login() {
     };
 
     return (
-        <div className="bg-[url('./assets/images/anh_todo_list.png')] w-screen h-screen flex justify-center items-center">
-            <form className="bg-white rounded-lg w-[340px] lg:w-96 sm:w-[350px] text-center h-fit py-5" onSubmit={handleSubmitLoginForm}>
-                <div className="my-7">
-                    <h1 className="text-xl lg:text-2xl font-bold ml-1">
+        <div className = {styles.container}>
+            <form className={styles.formLogin} onSubmit={handleSubmitLoginForm}>
+                <div className={styles.header}>
+                    <h1 className={styles.title}>
                         Login Form
                     </h1>
                 </div>
                 <div>
-                    <div className="mb-3 w-full">
-                        <span className="block font-normal text-black text-left lg:text-sm sm:text-sm text-xs ml-[44px] mb-1">
+                    <div className='formElements'>
+                        <span className='label'>
                             Username:
                         </span>
                         <input
@@ -53,12 +54,12 @@ function Login() {
                             name="username"
                             value={username}
                             onChange={handleChangeLoginForm}
-                            className="border-2 rounded border-slate-500 p-2 w-4/5 outline-none"
+                            className='formElementInput'
                             placeholder="Enter your username"
                         />
                     </div>
-                    <div className="mb-3 w-full">
-                        <span className="block font-normal text-black text-left lg:text-sm sm:text-sm text-xs ml-[44px] mb-1">
+                    <div className='formElements'>
+                        <span className='label'>
                             Password:
                         </span>
                         <input
@@ -66,27 +67,27 @@ function Login() {
                             name="password"
                             value={password}
                             onChange={handleChangeLoginForm}
-                            className="border-2 rounded border-slate-500 p-2 w-4/5 outline-none"
+                            className='formElementInput'
                             placeholder="Enter your password"
                         />
                     </div>
-                    <div className="text-right mr-10 mt-[-9px]">
-                        <span className="text-xs cursor-pointer hover:text-violet-600">Forgot password?</span>
+                    <div className={styles.forgotPassword}>
+                        <span className={styles.forgotPasswordTitle}>Forgot password?</span>
                     </div>
                 </div>
-                <div className="my-4 w-full">
+                <div className={styles.loginButtonContainer}>
                     <button
                         type="submit"
-                        className="text-white bg-fuchsia-500 text-center rounded-full w-4/5 h-10 transition-colors duration-300 hover:bg-fuchsia-600"
+                        className={styles.loginButton}
                     >
                         Login
                     </button>
                 </div>
                 <div>
-                    <span className="mr-1 font-light text-black lg:text-sm sm:text-sm text-xs">
+                    <span className={styles.loginFooterDescription}>
                         Do not have an account?
                     </span>
-                    <Link to="/auth/register" className="text-fuchsia-500 lg:text-sm sm:text-sm text-xs">
+                    <Link to="/auth/register" className={styles.loginFooterDirect}>
                         Register
                     </Link>
                 </div>

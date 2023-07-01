@@ -1,4 +1,4 @@
-import { CREATE_TODO, DELETE_TODO, EDIT_TODO, FILTER_TODO, GET_ALL_TODOS, SEARCH_TODO } from "./constant";
+import { CREATE_TODO, DELETE_TODO, EDIT_TODO, FILTER_TODO, GET_ALL_TODOS, SEARCH_TODO, SET_TODO } from "./constant";
 
 export const initTodosState = {
     todo: null,
@@ -35,6 +35,11 @@ export const reducer = (state, action)=> {
         case FILTER_TODO: 
             return {
                 todos: payload
+            }
+        case SET_TODO: 
+            return {
+                ...state,
+                todo: payload
             }
         default: 
             console.log('Invalid case');

@@ -1,0 +1,91 @@
+.d-none {
+    display: none;
+}
+
+.resize-none {
+  resize: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+.formElements {
+  margin: 0 0 1.2rem 0;
+  width: 100%;
+}
+
+.label {
+  display: block;
+  font-weight: 400;
+  color: black;
+  text-align: left;
+  font-size: 1.4rem;
+  line-height: 2rem;
+  margin: 0 0 0.4rem 4.4rem;
+}
+
+.formElementInput {
+  border: 0.2rem solid;
+  border-radius: 0.4rem;
+  border-color: rgb(110, 116, 139);
+  padding: 1rem;
+  width: 80%;
+  outline: none;
+}
+
+.formElementInput::placeholder {
+  font-size: 1.4rem;
+  line-height: 2rem;
+}
+
+.cancelButton {
+  color: white;
+  background-color: rgb(239, 68, 68) !important;
+  text-align: center;
+  border-radius: 0.6rem;
+  margin: 0 0.4rem 0 0;
+  height: 4rem;
+  width: 7rem;
+  font-size: 1.4rem;
+  border: none;
+  outline: none;
+}
+
+.cancelButton:hover {
+  background-color: rgb(220, 38, 38) !important;
+  transition: 0.3s linear;
+}
+
+.primaryButton {
+  color: white;
+  background-color: rgb(217, 70, 239) !important;
+  text-align: center;
+  border-radius: 0.6rem;
+  height: 4rem;
+  width: 7rem;
+  font-size: 1.4rem;
+  margin: 0 4.4rem 0 0.5rem;
+  border: none;
+  outline: none;
+}
+
+.primaryButton:hover {
+  background-color: rgb(192, 38, 211) !important;
+  transition: 0.3s linear;
+}
+
+.descriptionHeight {
+  height: 10rem;
+}
+
+@keyframes scaleIn {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

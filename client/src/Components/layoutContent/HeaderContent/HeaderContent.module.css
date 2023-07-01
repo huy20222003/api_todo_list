@@ -1,0 +1,110 @@
+.container {
+    height: 6rem;
+    background-color: rgb(59, 130, 246);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.logoContainer {
+    padding: 0 0 0 1.2rem;
+}
+
+.logo {
+    font-size: 2.4rem;
+    line-height: 3.2rem;
+    color: white;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.searchContainer {
+    margin: 0 0 0 6.4rem;
+}
+
+.searchInput {
+    height: 4.4rem;
+    border-radius: 3rem;
+    border: 2px solid;
+    border-color: rgb(209, 213, 219);
+    width: 35rem;
+    outline: none;
+    padding-left: 1.5rem;
+    font-size: 1.4rem;
+}
+
+.searchInput:focus {
+    border-color: rgb(96, 165, 250);
+}
+
+.userInfoContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 3.2rem;
+}
+
+.userInfoImage {
+    width: 4rem;
+    border-radius: 50%;
+    margin-right: 0.4rem;
+}
+
+.userInfoName {
+    margin: 0 0.4rem 0 0;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    font-weight: 400;
+    color: white;
+    cursor: pointer;
+}
+
+.caret {
+    position: relative;
+    color: white;
+}
+
+.subMenuContainer {
+    position: absolute;
+    background-color: white;
+    padding: 1.2rem;
+    border-radius: 0.6rem;
+    z-index: 10;
+    top: 6rem;
+    right: 1.2rem;
+    width: 24rem;
+    box-shadow: 0 2.5rem 5rem -1.2rem rgba(0, 0, 0, 0.25);
+}
+
+.subMenuItem {
+    margin: 0 0 0.8rem 0;
+    padding: 0.6rem 0 0.6rem 0;
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+    border-bottom: 0.1rem solid rgb(156, 163, 175);
+    list-style: none;
+}
+
+.subMenuItem:last-child {
+    border-bottom: 0;
+    margin-bottom: 0;
+}
+
+.subMenuItem:hover {
+    color: rgb(96, 165, 250);
+    transition: 0.3s linear;
+}
+
+.subMenuItemLink {
+    display: flex;
+    align-items: center;
+}
+
+.subMenuItemIcon {
+    margin: 0 1.2rem 0 0;
+}
+
+.subMenuItemName {
+    color: black;
+}

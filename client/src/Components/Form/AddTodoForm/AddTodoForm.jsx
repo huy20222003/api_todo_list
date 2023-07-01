@@ -1,7 +1,8 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
-import { TodosContext } from "../../Context/TodosContext";
+import { TodosContext } from "../../../Context/TodosContext";
+import styles from './AddTodoForm.module.css';
 
 const AddTodoForm = () => {
   const { showAddModal, setShowAddModal, createTodos } = useContext(TodosContext);
@@ -33,20 +34,20 @@ const AddTodoForm = () => {
   };
 
   return (
-    <div className={`fixed top-0 right-0 bottom-0 left-0 z-10 animate-scaleIn ${showAddModal ? "" : "hidden"}`}>
-      <div className="absolute w-full h-full bg-black bg-opacity-50">
-        <form className="bg-white rounded-lg w-[340px] lg:w-96 sm:w-[350px] text-center h-fit py-3 relative top-2/4 left-2/4 translate-x-[-50%] translate-y-[-50%]" onSubmit={handleCreateTodo}>
-          <div className="text-right" onClick={() => setShowAddModal(false)}>
-            <i className="fa-solid fa-xmark mr-5 text-xl text-slate-500 hover:text-black cursor-pointer"></i>
+    <div className={`${styles.container} ${showAddModal ? "" : "d-none"}`}>
+      <div className={styles.overlay}>
+        <form className={styles.addTodoForm} onSubmit={handleCreateTodo}>
+          <div className={styles.closeButtonContainer} onClick={() => setShowAddModal(false)}>
+            <i className={`fa-solid fa-xmark ${styles.closeButton}`}></i>
           </div>
-          <div className="my-7">
-            <h1 className="text-xl lg:text-2xl font-semibold ml-2">
+          <div className={styles.header}>
+            <h1 className={styles.title}>
               ADD TODO
             </h1>
           </div>
           <div>
-            <div className="mb-3 w-full">
-              <label htmlFor="name" className="block font-normal text-black text-left text-sm ml-[44px] mb-1">
+            <div className='formElements'>
+              <label htmlFor="name" className='label'>
                 Name
               </label>
               <input
@@ -55,12 +56,12 @@ const AddTodoForm = () => {
                 name="name"
                 value={name}
                 onChange={handleChangeAddForm}
-                className="border-2 rounded border-slate-500 p-2 w-4/5 outline-none"
+                className='formElementInput'
                 placeholder="Enter your Todo name"
               />
             </div>
-            <div className="mb-3 w-full">
-              <label htmlFor="description" className="block font-normal text-black text-left text-sm ml-[44px] mb-1">
+            <div className='formElements'>
+              <label htmlFor="description" className='label'>
                 Description
               </label>
               <textarea
@@ -68,34 +69,33 @@ const AddTodoForm = () => {
                 name="description"
                 value={description}
                 onChange={handleChangeAddForm}
-                className="border-2 rounded border-slate-500 p-2 w-4/5 resize-none outline-none"
+                className='formElementInput descriptionHeight resize-none'
                 placeholder="Enter your description"
               ></textarea>
             </div>
-            <div className="mb-3">
-              <label htmlFor="label" className="block font-normal text-black text-left text-sm ml-[44px] mb-1">
+            <div className='formElements'>
+              <label htmlFor="label" className='label'>
                 Label
               </label>
               <div>
-                <select id="label" name="label" className="border-2 border-gray-500 p-1 rounded-md w-4/5" value={label} onChange={handleChangeAddForm}>
-                  <option value="">----Your label----</option>
-                  <option value="completed">Completed</option>
+                <select id="label" name="label" className="formElementInput" value={label} onChange={handleChangeAddForm}>
                   <option value="pending">Pending</option>
+                  <option value="completed">Completed</option>
                 </select>
               </div>
             </div>
           </div>
-          <div className="my-3 w-full flex justify-end">
+          <div className={styles.buttonContainer}>
             <button
               type="button"
-              className="text-white bg-red-500 hover:bg-red-600 text-center rounded-md w-2/5 md:w-1/5 h-10 transition-colors duration-300 mr-2"
+              className="cancelButton"
               onClick={() => setShowAddModal(false)}
             >
               Cancel
             </button>
             <button
               type="submit"
-              className="text-white bg-fuchsia-500 hover:bg-fuchsia-600 text-center mr-[34px] rounded-md w-2/5 md:w-1/5 h-10 transition-colors duration-300"
+              className='primaryButton'
             >
               Add
             </button>

@@ -78,6 +78,7 @@ export const TodosProvider = ({ children }) => {
     try {
       const response = await axios.delete(`${Api_URL}/todos/delete/${todoId}`);
       dispatch(deleteTodo(todoId));
+      return response.data;
     } catch (error) {
       if (error.response && error.response.data) {
         return error.response.data;

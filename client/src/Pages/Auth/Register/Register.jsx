@@ -1,8 +1,9 @@
 import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { LOCAL_STORAGE_TOKEN_NAME } from '../../constant';
-import { AuthContext } from '../../Context/AuthContext';
+import { LOCAL_STORAGE_TOKEN_NAME } from '../../../constant';
+import { AuthContext } from '../../../Context/AuthContext';
+import styles from './Register.module.css';
 
 function Register() {
   const [registerForm, setRegisterForm] = useState({
@@ -57,79 +58,76 @@ function Register() {
   };
 
   return (
-    <div className="bg-[url('./assets/images/anh_todo_list.png')] w-screen h-screen flex justify-center items-center">
-      <form className="bg-white rounded-lg w-[340px] lg:w-96 sm:w-[350px] text-center h-fit pb-2" onSubmit={handleSubmitRegisterForm}>
-        <div className="my-7">
-          <h1 className="text-xl lg:text-2xl font-bold ml-1">Register Form</h1>
+    <div className={styles.container}>
+      <form className={styles.formRegister} onSubmit={handleSubmitRegisterForm}>
+        <div className={styles.header}>
+          <h1 className={styles.title}>Register Form</h1>
         </div>
         <div>
-          <div className="mb-3 w-full">
-            <span className="block font-normal text-left ml-[44px] mb-1 lg:text-sm sm:text-sm text-xs">FullName:</span>
+          <div className='formElements'>
+            <span className='label'>FullName:</span>
             <input
               type="text"
               name="fullName"
               value={fullName}
               onChange={handleChangeRegisterForm}
-              className="border-2 rounded border-slate-500 p-2 w-4/5 outline-none"
+              className='formElementInput'
               placeholder="Enter your fullname"
             />
           </div>
-          <div className="mb-3 w-full">
-            <span className="block font-normal text-left ml-[44px] mb-1 lg:text-sm sm:text-sm text-xs">Username:</span>
+          <div className='formElements'>
+            <span className='label'>Username:</span>
             <input
               type="text"
               name="username"
               value={username}
               onChange={handleChangeRegisterForm}
-              className="border-2 rounded border-slate-500 p-2 w-4/5 outline-none"
+              className= 'formElementInput'
               placeholder="Enter your username"
             />
           </div>
-          <div className="mb-3 w-full">
-            <span className="block font-normal text-left ml-[44px] mb-1 lg:text-sm sm:text-sm text-xs">Email:</span>
+          <div className='formElements'>
+            <span className='label'>Email:</span>
             <input
               type="email"
               name="email"
               value={email}
               onChange={handleChangeRegisterForm}
-              className="border-2 rounded border-slate-500 p-2 w-4/5 outline-none"
+              className='formElementInput'
               placeholder="Enter your email"
             />
           </div>
-          <div className="mb-3 w-full">
-            <span className="block font-normal text-left ml-[44px] mb-1 lg:text-sm sm:text-sm text-xs">Password:</span>
+          <div className='formElements'>
+            <span className='label'>Password:</span>
             <input
               type="password"
               name="password"
               value={password}
               onChange={handleChangeRegisterForm}
-              className={`border-2 rounded p-2 w-4/5 outline-none ${isInputStarted && isInvalidPassword ? 'border-red-500' : 'border-slate-500'}`}
+              className={`formElementInput ${isInputStarted && isInvalidPassword ? styles.formElementInputError : ''}`}
               placeholder="Password minimum 7 characters"
             />
           </div>
-          <div className="mb-3 w-full">
-            <span className="block font-normal text-left ml-[44px] mb-1 lg:text-sm sm:text-sm text-xs">Confirm Password:</span>
+          <div className='formElements'>
+            <span className='label'>Confirm Password:</span>
             <input
               type="password"
               name="confirmPassword"
               value={confirmPassword}
               onChange={handleChangeRegisterForm}
-              className={`border-2 rounded p-2 w-4/5 outline-none ${isInputStarted && isInvalidPassword ? 'border-red-500' : 'border-slate-500'}`}
+              className={`formElementInput ${isInputStarted && isInvalidPassword ? styles.formElementInputError : ''}`}
               placeholder="Password minimum 7 characters"
             />
           </div>
-          <div className="text-right mr-10 mt-[-9px]">
-            <span className="lg:text-sm sm:text-sm text-xs cursor-pointer hover:text-violet-600">Forgot Password?</span>
-          </div>
         </div>
-        <div className="my-4 w-full">
-          <button type="submit" className="text-white bg-fuchsia-500 text-center rounded-full w-4/5 h-10 transition-colors duration-300 hover:bg-fuchsia-600">
+        <div className={styles.registerButtonContainer}>
+          <button type="submit" className={styles.registerButton}>
             Register
           </button>
         </div>
         <div>
-          <span className="mr-1 font-light lg:text-sm sm:text-sm text-xs">Do you already have an account?</span>
-          <Link to="/auth/login" className="text-fuchsia-500 lg:text-sm sm:text-sm text-xs hover:text-violet-600">
+          <span className={styles.registerFooterDescription}>Do you already have an account?</span>
+          <Link to="/auth/login" className={styles.registerFooterDirect}>
             Login
           </Link>
         </div>

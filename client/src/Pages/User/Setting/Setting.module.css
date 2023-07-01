@@ -1,0 +1,92 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    width: 100%;
+}
+
+.content {
+    width: 80%;
+    margin: 3rem 0 0 0;
+}
+
+.backButtonContainer {
+    margin: 3.2rem 0 0.8rem 0;
+    width: 100%;
+    cursor: pointer;
+    position: relative;
+}
+
+.backButton {
+    position: absolute;
+    top: 0;
+    left: 0.8rem;
+    color: rgb(75, 85, 99);
+    font-size: 2rem;
+    line-height: 2.4rem;
+}
+
+.backButtonDescription {
+    margin: 0 0 0 3.6rem;
+    font-size: 1.6rem;
+    line-height: 2rem;
+} 
+
+.title {
+    text-align: center;
+    margin: 5rem 0 1.6rem 0;
+    font-size: 2.4rem;
+    line-height: 3.2rem;
+    font-weight: 600;
+}
+
+.settingFormContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.settingFormItem {
+    margin: 0 0 1.6rem 0;
+}
+
+.label {
+    font-size: 1.6rem;
+    line-height: 2rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.settingFormInput {
+    border: 0.2rem solid rgb(213, 209, 219);
+    outline: none;
+    border-radius: 0.6rem;
+    padding: 1rem;
+    width: 100%;
+    font-size: 1.4rem;
+}
+
+.changePasswordButtonContainer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 3.2rem 0 0 0;
+}
+
+.changePasswordButton {
+    background-color: rgb(59, 130, 246, 0.8) !important;
+    color: white;
+    border-radius: 0.6rem;
+    padding: 0.8rem 1.6rem;
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    align-self: flex-end;
+    outline: none;
+    border: none;
+}
+
+.changePasswordButton:hover {
+    background-color: rgba(59, 130, 246, 1) !important;
+}

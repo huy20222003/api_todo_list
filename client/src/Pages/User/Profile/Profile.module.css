@@ -1,0 +1,113 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.header {
+    width: 100%;
+}
+
+.content {
+    width: 80%;
+    margin: 3rem 0 0 0;
+}
+
+.backButtonContainer {
+    margin: 3.2rem 0 0.8rem 0;
+    width: 100%;
+    cursor: pointer;
+    position: relative;
+}
+
+.backButton {
+    position: absolute;
+    top: 0;
+    left: 0.8rem;
+    color: rgb(75, 85, 99);
+    font-size: 2rem;
+    line-height: 2.4rem;
+}
+
+.backButtonDescription {
+    margin: 0 0 0 3.6rem;
+    font-size: 1.6rem;
+    line-height: 2rem;
+} 
+
+.userInfoContainer {
+    width: 100%;
+    text-align: center;
+    margin: 6rem 0 1rem 0;
+}
+
+.userInfoImage {
+    width: 14rem;
+    height: 14rem;
+    border-radius: 50%;
+    margin: 0 auto;
+}
+
+.userInfoName {
+    margin: 0.4rem 0 0 0;
+    font-size: 2rem;
+    line-height: 2.4rem;
+    font-weight: 400;
+}
+
+.infoDetailContainer {
+    margin: 6rem 0 0 0;
+}
+
+.infoDetailTitle {
+    font-size: 2.4rem;
+    line-height: 3.2rem;
+    color: rgb(96, 165, 250);
+    text-transform: uppercase;
+}
+
+.infoDetailForm {
+    margin: 1.6rem 0 0 0;
+}
+
+.infoDetailFormItem {
+    margin: 0 0 1.6rem 0;
+}
+
+.label {
+    font-size: 1.6rem;
+    line-height: 2rem;
+    margin: 0 0 0.5rem 0;
+}
+
+.infoDetailFormInput {
+    border: 0.2rem solid rgb(213, 209, 219);
+    outline: none;
+    border-radius: 0.6rem;
+    background-color: rgb(229, 231, 235);
+    padding: 1rem;
+    width: 100%;
+    font-size: 1.4rem;
+}
+
+.logoutButtonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 3.2rem 0 0 0;
+}
+
+.logoutButton {
+    color: white;
+    background-color: rgb(239, 68, 68, 0.8) !important;
+    text-align: center;
+    border-radius: 0.6rem;
+    margin: 0 0.4rem 0 0;
+    padding: 0.8rem 1.6rem;
+    font-size: 1.8rem;
+    text-decoration: none;
+}
+
+.logoutButton:hover {
+    background-color: rgba(239, 68, 68, 1) !important;
+}

@@ -1,4 +1,4 @@
-import { CREATE_TODO, DELETE_TODO, EDIT_TODO, FILTER_TODO, GET_ALL_TODOS, SEARCH_TODO } from "./constant";
+import { CREATE_TODO, DELETE_TODO, EDIT_TODO, FILTER_TODO, GET_ALL_TODOS, SEARCH_TODO, SET_TODO } from "./constant";
 
 export const getAllTodos = (payload)=> {
     return {
@@ -38,6 +38,13 @@ export const searchTodo = (payload)=> {
 export const filterTodo = (payload)=> {
     return {
         type: FILTER_TODO,
+        payload
+    }
+}
+
+export const setTodo = (payload)=> {
+    return {
+        type: SET_TODO,
         payload
     }
 }

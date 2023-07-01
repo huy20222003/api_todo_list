@@ -1,0 +1,87 @@
+.container {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+    background-image: url('../../../assets/images/anh_todo_list.png');
+    justify-content: center;
+    align-items: center;
+}
+
+.formLogin {
+    background-color: white;
+    border-radius: 0.8rem;
+    width: 40rem;
+    text-align: center;
+    height: fit-content;
+    padding: 2rem 0;
+}
+
+.header {
+    margin: 3rem 0;
+}
+
+.title {
+    font-size: 2.4rem;
+    line-height: 3.2rem;
+    font-weight: 700;
+    margin: 0 0 0 4px;
+}
+
+.forgotPassword {
+    text-align: right;
+    margin: -0.9rem 4rem 0 0;
+}
+
+.forgotPasswordTitle {
+    font-size: 1.2rem;
+    line-height: 2rem;
+    cursor: pointer;
+}
+
+.forgotPasswordTitle:hover {
+    color: rgb(124, 58, 237);
+}
+
+.loginButtonContainer {
+    margin: 1.6rem 0 1.6rem 0;
+    width: 100%;
+}
+
+.loginButton {
+    color: white;
+    text-align: center;
+    border-radius: 0.8rem;
+    background-color: rgb(217, 70, 239, 0.8) !important;
+    width: 80%;
+    height: 4.5rem;
+    font-size: 1.4rem;
+    line-height: 2rem;
+    outline: none;
+    border: none;
+}
+
+.loginButton:hover {
+    background-color: rgb(217, 70, 239, 1) !important;
+    transition: 0.3s linear;
+}
+
+.loginFooterDescription {
+    margin: 0 0.4rem 0 0;
+    font-weight: 400;
+    color: black;
+    font-size: 1.4rem;
+    line-height: 2rem;
+}
+
+.loginFooterDirect {
+    color: rgb(217, 70, 239);
+    font-size: 1.4rem;
+    line-height: 2rem;
+    text-decoration: none;
+}
+
+@media screen and (min-with: 639px) {
+    .formLogin {
+        width: 34rem;
+    }
+}

@@ -1,0 +1,103 @@
+.headerContainer {
+    height: 6rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(59, 130, 246);
+}
+
+.logoContainer {
+    padding: 0 0 0 1.2rem;
+}
+
+.logo {
+    font-size: 2.4rem;
+    line-height: 3.2rem;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+}
+
+.buttonContainer {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.buttonItem {
+    background-color: rgb(34, 197, 94);
+    border-radius: 0.4rem;
+    margin: 0 0.8rem 0 0;
+    color: white;
+    padding: 0.4rem 0.8rem;
+}
+
+.buttonItemIcon {
+    margin-right: 0.4rem;
+    font-size: 1.5rem;
+}
+
+.button {
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: white;
+}
+
+.imageContainer {
+    width: 100%;
+    height: 40rem;
+    position: relative;
+    background-image: url(../../assets/images/images.jpg);
+    background-size: contain;
+}
+
+.titleOnImage {
+    text-align: center;
+    color: rgb(59, 130, 246);
+    font-size: 7rem;
+    line-height: 1;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.aboutContainer {
+    width: 80%;
+    text-align: center;
+    margin: 6rem auto;
+}
+
+.aboutTitle {
+    font-size: 4rem;
+    line-height: 5.2rem;
+    font-weight: 500;
+    margin: 0 0 3rem 0;
+}
+
+.aboutDescription {
+    margin-bottom: 1rem;
+}
+
+.aboutDescriptionItem {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+    margin: 0 0 2rem;
+    text-align: justify;
+}
+
+.footerContainer {
+    background-color: rgb(96, 165, 250);
+    padding: 1.6rem;
+}
+
+.footerDescription {
+    color: white;
+    text-align: center;
+    font-size: 1.4rem;
+    line-height: 2rem;
+}

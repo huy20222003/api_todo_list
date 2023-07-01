@@ -1,13 +1,14 @@
 import Content from "../../Components/layoutContent/Content";
 import AddTodoForm from "../../Components/Form/AddTodoForm";
 import EditTodoForm from "../../Components/Form/EditTodoForm";
+import styles from './Dashboard.module.css';
 
 
 const Dashboard = ()=> {
 
     return(
         <div className="">
-            <div className="w-full h-screen relative">
+            <div className={styles.contentContainer}>
                 <Content />
             </div>
             <AddTodoForm />
