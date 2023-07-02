@@ -80,7 +80,7 @@ const AddTodoForm = () => {
               </label>
               <div>
                 <select id="label" name="label" className="formElementInput" value={label} onChange={handleChangeAddForm}>
-                  <option value="">Choose your label</option>
+                  <option value="" disabled = {true}>Choose your label</option>
                   <option value="pending">Pending</option>
                   <option value="completed">Completed</option>
                 </select>
