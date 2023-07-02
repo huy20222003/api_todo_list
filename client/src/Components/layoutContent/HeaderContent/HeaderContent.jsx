@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, memo } from 'react';
 import { Link } from 'react-router-dom';
 import { TodosContext } from '../../../Context/TodosContext';
 import { AuthContext } from '../../../Context/AuthContext';
@@ -79,4 +79,4 @@ const HeaderContent = () => {
   );
 };
 
-export default HeaderContent;
+export default memo(HeaderContent);

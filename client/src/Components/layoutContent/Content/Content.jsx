@@ -1,3 +1,4 @@
+import { memo } from "react";
 import HeaderContent from "../HeaderContent";
 import BodyContent from "../BodyContent";
 
@@ -11,4 +12,4 @@ const Content = ()=> {
     );
 }
 
-export default Content;
+export default memo(Content);

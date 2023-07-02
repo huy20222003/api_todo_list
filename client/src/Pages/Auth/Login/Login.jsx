@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, memo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Context/AuthContext';
@@ -96,4 +96,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default memo(Login);

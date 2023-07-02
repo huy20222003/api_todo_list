@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, memo } from "react";
 import { toast } from 'react-toastify';
 import { TodosContext } from "../../../Context/TodosContext";
 import styles from './EditTodoForm.module.css'
@@ -106,4 +106,4 @@ const EditTodoForm = () => {
   );
 }
 
-export default EditTodoForm;
+export default memo(EditTodoForm);

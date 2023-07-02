@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, memo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { LOCAL_STORAGE_TOKEN_NAME } from '../../../constant';
@@ -136,4 +136,4 @@ function Register() {
   );
 }
 
-export default Register;
+export default memo(Register);

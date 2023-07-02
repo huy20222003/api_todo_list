@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react';
+import { useState, useContext, memo } from 'react';
 import {toast} from 'react-toastify';
 import HeaderContent from '../../../Components/layoutContent/HeaderContent';
 import { AuthContext } from '../../../Context/AuthContext';
@@ -104,4 +104,4 @@ const Setting = () => {
   );
 };
 
-export default Setting;
+export default memo(Setting);

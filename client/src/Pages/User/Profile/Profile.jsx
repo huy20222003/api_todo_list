@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, memo } from "react";
 import { Link } from "react-router-dom";
 import HeaderContent from "../../../Components/layoutContent/HeaderContent";
 import { AuthContext } from "../../../Context/AuthContext";
@@ -77,4 +77,4 @@ const Profile = () => {
   );
 }
 
-export default Profile;
+export default memo(Profile);

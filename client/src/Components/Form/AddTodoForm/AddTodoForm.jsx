@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, memo } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { TodosContext } from "../../../Context/TodosContext";
@@ -108,4 +108,4 @@ const AddTodoForm = () => {
   );
 }
 
-export default AddTodoForm;
+export default memo(AddTodoForm);

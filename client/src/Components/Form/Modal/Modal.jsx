@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, memo } from 'react';
 import { toast } from 'react-toastify';
 import styles from './Modal.module.css';
 import { TodosContext } from '../../../Context/TodosContext';
@@ -45,4 +45,4 @@ const Modal = ()=> {
     );
 }
 
-export default Modal;
+export default memo(Modal);

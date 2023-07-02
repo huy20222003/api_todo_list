@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useState, memo } from "react";
 import { toast } from 'react-toastify';
 import { TodosContext } from "../../../Context/TodosContext";
 import TodoItem from "../TodoItem";
@@ -43,4 +43,4 @@ const BodyContent = () => {
   );
 };
 
-export default BodyContent;
+export default memo(BodyContent);

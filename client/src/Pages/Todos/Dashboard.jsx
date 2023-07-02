@@ -1,3 +1,4 @@
+import { memo } from "react";
 import Content from "../../Components/layoutContent/Content";
 import AddTodoForm from "../../Components/Form/AddTodoForm";
 import EditTodoForm from "../../Components/Form/EditTodoForm";
@@ -19,4 +20,4 @@ const Dashboard = ()=> {
     );
 }
 
-export default Dashboard;
+export default memo(Dashboard);
