@@ -14,6 +14,7 @@
 .todoList {
     display: flex;
     flex-wrap: wrap;
+    min-height: 100%;
 }
 
 .addButtonContainer {
@@ -43,4 +44,15 @@
 .addButton:hover {
     transform: scale(1.25);
     transition: 0.5s ease;
+}
+
+@media only screen and (max-width: 740px) {
+    .filterContainer {
+        margin: 4rem 0 0 3rem;
+    }
+
+    .todoList {
+        justify-content: center;
+        align-items: center;
+    }
 }

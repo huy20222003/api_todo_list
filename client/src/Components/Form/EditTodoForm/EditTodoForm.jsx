@@ -78,6 +78,7 @@ const EditTodoForm = () => {
               </label>
               <div>
                 <select id="label" name="label" className='formElementInput' value={label} onChange={handleChangeEditForm}>
+                  <option value="">Choose your label</option>
                   <option value="pending">Pending</option>
                   <option value="completed">Completed</option>
                 </select>

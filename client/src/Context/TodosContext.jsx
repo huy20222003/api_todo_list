@@ -16,7 +16,9 @@ export const TodosContext = createContext();
 export const TodosProvider = ({ children }) => {
   const [showAddModal, setShowAddModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showModalDelete, setShowModalDelete] = useState(false);
   const [id, setId] = useState('');
+  const [todoLoading, setTodoLoading] = useState(true);
   const [todoState, dispatch] = useReducer(reducer, initTodosState);
 
   const getAll = async () => {
@@ -24,8 +26,10 @@ export const TodosProvider = ({ children }) => {
       const response = await axios.get(`${Api_URL}/todos/all`);
       if (response.data.status) {
         dispatch(getAllTodos(response.data.todos));
+        setTodoLoading(false);
       }
     } catch (error) {
+      setTodoLoading(true);
       if (error.response && error.response.data) {
         return error.response.data;
       } else {
@@ -139,6 +143,10 @@ export const TodosProvider = ({ children }) => {
     id,
     setId,
     todoState,
+    todoLoading,
+    setTodoLoading,
+    showModalDelete,
+    setShowModalDelete,
     getAll,
     createTodos,
     editTodos,

@@ -58,6 +58,7 @@
     line-height: 2rem;
     outline: none;
     border: none;
+    cursor: pointer;
 }
 
 .loginButton:hover {
@@ -80,7 +81,7 @@
     text-decoration: none;
 }
 
-@media screen and (min-with: 639px) {
+@media only screen and (max-width: 768px) {
     .formLogin {
         width: 34rem;
     }

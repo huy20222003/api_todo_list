@@ -24,8 +24,9 @@ const AddTodoForm = () => {
       const addData = await createTodos(addForm);
       if (!addData.status) {
         toast.error('Add todo failed');
+      } else {
+        toast.success('Add todo successfully!');
       }
-      toast.success('Add todo successfully!');
     } catch (error) {
       toast.error('Server Error');
     }
@@ -79,6 +80,7 @@ const AddTodoForm = () => {
               </label>
               <div>
                 <select id="label" name="label" className="formElementInput" value={label} onChange={handleChangeAddForm}>
+                  <option value="">Choose your label</option>
                   <option value="pending">Pending</option>
                   <option value="completed">Completed</option>
                 </select>

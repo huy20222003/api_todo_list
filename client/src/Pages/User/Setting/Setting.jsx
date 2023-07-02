@@ -95,7 +95,7 @@ const Setting = () => {
           </div>
           <div className={styles.changePasswordButtonContainer}>
             <button type="submit" className={styles.changePasswordButton}>
-              Change Password
+              Change
             </button>
           </div>
         </form>

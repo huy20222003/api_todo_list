@@ -52,6 +52,7 @@
     line-height: 2rem;
     outline: none;
     border: none;
+    cursor: pointer;
 }
 
 .registerButton:hover {
@@ -72,4 +73,10 @@
     font-size: 1.4rem;
     line-height: 2rem;
     text-decoration: none;
+}
+
+@media only screen and (max-width: 740px) {
+    .formRegister {
+        width: 34rem;
+    }
 }

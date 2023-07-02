@@ -26,7 +26,7 @@ const Profile = () => {
             <span className={styles.backButtonDescription}>Back</span>
         </div>
         <div className={styles.userInfoContainer}>
-          <img src={user?.image || '../../../assets/images/avatar_mac_dinh.jpg'} className={styles.userInfoImage} alt={user?.fullName} />
+          <img src={user?.image} className={styles.userInfoImage} alt={user?.fullName} />
           <h2 className={styles.userInfoName}>{user?.fullName}</h2>
         </div>
         <div className={styles.infoDetailContainer}>
@@ -38,27 +38,27 @@ const Profile = () => {
                 type="text"
                 name="fullName"
                 className={styles.infoDetailFormInput}
-                value={user?.fullName || 'user'}
+                value={user?.fullName}
                 readOnly={true}
               />
             </div>
-            <div className="mb-4">
+            <div className={styles.infoDetailFormItem}>
               <p className={styles.label}>Username:</p>
               <input
                 type="text"
                 name="username"
                 className={styles.infoDetailFormInput}
-                value={user?.username || 'user'}
+                value={user?.username}
                 readOnly={true}
               />
             </div>
-            <div className="mb-4">
+            <div className={styles.infoDetailFormItem}>
               <p className={styles.label}>Email:</p>
               <input
                 type="email"
                 name="email"
                 className={styles.infoDetailFormInput}
-                value={user?.email || 'user'}
+                value={user?.email}
                 readOnly={true}
               />
             </div>

@@ -101,3 +101,39 @@
     font-size: 1.4rem;
     line-height: 2rem;
 }
+
+@media only screen and (max-width: 740px)  {
+    .logo {
+        font-size: 1.6rem;
+        line-height: 2rem;
+    }
+
+    .buttonItem {
+        padding: 0.3rem 0.6rem;
+    }
+    
+    .buttonItemIcon {
+        margin-right: 0.4rem;
+        font-size: 1.2rem;
+    }
+    
+    .button {
+        font-size: 1.4rem;
+        line-height: 2rem;
+    }
+    
+    .imageContainer {
+        height: 30rem;
+    }
+
+    .titleOnImage {
+        font-size: 3rem;
+        line-height: 1;
+    }
+
+    .aboutTitle {
+        font-size: 4rem;
+        line-height: 5rem;
+        font-weight: 400;
+    }
+} 

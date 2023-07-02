@@ -63,10 +63,10 @@ export const AuthProvider = ({ children }) => {
   // Register User
   const registerUser = async (registerForm) => {
     try {
-      const res = await axios.post(`${Api_URL}/auth/register`, registerForm);
+      const response = await axios.post(`${Api_URL}/auth/register`, registerForm);
       await loadUser();
 
-      return res.data;
+      return response.data;
     } catch (error) {
       if (error.response && error.response.data) {
         return error.response.data;

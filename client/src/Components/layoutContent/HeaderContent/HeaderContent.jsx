@@ -44,10 +44,10 @@ const HeaderContent = () => {
           placeholder="Search your Todo"
         />
       </div>
-      <div className={styles.userInfoContainer}>
-        <img className={styles.userInfoImage} src={user?.image || '../../../assets/images/avatar_mac_dinh.jpg'} alt="avatar" />
-        <div onClick={() => setSubMenu(!subMenu)}>
-          <span className={styles.userInfoName}>Hi, {user?.username || 'user'}</span>
+      <div className={styles.userInfoContainer} onClick={() => setSubMenu(!subMenu)}>
+        <img className={styles.userInfoImage} src={user?.image} alt="avatar" />
+        <div>
+          <span className={styles.userInfoName}>Hi, {user?.username}</span>
           <i className={`fa-solid fa-caret-down ${styles.caret}`}></i>
           <ul
             className={`${styles.subMenuContainer} ${
