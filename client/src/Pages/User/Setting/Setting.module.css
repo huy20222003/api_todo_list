@@ -76,7 +76,7 @@
 }
 
 .changePasswordButton {
-    background-color: rgb(59, 130, 246, 0.8) !important;
+    background-color: rgb(59, 130, 246, 0.9);
     color: white;
     border-radius: 0.6rem;
     padding: 0.8rem 1.6rem;
@@ -85,8 +85,15 @@
     align-self: flex-end;
     outline: none;
     border: none;
+    cursor: pointer;
 }
 
 .changePasswordButton:hover {
-    background-color: rgba(59, 130, 246, 1) !important;
+    background-color: rgba(59, 130, 246, 1);
+}
+
+@media only screen and (max-width: 740px) {
+    .backButtonContainer {
+        margin: 0;
+    }
 }

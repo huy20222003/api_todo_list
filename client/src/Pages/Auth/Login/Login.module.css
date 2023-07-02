@@ -51,7 +51,7 @@
     color: white;
     text-align: center;
     border-radius: 0.8rem;
-    background-color: rgb(217, 70, 239, 0.8) !important;
+    background-color: rgba(33, 164, 220, 0.9);
     width: 80%;
     height: 4.5rem;
     font-size: 1.4rem;
@@ -62,7 +62,7 @@
 }
 
 .loginButton:hover {
-    background-color: rgb(217, 70, 239, 1) !important;
+    background-color: rgba(33, 164, 220, 1);
     transition: 0.3s linear;
 }
 
@@ -75,7 +75,7 @@
 }
 
 .loginFooterDirect {
-    color: rgb(217, 70, 239);
+    color: rgba(33, 164, 220, 1);
     font-size: 1.4rem;
     line-height: 2rem;
     text-decoration: none;

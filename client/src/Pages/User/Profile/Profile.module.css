@@ -111,3 +111,9 @@
 .logoutButton:hover {
     background-color: rgba(239, 68, 68, 1) !important;
 }
+
+@media only screen and (max-width: 740px) {
+    .backButtonContainer {
+        margin: 0;
+    }
+}

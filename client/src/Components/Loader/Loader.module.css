@@ -3,7 +3,7 @@
     height: 50px;
     border-radius: 50%;
     border: 8px solid #0000;
-    border-right-color: #766DF497;
+    border-right-color: rgba(33, 164, 220, 1);
     position: absolute;
     animation: s4 1s infinite linear;
     top: 50%;

@@ -1,5 +1,5 @@
-import HeaderContent from "./HeaderContent";
-import BodyContent from "./BodyContent";
+import HeaderContent from "../HeaderContent";
+import BodyContent from "../BodyContent";
 
 const Content = ()=> {
 
