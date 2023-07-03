@@ -8,7 +8,8 @@ import {
   editTodo,
   deleteTodo,
   searchTodo,
-  filterTodo
+  filterTodo,
+  setTodo
 } from '../Reducer/TodosReducer/action';
 
 export const TodosContext = createContext();
@@ -60,10 +61,10 @@ export const TodosProvider = ({ children }) => {
   };
 
   // Edit todo
-  const editTodos = async (todoId, editForm) => {
+  const editTodos = async (editForm) => {
     try {
-      const response = await axios.put(`${Api_URL}/todos/edit/${todoId}`, editForm);
-      await getAll();
+      const response = await axios.put(`${Api_URL}/todos/edit/${editForm._id}`, editForm);
+      dispatch(editTodo(editForm));
       return response.data;
     } catch (error) {
       if (error.response && error.response.data) {
@@ -135,6 +136,12 @@ export const TodosProvider = ({ children }) => {
     }
   }
 
+  //set 
+  const setTodos = (todoId)=> {
+    const todo = todoState.todos.find((todo)=>todo._id === todoId);
+    dispatch(setTodo(todo));
+  }
+
   const TodosContextData = {
     showAddModal,
     setShowAddModal,
@@ -152,7 +159,8 @@ export const TodosProvider = ({ children }) => {
     editTodos,
     deleteTodos,
     searchTodos,
-    filterTodos
+    filterTodos,
+    setTodos
   };
 
   return <TodosContext.Provider value={TodosContextData}>{children}</TodosContext.Provider>;

@@ -2,7 +2,7 @@
     border: 2px solid rgb(59, 130, 246);
     border-radius: 0.6rem;
     margin: 1.2rem;
-    min-width: 20rem;
+    width: 20rem;
     height: 14rem;
     padding: 0.8rem;
     position: relative;
@@ -55,7 +55,7 @@
 
 @media only screen and (max-width: 740px) {
     .container {
-        min-width: 32rem;
+        width: 32rem;
     }
 
     .todoLabel {

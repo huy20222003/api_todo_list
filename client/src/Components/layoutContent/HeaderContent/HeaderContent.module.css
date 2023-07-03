@@ -112,7 +112,7 @@
 
 @media only screen and (max-width: 740px) {
     .container {
-        height: 5rem;
+        height: 5.5rem;
     }
 
     .logoContainer, .userInfoName {
@@ -125,7 +125,7 @@
     
     .searchInput {
         width: 28rem;
-        height: 3.6rem;
+        height: 4rem;
     }
 
     .userInfoContainer {

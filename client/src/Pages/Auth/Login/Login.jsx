@@ -72,7 +72,7 @@ function Login() {
                         />
                     </div>
                     <div className={styles.forgotPassword}>
-                        <span className={styles.forgotPasswordTitle}>Forgot password?</span>
+                        <Link to = '/user/reset-password' className={styles.forgotPasswordTitle}>Forgot password?</Link>
                     </div>
                 </div>
                 <div className={styles.loginButtonContainer}>

@@ -36,10 +36,11 @@
     font-size: 1.2rem;
     line-height: 2rem;
     cursor: pointer;
+    color: black;
 }
 
 .forgotPasswordTitle:hover {
-    color: rgb(124, 58, 237);
+    color: rgba(33, 164, 220, 1);
 }
 
 .loginButtonContainer {

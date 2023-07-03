@@ -1,35 +1,51 @@
-import { useContext, useState, memo } from "react";
+import { useContext, useState, memo, useEffect } from "react";
 import { toast } from 'react-toastify';
 import { TodosContext } from "../../../Context/TodosContext";
 import styles from './EditTodoForm.module.css'
 
 const EditTodoForm = () => {
-  const { showEditModal, setShowEditModal, id, editTodos, todoState: {todos} } = useContext(TodosContext);
-  const [editForm, setEditForm] = useState({
-    name: "",
-    description: "",
-    label: ""
-  });
+  const { showEditModal, setShowEditModal, editTodos, todoState: {todo} } = useContext(TodosContext);
+  const initialEditFormState = {
+    _id: (todo && todo._id) || '',
+    name: (todo && todo.name) || '',
+    description: (todo && todo.description) || '',
+    label: (todo && todo.label) || 'pending',
+  };
+  
+  const [editForm, setEditForm] = useState(initialEditFormState);
+
+  useEffect(() => {
+    // Kiểm tra và đảm bảo todo không phải là null trước khi setEditForm
+    if (todo) {
+      setEditForm({
+        _id: (todo._id !== null) ? todo._id : '',
+        name: (todo.name !== null) ? todo.name : '',
+        description: (todo.description !== null) ? todo.description : '',
+        label: (todo.label !== null) ? todo.label : 'pending',
+      });
+    }
+  }, [todo]);
   
   const { name, description, label } = editForm;
 
   const handleChangeEditForm = (e) => {
     setEditForm({ ...editForm, [e.target.name]: e.target.value });
   };
-
+  
   const handleEditTodo = async (e) => {
     e.preventDefault();
     try {
-      const editData = await editTodos(id, editForm);
+      const editData = await editTodos(editForm);
       if (!editData.status) {
         toast.error('Edit todo failed');
+      } else {
+        toast.success('Edit todo successfully!');
       }
-      toast.success('Edit todo successfully!');
     } catch (error) {
       toast.error('Server error');
     }
     setShowEditModal(false);
-    setEditForm({ name: '', description: '', label: '' });
+    // setEditForm({ name: '', description: '', label: '' });
   };
 
   return (
@@ -78,9 +94,10 @@ const EditTodoForm = () => {
               </label>
               <div>
                 <select id="label" name="label" className='formElementInput' value={label} onChange={handleChangeEditForm}>
-                  <option value="" disabled = {true}>Choose your label</option>
-                  <option value="pending">Pending</option>
-                  <option value="completed">Completed</option>
+                  <optgroup label="Choose your label">
+                    <option value="pending">Pending</option>
+                    <option value="completed">Completed</option>
+                  </optgroup>
                 </select>
               </div>
             </div>

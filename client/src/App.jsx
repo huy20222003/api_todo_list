@@ -7,6 +7,7 @@ import Register from './Pages/Auth/Register';
 import Dashboard from './Pages/Todos/Dashboard';
 import Profile from './Pages/User/Profile';
 import Setting from './Pages/User/Setting';
+import ResetPassword from './Pages/User/ResetPassword';
 import ProtectedRoute from './routes/ProtectedRoute';
 
 function App() {
@@ -19,8 +20,9 @@ function App() {
           <Route path='/auth/login' element={<Login />} />
           <Route path='/auth/register' element={<Register />} />
           <Route path='/dashboard' element={<Dashboard />} />
-          <Route path='/dashboard/profile' element={<Profile />} />
-          <Route path='/dashboard/setting' element={<Setting />} />
+          <Route path='/dashboard/user/profile' element={<Profile />} />
+          <Route path='/dashboard/user/setting' element={<Setting />} />
+          <Route path='/user/reset-password' element={<ResetPassword />} />
         </Routes>
         <ToastContainer />
       </div>

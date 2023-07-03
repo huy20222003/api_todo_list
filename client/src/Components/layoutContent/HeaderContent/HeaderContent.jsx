@@ -55,13 +55,13 @@ const HeaderContent = () => {
             }`}
           >
             <li className={styles.subMenuItem}>
-              <Link to="/dashboard/profile" className={styles.subMenuItemLink}>
+              <Link to="/dashboard/user/profile" className={styles.subMenuItemLink}>
                 <i className={`fa-solid fa-user ${styles.subMenuItemIcon}`}></i>
                 <span className={styles.subMenuItemName}>Account</span>
               </Link>
             </li>
             <li className={styles.subMenuItem}>
-              <Link to='/dashboard/setting' className={styles.subMenuItemLink}>
+              <Link to='/dashboard/user/setting' className={styles.subMenuItemLink}>
                 <i className={`fa-solid fa-gear ${styles.subMenuItemIcon}`}></i>
                 <span className={styles.subMenuItemName}>Settings</span>
               </Link>

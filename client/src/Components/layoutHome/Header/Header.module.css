@@ -1,0 +1,40 @@
+.logoContainer {
+    padding: 0 0 0 1.2rem;
+}
+
+.logo {
+    font-size: 2.4rem;
+    line-height: 3.2rem;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+}
+
+.buttonContainer {
+    display: flex;
+    align-items: center;
+}
+
+.buttonItem {
+    background-color: rgba(33, 164, 220, 1);
+    border-radius: 0.4rem;
+    margin: 0 0.8rem 0 0;
+    color: white;
+    padding: 0.4rem 0.8rem;
+    cursor: pointer;
+}
+
+.buttonItemIcon {
+    margin-right: 0.4rem;
+    font-size: 1.5rem;
+}
+
+.button {
+    font-size: 1.8rem;
+    line-height: 2.4rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    cursor: pointer;
+}

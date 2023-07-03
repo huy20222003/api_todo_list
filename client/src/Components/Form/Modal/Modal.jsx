@@ -30,7 +30,7 @@ const Modal = ()=> {
                 <div className={styles.modal}>
                     <div className={styles.header}>
                         <h2 className={styles.title}>Delete</h2>
-                        <i className={`fa-solid fa-xmark ${styles.close}`} onClick={handleCloseModalConfirm}></i>
+                        <i className={`fa-regular fa-circle-xmark ${styles.close}`} onClick={handleCloseModalConfirm}></i>
                     </div>
                     <div className={styles.body}>
                         <p className={styles.description}>Are you sure you want to delete it?</p>

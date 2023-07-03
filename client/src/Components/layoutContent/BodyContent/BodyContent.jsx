@@ -30,14 +30,13 @@ const BodyContent = () => {
         <TodoItem />
       </div>
       <div className={styles.addButtonContainer}>
-        {/* <p className={styles.toolTip}>
-          Add new todo
-        </p> */}
-        <i
-          className={`fa-solid fa-plus ${styles.addButton}`}
-          onClick={() => setShowAddModal(true)}
-        >
-        </i>
+        <span data-tooltip="Add new Todo!" data-flow="top">
+          <i
+            className={`fa-solid fa-plus ${styles.addButton}`}
+            onClick={() => setShowAddModal(true)}
+          >
+          </i>
+        </span>
       </div>
     </div>
   );

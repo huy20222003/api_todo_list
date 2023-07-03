@@ -7,7 +7,7 @@ export const initTodosState = {
 
 export const reducer = (state, action)=> {
     const {type, payload} = action;
-
+    
     switch(type) {
         case GET_ALL_TODOS: 
             return {
@@ -20,8 +20,10 @@ export const reducer = (state, action)=> {
                 todos: [...state.todos, payload]
             }
         case EDIT_TODO:
+            const newTodo = state.todos.map((todo)=> todo._id === payload._id ? payload : todo);
             return {
-                ...state
+                ...state,
+                todos: newTodo
             }
         case DELETE_TODO: 
             return {
