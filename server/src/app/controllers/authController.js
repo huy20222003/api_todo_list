@@ -55,7 +55,7 @@ class authController {
             if (!passwordMatch) {
                 return res.status(401).json({ status: false, message: 'Invalid username or password!' });
             }
-            const accessToken = jwt.sign({ user }, 'TOKEN_SECRET');
+            const accessToken = jwt.sign({ user }, process.env.TOKEN_SECRET);
             res.status(201).json({ status: true, message: 'Logged successfully! ', accessToken });
         } catch(error) {
             res.status(500).json({ status: false, message: error });
