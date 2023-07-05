@@ -5,20 +5,18 @@ const nodemailer = require('nodemailer');
 
 class userController {
     async update_password(req, res) {
-        const { oldPassword, newPassword, confirmPassword } = req.body;
+        const { oldPassword, newPassword } = req.body;
       
-        if (!oldPassword || !newPassword || !confirmPassword) {
+        if (!oldPassword || !newPassword) {
           res.status(400).json({ status: false, message: 'Missing password or new password' });
           return;
         }
       
         try {
           const hashedNewPassword = await bcrypt.hash(newPassword, 8);
-          const hashedConfirmPassword = await bcrypt.hash(confirmPassword, 8);
       
           const user = await Users.findByIdAndUpdate(req._id, {
-            password: hashedNewPassword,
-            confirmPassword: hashedConfirmPassword,
+            password: hashedNewPassword
           });
       
           if (!user) {
@@ -72,21 +70,19 @@ class userController {
     }
     
     async resetPassword(req, res) {
-      const { newPassword, confirmPassword, token } = req.body;
-      if (!newPassword || !confirmPassword) {
+      const { newPassword, token } = req.body;
+      if (!newPassword) {
         res.status(400).json({ status: false, message: 'Missing password or new password' });
         return;
       }
       try {
-        const hashedNewPassword = await bcrypt.hash(newPassword, 10);
-        const hashedConfirmPassword = await bcrypt.hash(confirmPassword, 10);
+        const hashedNewPassword = await bcrypt.hash(newPassword, 8);
   
         const user = await Users.findOneAndUpdate({
           resetToken: token,
           resetTokenExpiration: { $gt: Date.now() }, // Kiểm tra xem mã thông báo còn hiệu lực hay không
         }, {
             password: hashedNewPassword,
-            confirmPassword: hashedConfirmPassword,
             $unset: { resetTokenExpiration: 1, resetToken: 1 } 
         }, {new: true});
     

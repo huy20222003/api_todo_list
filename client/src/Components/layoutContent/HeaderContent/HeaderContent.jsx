@@ -55,6 +55,12 @@ const HeaderContent = () => {
             }`}
           >
             <li className={styles.subMenuItem}>
+              <Link to="/dashboard" className={styles.subMenuItemLink}>
+                <i className={`fa-solid fa-house ${styles.subMenuItemIcon}`}></i>
+                <span className={styles.subMenuItemName}>Dashboard</span>
+              </Link>
+            </li>
+            <li className={styles.subMenuItem}>
               <Link to="/dashboard/user/profile" className={styles.subMenuItemLink}>
                 <i className={`fa-solid fa-user ${styles.subMenuItemIcon}`}></i>
                 <span className={styles.subMenuItemName}>Account</span>

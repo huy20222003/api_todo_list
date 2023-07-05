@@ -32,13 +32,6 @@ const Users = new Schema({
         trim: true, 
         minLength: 7
     },
-    confirmPassword: {
-        type: String, 
-        default: "",
-        required: true,
-        trim: true,
-        minLength: 7
-    },
     image: {
         type: String,
         default: "https://antimatter.vn/wp-content/uploads/2022/11/anh-avatar-trang-fb-mac-dinh.jpg"
@@ -54,9 +47,8 @@ const Users = new Schema({
 
 Users.pre('save', async function (next) {
     const user = this;
-    if (user.isModified('password') && user.isModified('confirmPassword')) {
+    if (user.isModified('password')) {
         user.password = await bcrypt.hash(user.password, 8);
-        user.confirmPassword = await bcrypt.hash(user.confirmPassword, 8);
     }
     next();
 })

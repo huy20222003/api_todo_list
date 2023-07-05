@@ -18,8 +18,8 @@ class authController {
     }
 
     async register(req, res) {
-        const { fullName, username, email, password, confirmPassword } = req.body;
-        if(!username || !fullName || !email || !password || !confirmPassword) {
+        const { fullName, username, email, password} = req.body;
+        if(!username || !fullName || !email || !password) {
             return res.status(400).json({status: false, message: 'Please check the information again!'});
         }
         try {
@@ -27,7 +27,7 @@ class authController {
             if(user) {
                 return res.status(400).json({ status: false, message: 'Username or email already exists!' });
             }else {
-                const newUser = new Users({ fullName, username, email, password, confirmPassword });
+                const newUser = new Users({ fullName, username, email, password });
                 const accessToken = jwt.sign({ newUser }, 'TOKEN_SECRET');
                 await newUser.save();
                 return res.status(200).json({ status: true, message: 'Register successful!', accessToken });

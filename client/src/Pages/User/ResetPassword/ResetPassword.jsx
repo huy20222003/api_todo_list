@@ -55,9 +55,6 @@ const ResetPassword = ()=> {
                     </div>
                 </form>
             </div>
-            <div className={styles.footerContainer}>
-                <Footer />
-            </div>
         </div>
     );
 }
