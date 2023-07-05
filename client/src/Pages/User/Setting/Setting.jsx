@@ -1,7 +1,7 @@
 import { useState, useContext, memo } from 'react';
 import {toast} from 'react-toastify';
 import HeaderContent from '../../../Components/layoutContent/HeaderContent';
-import { AuthContext } from '../../../Context/AuthContext';
+import { UserContext } from '../../../Context/UserContext';
 import styles from './Setting.module.css';
 
 const Setting = () => {
