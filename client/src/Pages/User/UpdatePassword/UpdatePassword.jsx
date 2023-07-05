@@ -25,17 +25,18 @@ const UpdatePassword = ()=> {
         e.preventDefault();
         if(newPassword != confirmPassword) {
             toast.info('Password incorrect!');
-        }
-        try {
-            const updateData = await updatePasswordAfterReset(updateForm);
-            if(!updateData.status) {
-                toast.error(updateData.message);
-            } else {
-                toast.success(updateData.message);
-                navigate('/');
+        } else {
+            try {
+                const updateData = await updatePasswordAfterReset(updateForm);
+                if(!updateData.status) {
+                    toast.error(updateData.message);
+                } else {
+                    toast.success(updateData.message);
+                    navigate('/');
+                }
+            } catch (error) {
+                toast.error('Server error');
             }
-        } catch (error) {
-            toast.error('Server error');
         }
     }
 

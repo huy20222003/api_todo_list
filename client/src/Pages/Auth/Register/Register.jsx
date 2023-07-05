@@ -32,19 +32,19 @@ function Register() {
     e.preventDefault();
     if (password !== confirmPassword) {
       toast.info('Password incorrect!');
-    } 
-
-    try {
-      const registerData = await registerUser(registerForm);
-      if (!registerData.status) {
-        toast.error('Register failed!');
-      } else {
-        localStorage.setItem(LOCAL_STORAGE_TOKEN_NAME, registerData.accessToken);
-        toast.success('Successful account registration!!');
-        navigate('/auth/login');
+    } else {
+      try {
+        const registerData = await registerUser(registerForm);
+        if (!registerData.status) {
+          toast.error('Register failed!');
+        } else {
+          localStorage.setItem(LOCAL_STORAGE_TOKEN_NAME, registerData.accessToken);
+          toast.success('Successful account registration!!');
+          navigate('/auth/login');
+        }
+      } catch (error) {
+        toast.error('Server error');
       }
-    } catch (error) {
-      toast.error('Server error');
     }
     setRegisterForm({
       fullName: '',
