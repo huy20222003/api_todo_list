@@ -23,6 +23,9 @@ const UpdatePassword = ()=> {
 
     const handleUpdatePasswordAfterReset =  async (e)=> {
         e.preventDefault();
+        if(newPassword != confirmPassword) {
+            toast.info('Password incorrect!');
+        }
         try {
             const updateData = await updatePasswordAfterReset(updateForm);
             if(!updateData.status) {
