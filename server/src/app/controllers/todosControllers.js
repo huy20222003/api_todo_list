@@ -13,7 +13,7 @@ class todosControllers {
     async create(req, res) {
         const { name, description, label } = req.body;
         if(!name || !label) {
-            res.status(400).json({ status: false, message: 'Missing name or status!' });
+            res.status(500).json({ status: false, message: 'Missing name or status!' });
         }
 
         try {
@@ -21,7 +21,7 @@ class todosControllers {
             await newTodo.save();
             res.status(200).json({ status: true, message: 'Add todo successful!', newTodo });
         } catch (error) {
-            res.status(400).json({ status: false, message: error });
+            res.status(500).json({ status: false, message: error });
         }
     }
 
@@ -39,7 +39,7 @@ class todosControllers {
                 res.status(201).json({ status: true, message: 'Edit successful!' });
             }
         } catch (error) {
-            res.status(400).json({ status: false, message: error });
+            res.status(500).json({ status: false, message: error });
         }
     }
 
@@ -52,7 +52,7 @@ class todosControllers {
                 res.status(201).json({ status: true, message: 'Delete successful!' });
             }
         } catch (error) {
-            res.status(400).json({ status: false, message: error });
+            res.status(500).json({ status: false, message: error });
         }
     }
 
@@ -67,7 +67,7 @@ class todosControllers {
                 res.status(201).json({ status: true, message: 'Search successful!', todo });
             }
         } catch (error) {
-            res.status(400).json({ status: false, message: error });
+            res.status(500).json({ status: false, message: error });
         }
     }
 
@@ -82,7 +82,7 @@ class todosControllers {
                 res.status(201).json({ status: true, message: 'Filter successful!', todo });
             }
         } catch (error) {
-            res.status(400).json({ status: false, message: error });
+            res.status(500).json({ status: false, message: error });
         }
     }
 }

@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import App from './App'
 import { AuthProvider } from './Context/AuthContext';
 import { TodosProvider } from './Context/TodosContext';
+import { UserProvider } from './Context/UserContext';
 import GlobalStyles from '../src/GlobalStyles/GlobalStyles'
 import './index.css';
 
@@ -11,7 +12,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <GlobalStyles>
         <AuthProvider>
           <TodosProvider>
-            <App/>
+            <UserProvider>
+              <App/>
+            </UserProvider>
           </TodosProvider>
         </AuthProvider>
       </GlobalStyles>

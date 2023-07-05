@@ -106,28 +106,12 @@ export const AuthProvider = ({ children }) => {
     );
   };
 
-  //update password
-  const updatePasswords = async (updatePasswordForm)=> {
-    try {
-      const response = await axios.put(`${Api_URL}/user/password/update`, updatePasswordForm);
-      await loadUser();
-      return response.data;
-    } catch (error) {
-      if (error.response && error.response.data) {
-        return error.response.data;
-      } else {
-        return { status: false, message: error.message };
-      }
-    }
-  }
-
   const AuthContextData = {
     authState,
     loadUser,
     registerUser,
     loginUser,
     logoutUser,
-    updatePasswords
   };
 
   return <AuthContext.Provider value={AuthContextData}>{children}</AuthContext.Provider>;

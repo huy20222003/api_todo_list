@@ -13,7 +13,7 @@ class authController {
                 res.status(200).json({status: true, message: 'User found!', user});
             }
         } catch (error) {
-            res.status(400).json({status: false, message: error});
+            res.status(500).json({status: false, message: error});
         }
     }
 
@@ -33,7 +33,7 @@ class authController {
                 return res.status(200).json({ status: true, message: 'Register successful!', accessToken });
             }
         } catch (error) {
-            res.status(400).json({ status: false, message: error });
+            res.status(500).json({ status: false, message: error });
         }
     }
 
@@ -58,7 +58,7 @@ class authController {
             const accessToken = jwt.sign({ user }, 'TOKEN_SECRET');
             res.status(201).json({ status: true, message: 'Logged successfully! ', accessToken });
         } catch(error) {
-            res.status(400).json({ status: false, message: error });
+            res.status(500).json({ status: false, message: error });
         }
     }
 }

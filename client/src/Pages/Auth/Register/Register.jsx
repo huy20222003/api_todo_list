@@ -70,6 +70,7 @@ function Register() {
               type="text"
               name="fullName"
               value={fullName}
+              required={true}
               onChange={handleChangeRegisterForm}
               className='formElementInput'
               placeholder="Enter your fullname"
@@ -81,6 +82,7 @@ function Register() {
               type="text"
               name="username"
               value={username}
+              required={true}
               onChange={handleChangeRegisterForm}
               className= 'formElementInput'
               placeholder="Enter your username"
@@ -92,6 +94,7 @@ function Register() {
               type="email"
               name="email"
               value={email}
+              required={true}
               onChange={handleChangeRegisterForm}
               className='formElementInput'
               placeholder="Enter your email"
@@ -103,6 +106,7 @@ function Register() {
               type="password"
               name="password"
               value={password}
+              required={true}
               onChange={handleChangeRegisterForm}
               className={`formElementInput ${isInputStarted && isInvalidPassword ? styles.formElementInputError : ''}`}
               placeholder="Password minimum 7 characters"
@@ -114,6 +118,7 @@ function Register() {
               type="password"
               name="confirmPassword"
               value={confirmPassword}
+              required={true}
               onChange={handleChangeRegisterForm}
               className={`formElementInput ${isInputStarted && isInvalidPassword ? styles.formElementInputError : ''}`}
               placeholder="Password minimum 7 characters"

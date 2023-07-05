@@ -8,6 +8,7 @@ import Dashboard from './Pages/Todos/Dashboard';
 import Profile from './Pages/User/Profile';
 import Setting from './Pages/User/Setting';
 import ResetPassword from './Pages/User/ResetPassword';
+import UpdatePassword from './Pages/User/UpdatePassword';
 import ProtectedRoute from './routes/ProtectedRoute';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path='/dashboard/user/profile' element={<Profile />} />
           <Route path='/dashboard/user/setting' element={<Setting />} />
           <Route path='/user/reset-password' element={<ResetPassword />} />
+          <Route path='/user/update-password' element={<UpdatePassword />} />
         </Routes>
         <ToastContainer />
       </div>

@@ -66,6 +66,7 @@ function Login() {
                             type="password"
                             name="password"
                             value={password}
+                            required={true}
                             onChange={handleChangeLoginForm}
                             className='formElementInput'
                             placeholder="Enter your password"

@@ -12,7 +12,7 @@ const Setting = () => {
   });
 
   const { oldPassword, newPassword, confirmPassword } = passwordForm;
-  const {updatePasswords} = useContext(AuthContext);
+  const {updatePasswords} = useContext(UserContext);
 
   const handleChangePasswordForm = (e) => {
     setPasswordForm({ ...passwordForm, [e.target.name]: e.target.value });
