@@ -32,7 +32,7 @@ const UpdatePassword = ()=> {
                     toast.error(updateData.message);
                 } else {
                     toast.success(updateData.message);
-                    navigate('/');
+                    navigate('/auth/login');
                 }
             } catch (error) {
                 toast.error('Server error');
