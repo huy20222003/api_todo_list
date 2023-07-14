@@ -57,7 +57,7 @@ class userController {
             html: `Your verification code is: <b>${code}</b>. If you did not initiate this action, please change your password to secure your account.`,
           };
     
-          //await transporter.sendMail(mailOptions);
+          await transporter.sendMail(mailOptions);
     
           res.status(200).json({ status: true, message: 'An email with instructions to reset your password has been sent.' });
         }
