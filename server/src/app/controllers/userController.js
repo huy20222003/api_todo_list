@@ -54,9 +54,7 @@ class userController {
             from: '(Todo List Webapp) todolistwebappv1@gmail.com',
             to: email,
             subject: 'Reset Your Password',
-            text: `You are performing a password reset on the TodoList Webapp.
-                    Your verification code is: ${code}
-                    If you did not initiate this action, please change your password to secure your account.`,
+            html: `Your verification code is: <b>${code}</b>. If you did not initiate this action, please change your password to secure your account.`,
           };
     
           //await transporter.sendMail(mailOptions);
