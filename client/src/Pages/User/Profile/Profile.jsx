@@ -53,8 +53,8 @@ const Profile = () => {
     setShowModalVerify(true);
     setUpdatedButton(true);
     try {
-      const updateInfo = await sendCode({email: user?.email});
-      if(!updateInfo.status) {
+      const sendData = await sendCode({email: user?.email});
+      if(!sendData.status) {
         toast.error(sendData.message);
       } else {
         toast.success(sendData.message);

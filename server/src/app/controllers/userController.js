@@ -53,7 +53,7 @@ class userController {
           const mailOptions = {
             from: '(Todo List Webapp) todolistwebappv1@gmail.com',
             to: email,
-            subject: 'Reset Your Password',
+            subject: 'Your Verification Code',
             html: `Your verification code is: <b>${code}</b>. If you did not initiate this action, please change your password to secure your account.`,
           };
     
