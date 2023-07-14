@@ -5,6 +5,7 @@ import { Api_URL } from '../constant';
 export const UserContext = createContext();
 
 export const UserProvider = ({children}) => {
+    const [showModalVerify, setShowModalVerify] = useState(false);
     //update password
     const updatePasswords = async (updatePasswordForm)=> {
         try {
@@ -19,9 +20,9 @@ export const UserProvider = ({children}) => {
         }
       }
 
-      const resetPasswords = async(resetPassowrdForm)=> {
+      const sendCode = async(resetPassowrdForm)=> {
         try {
-            const response = await axios.post(`${Api_URL}/user/password/forgot-password`, resetPassowrdForm);
+            const response = await axios.post(`${Api_URL}/user/send-code`, resetPassowrdForm);
             return response.data;
         } catch (error) {
             if (error.response && error.response.data) {
@@ -45,11 +46,46 @@ export const UserProvider = ({children}) => {
         }
       }
 
+      const verifyCode = async(code)=> {
+        try {
+          const emailSessionStorage = sessionStorage.getItem('email');
+          const verifyData = {
+            code, 
+            email: emailSessionStorage
+          }
+          const response = await axios.post(`${Api_URL}/user/verify-code`, verifyData);
+          return response.data;
+        } catch (error) {
+          if (error.response && error.response.data) {
+            return error.response.data;
+          } else {
+              return { status: false, message: error.message };
+          }
+        }
+      }
+
+      const updateUserInfo = async (userInfo)=> {
+        try {
+          const response = await axios.put(`${Api_URL}/user/profile/update`, userInfo);
+          return response.data;
+        } catch (error) {
+          if (error.response && error.response.data) {
+            return error.response.data;
+          } else {
+              return { status: false, message: error.message };
+          }
+        }
+      }
+
 
     const userData = {
-        updatePasswords,
-        resetPasswords,
-        updatePasswordAfterReset
+      showModalVerify,
+      setShowModalVerify,
+      updatePasswords,
+      sendCode,
+      verifyCode,
+      updatePasswordAfterReset,
+      updateUserInfo
     }
     return <UserContext.Provider value={userData}>{children}</UserContext.Provider>
 }

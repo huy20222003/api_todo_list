@@ -1,8 +1,18 @@
-POST http://localhost:3000/api/user/password/forgot-password
+POST http://localhost:3000/api/user/send-code
 Content-Type: application/json
 
 {
     "email": "huy20222003@gmail.com"
+}
+
+###
+
+POST http://localhost:3000/api/user/verify-code
+Content-Type: application/json
+
+{
+    "email": "huy20222003@gmail.com",
+    "code": 287761
 }
 
 ###
@@ -22,8 +32,8 @@ POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-    "username": "admin",
-    "password": "7654321"
+    "username": "huyentrang",
+    "password": "1234567"
 }
 
 

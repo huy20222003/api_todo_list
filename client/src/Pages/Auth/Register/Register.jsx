@@ -44,24 +44,25 @@ function Register() {
         }
       } catch (error) {
         toast.error('Server error');
+      } finally {
+        setRegisterForm({
+          fullName: '',
+          username: '',
+          email: '',
+          password: '',
+          confirmPassword: ''
+        });
+        setIsInputStarted(false); // Đặt lại trạng thái khi gửi form
+        setIsInvalidPassword(false); // Đặt lại trạng thái mật khẩu không hợp lệ
       }
     }
-    setRegisterForm({
-      fullName: '',
-      username: '',
-      email: '',
-      password: '',
-      confirmPassword: ''
-    });
-    setIsInputStarted(false); // Đặt lại trạng thái khi gửi form
-    setIsInvalidPassword(false); // Đặt lại trạng thái mật khẩu không hợp lệ
   };
 
   return (
     <div className={styles.container}>
       <form className={styles.formRegister} onSubmit={handleSubmitRegisterForm}>
         <div className={styles.header}>
-          <h1 className={styles.title}>Register Form</h1>
+          <h1 className={styles.title}>Register</h1>
         </div>
         <div>
           <div className='formElements'>

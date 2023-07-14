@@ -2,13 +2,12 @@ import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Header from '../../../Components/layoutHome/Header';
-import Footer from '../../../Components/layoutHome/Footer';
 import styles from './ResetPassword.module.css';
 import { UserContext } from '../../../Context/UserContext';
 
 const ResetPassword = ()=> {
     const [emailReset, setEmailReset] = useState('');
-    const { resetPasswords } = useContext(UserContext);
+    const { sendCode, setShowModalVerify } = useContext(UserContext);
     const navigate = useNavigate();
 
     const handleChangeresetPasswordForm = (e)=> {
@@ -18,12 +17,14 @@ const ResetPassword = ()=> {
     const handleResetPassword = async (e)=> {
         e.preventDefault();
         try {
-            const resetData = await resetPasswords({email: emailReset});
+            const resetData = await sendCode({email: emailReset});
+            sessionStorage.setItem('email', emailReset);
             if(!resetData.status) {
                 toast.error('Email does not exist');
             } else {
                 toast.success('Password reset email has been sent');
                 navigate('/user/update-password');
+                setShowModalVerify(true);
             }
         } catch (error) {
             toast.error('Server error');
@@ -39,9 +40,9 @@ const ResetPassword = ()=> {
                 <div className={styles.titleContainer}>
                     <h3 className={styles.title}>Reset Password</h3>
                 </div>
-                <form onSubmit={handleResetPassword}>
+                <form className={styles.resetForm} onSubmit={handleResetPassword}>
                     <div className='formElements'>
-                        <span className={`label ${styles.ml10}`}>Email:</span>
+                        <span className='label'>Email:</span>
                         <input 
                             type="email" 
                             name='email'
@@ -51,7 +52,7 @@ const ResetPassword = ()=> {
                             placeholder='Your Email'/>
                     </div>
                     <div>
-                        <button className={`primaryButton ${styles.w80}`}>Send</button>
+                        <button className='primaryButton w100'>Send</button>
                     </div>
                 </form>
             </div>

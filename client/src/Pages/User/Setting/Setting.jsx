@@ -3,6 +3,7 @@ import {toast} from 'react-toastify';
 import HeaderContent from '../../../Components/layoutContent/HeaderContent';
 import { UserContext } from '../../../Context/UserContext';
 import styles from './Setting.module.css';
+import { AuthContext } from '../../../Context/AuthContext';
 
 const Setting = () => {
   const [passwordForm, setPasswordForm] = useState({
@@ -10,13 +11,34 @@ const Setting = () => {
     newPassword: '',
     confirmPassword: '',
   });
+  
+  const [updatedButton, setUpdatedButton] = useState(false);
 
   const { oldPassword, newPassword, confirmPassword } = passwordForm;
-  const {updatePasswords} = useContext(UserContext);
+  const {authState: {
+    user
+  }} = useContext(AuthContext);
+  const {updatePasswords, setShowModalVerify, sendCode} = useContext(UserContext);
 
   const handleChangePasswordForm = (e) => {
     setPasswordForm({ ...passwordForm, [e.target.name]: e.target.value });
   };
+
+  const handleChangePassword = async (e)=> {
+    e.preventDefault();
+    setShowModalVerify(true);
+    setUpdatedButton(true);
+    try {
+      const sendData = await sendCode({email: user?.email});
+      if(!sendData.status) {
+        toast.error(sendData.message);
+      } else {
+        toast.success(sendData.message);
+      }
+    } catch (error) {
+      toast.error('Server error');
+    }
+  }
 
   const handleSubmitPasswordForm = async (e) => {
     e.preventDefault();
@@ -44,6 +66,11 @@ const Setting = () => {
     });
   };
 
+  const handleCancel = (event)=> {
+    event.preventDefault();
+    setUpdatedButton(false);
+  }
+
   const handleGoBack = ()=> {
     history.back();
   }
@@ -59,7 +86,7 @@ const Setting = () => {
             <span className={styles.backButtonDescription}>Back</span>
         </div>
         <h1 className={styles.title}>Change Password</h1>
-        <form className={styles.settingForm} onSubmit={handleSubmitPasswordForm}>
+        <form className={styles.settingForm} onSubmit={handleChangePassword}>
           <div className={styles.settingFormItem}>
             <p className={styles.label}>Old Password:</p>
             <input
@@ -94,9 +121,17 @@ const Setting = () => {
             />
           </div>
           <div className={styles.changePasswordButtonContainer}>
-            <button type="submit" className={styles.changePasswordButton}>
-              Change
+            <button className={`${updatedButton ? 'd-none' : ''} primaryButton`}>
+              Update
             </button>
+            <div className={`${updatedButton ? '' : 'd-none'}`}>
+              <button className="cancelButton" onClick={handleCancel}>
+                Cancel
+              </button>
+              <button className="primaryButton" onClick={handleSubmitPasswordForm}>
+                Save
+              </button>
+            </div>
           </div>
         </form>
       </div>

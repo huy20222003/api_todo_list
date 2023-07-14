@@ -1,19 +1,77 @@
-import { useContext, memo } from "react";
-import { Link } from "react-router-dom";
+import { useContext, useEffect, memo, useState } from "react";
 import HeaderContent from "../../../Components/layoutContent/HeaderContent";
 import { AuthContext } from "../../../Context/AuthContext";
-import styles from './Profile.module.css'
+import { UserContext } from "../../../Context/UserContext";
+import styles from './Profile.module.css';
+import { toast } from "react-toastify";
 
 const Profile = () => {
-  const { authState: { user }, logoutUser } = useContext(AuthContext);
+  const { authState: { user } } = useContext(AuthContext);
+  const { updateUserInfo, sendCode, setShowModalVerify } = useContext(UserContext);
+  const [updatedButton, setUpdatedButton] = useState(false);
 
-  const handleLogout = ()=> {
-    logoutUser();
+  const [userInfo, setUserInfo] = useState({
+    fullName: "",
+    username: "",
+    email: "",
+    token: ""
+  });
+
+  useEffect(() => {
+    setUserInfo({
+      fullName: user?.fullName || "",
+      username: user?.username || "",
+      email: user?.email || "",
+      token: ""
+    });
+  }, [user]);
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setUserInfo((prevUserInfo) => ({
+      ...prevUserInfo,
+      [name]: value,
+    }));
+  };
+
+  const handleSave = async (event) => {
+    event.preventDefault();
+    try {
+      const updateData = await updateUserInfo(userInfo);
+      if(!updateData.status) {
+        toast.error(updateData.message);
+      } else {
+        toast.success(updateData.message);
+      }
+    } catch (error) {
+      toast.error('Server error');
+    } 
+  };
+
+  const handleUpdate = async (e)=> {
+    e.preventDefault();
+    setShowModalVerify(true);
+    setUpdatedButton(true);
+    try {
+      const updateInfo = await sendCode({email: user?.email});
+      if(!updateInfo.status) {
+        toast.error(sendData.message);
+      } else {
+        toast.success(sendData.message);
+      }
+    } catch (error) {
+      toast.error('Server error');
+    }
   }
 
-  const handleGoBack = ()=> {
+  const handleCancel = (event)=> {
+    event.preventDefault();
+    setUpdatedButton(false);
+  }
+
+  const handleGoBack = () => {
     history.back();
-  }
+  };
 
   return (
     <div className={styles.container}>
@@ -22,8 +80,8 @@ const Profile = () => {
       </div>
       <div className={styles.content}>
         <div className={styles.backButtonContainer} onClick={handleGoBack}>
-            <i className={`fa-solid fa-arrow-left ${styles.backButton}`}></i>
-            <span className={styles.backButtonDescription}>Back</span>
+          <i className={`fa-solid fa-arrow-left ${styles.backButton}`}></i>
+          <span className={styles.backButtonDescription}>Back</span>
         </div>
         <div className={styles.userInfoContainer}>
           <img src={user?.image} className={styles.userInfoImage} alt={user?.fullName} />
@@ -31,50 +89,55 @@ const Profile = () => {
         </div>
         <div className={styles.infoDetailContainer}>
           <h1 className={styles.infoDetailTitle}>Information</h1>
-          <form className={styles.infoDetailForm}>
-            <div className={styles.infoDetailFormItem}>
-              <p className={styles.label}>Full Name:</p>
+          <form className={styles.infoDetailForm} onSubmit={handleUpdate}>
+            <div className='formElements'>
+              <p className='label'>Full Name:</p>
               <input
                 type="text"
                 name="fullName"
-                className={styles.infoDetailFormInput}
-                value={user?.fullName}
-                readOnly={true}
+                className='formElementInput'
+                value={userInfo.fullName}
+                onChange={handleChange}
               />
             </div>
-            <div className={styles.infoDetailFormItem}>
-              <p className={styles.label}>Username:</p>
+            <div className='formElements'>
+              <p className='label'>Username:</p>
               <input
                 type="text"
                 name="username"
-                className={styles.infoDetailFormInput}
-                value={user?.username}
-                readOnly={true}
+                className='formElementInput'
+                value={userInfo.username}
+                onChange={handleChange}
               />
             </div>
-            <div className={styles.infoDetailFormItem}>
-              <p className={styles.label}>Email:</p>
+            <div className='formElements'>
+              <p className='label'>Email:</p>
               <input
                 type="email"
                 name="email"
-                className={styles.infoDetailFormInput}
-                value={user?.email}
-                readOnly={true}
+                className='formElementInput'
+                value={userInfo.email}
+                onChange={handleChange}
               />
             </div>
+            <div className={styles.updateButtonContainer}>
+              <button className={`${updatedButton ? 'd-none' : ''} primaryButton`}>
+                Update
+              </button>
+              <div className={`${updatedButton ? '' : 'd-none'}`}>
+                <button className="cancelButton" onClick={handleCancel}>
+                  Cancel
+                </button>
+                <button className="primaryButton" onClick={handleSave}>
+                  Save
+                </button>
+              </div>
+            </div>
           </form>
-          <div className={styles.logoutButtonContainer}>
-            <Link to= '/'
-              className={styles.logoutButton}
-              onClick={handleLogout}
-            >
-              Logout
-            </Link>
-          </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default memo(Profile);

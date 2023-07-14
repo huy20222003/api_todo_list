@@ -5,8 +5,10 @@ const verify = require('../middleware/auth');
 const userController = require('../app/controllers/userController');
 
 router.put('/password/update', verify, userController.update_password);
-router.post('/password/forgot-password', userController.forgotPassword);
+router.post('/send-code', userController.sendCode);
+router.post('/verify-code', userController.verifyCode);
 router.post('/password/reset-password', userController.resetPassword);
+router.put('/profile/update', verify, userController.updateUserInfo);
 
 
 module.exports = router;

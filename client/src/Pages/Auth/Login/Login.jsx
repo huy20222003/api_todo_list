@@ -32,8 +32,10 @@ function Login() {
             }
         } catch (error) {
             toast.error('Server error');
+        } finally {
+            setLoginForm({ username: '', password: '' });
         }
-        setLoginForm({ username: '', password: '' });
+        
     };
 
     return (
@@ -41,7 +43,7 @@ function Login() {
             <form className={styles.formLogin} onSubmit={handleSubmitLoginForm}>
                 <div className={styles.header}>
                     <h1 className={styles.title}>
-                        Login Form
+                        Login
                     </h1>
                 </div>
                 <div>

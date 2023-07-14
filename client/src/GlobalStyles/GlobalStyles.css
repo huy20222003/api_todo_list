@@ -10,9 +10,12 @@ a {
   text-decoration: none;
 }
 
+.w100 {
+  width: 100% !important;
+}
+
 .formElements {
   margin: 0 0 1.2rem 0;
-  width: 100%;
 }
 
 .label {
@@ -22,7 +25,7 @@ a {
   text-align: left;
   font-size: 1.4rem;
   line-height: 2rem;
-  margin: 0 0 0.4rem 4.4rem;
+  margin: 0 0 0.4rem 0;
 }
 
 .formElementInput {
@@ -30,7 +33,7 @@ a {
   border-radius: 0.4rem;
   border-color: rgb(110, 116, 139);
   padding: 1rem;
-  width: 80%;
+  width: 100%;
   outline: none;
 }
 
@@ -66,7 +69,7 @@ a {
   height: 4rem;
   width: 7rem;
   font-size: 1.4rem;
-  margin: 0 4.4rem 0 0.5rem;
+  margin: 0 0 0 0.5rem;
   border: none;
   outline: none;
   cursor: pointer;
