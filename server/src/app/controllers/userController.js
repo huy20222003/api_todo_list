@@ -69,7 +69,11 @@ class userController {
     async verifyCode(req, res) {
       const { email, code } = req.body;
       try {
-        const codeInfo = await Code.findOne({code, userEmail: email});
+        const codeInfo = await Code.findOne({
+          code,
+          userEmail: email,
+          codeExpiration: { $gt: Date.now() }
+        });
         if(!codeInfo) {
           return res.status(404).json({ status: false, message: 'Code not found.' });
         } else {
@@ -93,13 +97,9 @@ class userController {
       try {
         const hashedNewPassword = await bcrypt.hash(newPassword, 8);
   
-        const user = await Users.findOneAndUpdate({
-          resetToken: token,
-          resetTokenExpiration: { $gt: Date.now() }, // Kiểm tra xem mã thông báo còn hiệu lực hay không
-        }, {
-            password: hashedNewPassword,
-            $unset: { resetTokenExpiration: 1, resetToken: 1 } 
-        }, {new: true});
+        const user = await Users.findOneAndUpdate(req._id, {
+            password: hashedNewPassword}
+          );
     
         if (!user) {
           return res.status(400).json({status: false, message: 'Invalid or expired token.' });

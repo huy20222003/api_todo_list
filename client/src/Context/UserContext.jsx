@@ -1,11 +1,13 @@
-import { useState, createContext } from 'react';
+import { useState, createContext, useContext } from 'react';
 import axios from 'axios';
+import { AuthContext } from '../Context/AuthContext';
 import { Api_URL } from '../constant';
 
 export const UserContext = createContext();
 
 export const UserProvider = ({children}) => {
     const [showModalVerify, setShowModalVerify] = useState(false);
+    const { authState: { user }} = useContext(AuthContext);
     //update password
     const updatePasswords = async (updatePasswordForm)=> {
         try {
@@ -20,9 +22,10 @@ export const UserProvider = ({children}) => {
         }
       }
 
-      const sendCode = async(resetPassowrdForm)=> {
+      const sendCode = async(form)=> {
         try {
-            const response = await axios.post(`${Api_URL}/user/send-code`, resetPassowrdForm);
+            sessionStorage.setItem('email', user?.email);
+            const response = await axios.post(`${Api_URL}/user/send-code`, form);
             return response.data;
         } catch (error) {
             if (error.response && error.response.data) {
