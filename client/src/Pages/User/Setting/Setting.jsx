@@ -24,7 +24,7 @@ const Setting = () => {
     setPasswordForm({ ...passwordForm, [e.target.name]: e.target.value });
   };
 
-  const handleChangePassword = async (e)=> {
+  const handleSendCode = async (e)=> {
     e.preventDefault();
     setShowModalVerify(true);
     setUpdatedButton(true);
@@ -53,6 +53,7 @@ const Setting = () => {
             toast.error('Password update failed');
         } else {
             toast.success('Password update successful');
+            setUpdatedButton(false);
         }
     } catch (error) {
         toast.error('Server error');
@@ -86,7 +87,7 @@ const Setting = () => {
             <span className={styles.backButtonDescription}>Back</span>
         </div>
         <h1 className={styles.title}>Change Password</h1>
-        <form className={styles.settingForm} onSubmit={handleChangePassword}>
+        <form className={styles.settingForm} onSubmit={handleSubmitPasswordForm}>
           <div className={styles.settingFormItem}>
             <p className={styles.label}>Old Password:</p>
             <input
@@ -121,14 +122,14 @@ const Setting = () => {
             />
           </div>
           <div className={styles.changePasswordButtonContainer}>
-            <button className={`${updatedButton ? 'd-none' : ''} primaryButton`}>
+            <button className={`${updatedButton ? 'd-none' : ''} primaryButton`} onClick={handleSendCode}>
               Update
             </button>
             <div className={`${updatedButton ? '' : 'd-none'}`}>
               <button className="cancelButton" onClick={handleCancel}>
                 Cancel
               </button>
-              <button className="primaryButton" onClick={handleSubmitPasswordForm}>
+              <button className="primaryButton">
                 Save
               </button>
             </div>

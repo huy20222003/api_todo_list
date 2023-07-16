@@ -59,7 +59,7 @@ class userController {
     
           await transporter.sendMail(mailOptions);
     
-          res.status(200).json({ status: true, message: 'An email with instructions to reset your password has been sent.' });
+          res.status(200).json({ status: true, message: 'An email has been sent.' });
         }
       } catch (error) {
         res.status(500).json({ status: false, message: 'An error occurred while processing the request.' });
@@ -117,11 +117,7 @@ class userController {
         res.status(400).json({status: false, message: 'Missing infomation'});
       } else {
         try {
-          const user = Users.findByIdAndUpdate(req._id, {
-            fullName,
-            username, 
-            email
-          });
+          const user = await Users.findByIdAndUpdate(req._id, req.body);
           if(!user) {
             res.status(403).json({status: false, message: 'User not found'});
           } else {

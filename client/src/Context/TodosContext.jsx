@@ -1,4 +1,4 @@
-import { useReducer, useState, createContext } from 'react';
+import { useReducer, useState, createContext, useEffect } from 'react';
 import axios from 'axios';
 import { initTodosState, reducer } from '../Reducer/TodosReducer/reducer';
 import { Api_URL } from '../constant';
@@ -41,7 +41,11 @@ export const TodosProvider = ({ children }) => {
       }
     }
   };
-
+  
+  useEffect(() => {
+    getAll();
+  }, [todoState.currentPage]);
+  
   // Create
   const createTodos = async (TodoData) => {
     try {

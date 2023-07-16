@@ -32,7 +32,7 @@ POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-    "username": "huyentrang",
+    "username": "admin",
     "password": "1234567"
 }
 
@@ -55,14 +55,14 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6I
 
 
 ###
-PUT http://localhost:3000/api/user/password/update
+PUT http://localhost:3000/api/user/profile/update
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY0OWFiNmZlNDJkYWQ2MDYwYzcxNjJhNyIsImZ1bGxOYW1lIjoiaHV5IiwidXNlcm5hbWUiOiJhZG1pbiIsImVtYWlsIjoiaHV5MjAyMjIwMDNAZ21haWwuY29tIiwicGFzc3dvcmQiOiIkMmEkMDgkYjdrYW9MY2FDNmJ2N3VhWDFYZ2diZWxVRFF4QlMuZWI0Y0VJaURkMmhaalhzT1ByVVR1YzIiLCJjb25maXJtUGFzc3dvcmQiOiIkMmEkMDgkMXZqRmdydmxlQ3Z4UldDTkdneFlST1NhMkFpcm5pMTQyV1RFR1RQblZnLy5DUjAvNWxWRU8iLCJpbWFnZSI6Imh0dHBzOi8vYW50aW1hdHRlci52bi93cC1jb250ZW50L3VwbG9hZHMvMjAyMi8xMS9hbmgtYXZhdGFyLXRyYW5nLWZiLW1hYy1kaW5oLmpwZyIsIl9fdiI6MH0sImlhdCI6MTY4Nzg2MzE0OH0.DreRS-SiO5Ia9TGIlSLY8JwQeOzlURTKHIuMWroiECQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjY0YTU1OTM0MjU2OGFhMGM0ZmFlN2VmNSIsImZ1bGxOYW1lIjoiYWRtaW4iLCJ1c2VybmFtZSI6ImFkbWluIiwiZW1haWwiOiJodXkyMDIyMjAwM0BnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQwOCRzTHJKRDBuYlEwdWxQWWNzTWFWNzQuSnFnR20vYWlPNXNQWU53c1gxVXBwYnlPWUhQQVYyRyIsImNvbmZpcm1QYXNzd29yZCI6IiQyYSQxMCRQZENYQzlYa29Ed01lN3k0L3NLTGl1ajZpbXU3QjNCLk1xdFkyY1R4blNyNnNPcUJRZy9KdSIsImltYWdlIjoiaHR0cHM6Ly9hbnRpbWF0dGVyLnZuL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDIyLzExL2FuaC1hdmF0YXItdHJhbmctZmItbWFjLWRpbmguanBnIiwiX192IjowLCJyZXNldFRva2VuIjo1Nzg2MTAsInJlc2V0VG9rZW5FeHBpcmF0aW9uIjoiMjAyMy0wNy0xMVQwODoxMjo0My42MTVaIn0sImlhdCI6MTY4OTQ5MzI0NH0.vGcD7EZeyMjdqoHAGWaLRZzRVTWEhO3XVKcud1AqRlc
 
 {
-    "oldPassword": "7654321",
-    "newPassword": "1234567",
-    "confirmPassword": "1234567"
+    "fullName": "Admin",
+    "username": "admin",
+    "email": "huy20222003@gmail.com"
 }
 
 ###

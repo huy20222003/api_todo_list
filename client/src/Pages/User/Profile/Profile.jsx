@@ -13,16 +13,14 @@ const Profile = () => {
   const [userInfo, setUserInfo] = useState({
     fullName: "",
     username: "",
-    email: "",
-    token: ""
+    email: ""
   });
 
   useEffect(() => {
     setUserInfo({
       fullName: user?.fullName || "",
       username: user?.username || "",
-      email: user?.email || "",
-      token: ""
+      email: user?.email || ""
     });
   }, [user]);
 
@@ -42,13 +40,14 @@ const Profile = () => {
         toast.error(updateData.message);
       } else {
         toast.success(updateData.message);
+        setUpdatedButton(false);
       }
     } catch (error) {
       toast.error('Server error');
     } 
   };
 
-  const handleUpdate = async (e)=> {
+  const handleSendCode = async (e)=> {
     e.preventDefault();
     setShowModalVerify(true);
     setUpdatedButton(true);
@@ -89,7 +88,7 @@ const Profile = () => {
         </div>
         <div className={styles.infoDetailContainer}>
           <h1 className={styles.infoDetailTitle}>Information</h1>
-          <form className={styles.infoDetailForm} onSubmit={handleUpdate}>
+          <form className={styles.infoDetailForm} onSubmit={handleSave}>
             <div className='formElements'>
               <p className='label'>Full Name:</p>
               <input
@@ -121,14 +120,14 @@ const Profile = () => {
               />
             </div>
             <div className={styles.updateButtonContainer}>
-              <button className={`${updatedButton ? 'd-none' : ''} primaryButton`}>
+              <button className={`${updatedButton ? 'd-none' : ''} primaryButton`} onClick={handleSendCode}>
                 Update
               </button>
               <div className={`${updatedButton ? '' : 'd-none'}`}>
                 <button className="cancelButton" onClick={handleCancel}>
                   Cancel
                 </button>
-                <button className="primaryButton" onClick={handleSave}>
+                <button className="primaryButton">
                   Save
                 </button>
               </div>

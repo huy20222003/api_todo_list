@@ -2,11 +2,12 @@ const Todos = require('../models/Todos');
 
 class todosControllers {
     async all(req, res) {
+
         try {
             const todos = await Todos.find({ userId: req._id });
             res.status(200).json({ status: true, message: 'Get Successful!', todos });
         } catch (error) {
-            res.status(403).json({ status: false, message: error });
+            res.status(500).json({ status: false, message: error });
         }
     }
 
