@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 const Profile = () => {
   const { authState: { user } } = useContext(AuthContext);
   const { updateUserInfo, sendCode, setShowModalVerify } = useContext(UserContext);
+  const [readOnly, setReadOnly] = useState(true);
   const [updatedButton, setUpdatedButton] = useState(false);
 
   const [userInfo, setUserInfo] = useState({
@@ -51,6 +52,7 @@ const Profile = () => {
     e.preventDefault();
     setShowModalVerify(true);
     setUpdatedButton(true);
+    setReadOnly(false);
     try {
       const sendData = await sendCode({email: user?.email});
       if(!sendData.status) {
@@ -94,9 +96,10 @@ const Profile = () => {
               <input
                 type="text"
                 name="fullName"
-                className='formElementInput'
+                className={`formElementInput ${readOnly ? 'bgReadOnly' : ''}`}
                 value={userInfo.fullName}
                 onChange={handleChange}
+                readOnly = {readOnly}
               />
             </div>
             <div className='formElements'>
@@ -104,9 +107,10 @@ const Profile = () => {
               <input
                 type="text"
                 name="username"
-                className='formElementInput'
+                className={`formElementInput ${readOnly ? 'bgReadOnly' : ''}`}
                 value={userInfo.username}
                 onChange={handleChange}
+                readOnly = {readOnly}
               />
             </div>
             <div className='formElements'>
@@ -114,9 +118,10 @@ const Profile = () => {
               <input
                 type="email"
                 name="email"
-                className='formElementInput'
+                className={`formElementInput ${readOnly ? 'bgReadOnly' : ''}`}
                 value={userInfo.email}
                 onChange={handleChange}
+                readOnly = {readOnly}
               />
             </div>
             <div className={styles.updateButtonContainer}>
