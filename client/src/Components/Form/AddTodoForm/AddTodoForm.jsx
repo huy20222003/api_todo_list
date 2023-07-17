@@ -1,12 +1,12 @@
 import { useContext, useState, memo } from "react";
-import { useNavigate } from "react-router-dom";
 import { toast } from 'react-toastify';
 import { TodosContext } from "../../../Context/TodosContext";
+import { LabelsContext } from "../../../Context/LabelsContext";
 import styles from './AddTodoForm.module.css';
 
 const AddTodoForm = () => {
   const { showAddModal, setShowAddModal, createTodos } = useContext(TodosContext);
-  const navigate = useNavigate();
+  const {labelState: { labels }} = useContext(LabelsContext);
   const [addForm, setAddForm] = useState({
     name: "",
     description: "",
@@ -81,8 +81,9 @@ const AddTodoForm = () => {
               <div>
                 <select id="label" name="label" className="formElementInput" value={label} onChange={handleChangeAddForm}>
                   <option value="" disabled = {true}>Choose your label</option>
-                  <option value="pending">Pending</option>
-                  <option value="completed">Completed</option>
+                  {labels.map((label)=>(
+                    <option key={label._id} name={label.name}>{label.name}</option>
+                  ))}
                 </select>
               </div>
             </div>

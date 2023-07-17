@@ -1,5 +1,5 @@
 const Users = require('../models/Users');
-const Code = require('../models/Code');
+const Codes = require('../models/Code');
 const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 
@@ -40,7 +40,7 @@ class userController {
         if (!user) {
           return res.status(404).json({status: false, message: 'Email not found.' });
         } else {
-          const newCode = new Code({ code, codeExpiration, userEmail: email });
+          const newCode = new Codes({ code, codeExpiration, userEmail: email });
           await newCode.save();
           const transporter = nodemailer.createTransport({
             service: 'gmail',
@@ -69,7 +69,7 @@ class userController {
     async verifyCode(req, res) {
       const { email, code } = req.body;
       try {
-        const codeInfo = await Code.findOne({
+        const codeInfo = await Codes.findOne({
           code,
           userEmail: email,
           codeExpiration: { $gt: Date.now() }
@@ -89,7 +89,7 @@ class userController {
     }
 
     async resetPassword(req, res) {
-      const { newPassword, code } = req.body;
+      const { newPassword } = req.body;
       if (!newPassword) {
         res.status(400).json({ status: false, message: 'Missing password or new password' });
         return;

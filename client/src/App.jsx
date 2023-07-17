@@ -7,6 +7,7 @@ import Register from './Pages/Auth/Register';
 import Dashboard from './Pages/Todos/Dashboard';
 import Profile from './Pages/User/Profile';
 import Setting from './Pages/User/Setting';
+import Labels from './Pages/User/Label';
 import ResetPassword from './Pages/User/ResetPassword';
 import UpdatePassword from './Pages/User/UpdatePassword';
 import VerifyCode from './Components/Form/VerifyCode/VerifyCode';
@@ -24,6 +25,7 @@ function App() {
           <Route path='/dashboard' element={<Dashboard />} />
           <Route path='/dashboard/user/profile' element={<Profile />} />
           <Route path='/dashboard/user/setting' element={<Setting />} />
+          <Route path='/dashboard/user/labels' element={<Labels />} />
           <Route path='/user/reset-password' element={<ResetPassword />} />
           <Route path='/user/update-password' element={<UpdatePassword />} />
         </Routes>

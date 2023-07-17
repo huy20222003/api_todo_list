@@ -7,7 +7,7 @@ import styles from './HeaderContent.module.css';
 const HeaderContent = () => {
   const [searchValue, setSearchValue] = useState('');
   const [subMenu, setSubMenu] = useState(false);
-  const { searchTodos } = useContext(TodosContext);
+  const { searchTodos, setShowAddModal } = useContext(TodosContext);
   const { authState: { user }, logoutUser } = useContext(AuthContext);
   
   const handleSearchTodo = async (e) => {
@@ -64,6 +64,18 @@ const HeaderContent = () => {
               <Link to="/dashboard/user/profile" className={styles.subMenuItemLink}>
                 <i className={`fa-solid fa-user ${styles.subMenuItemIcon}`}></i>
                 <span className={styles.subMenuItemName}>Account</span>
+              </Link>
+            </li>
+            <li className={styles.subMenuItem}>
+              <Link to='/dashboard' className={styles.subMenuItemLink}>
+                <i className={`fa-solid fa-plus ${styles.subMenuItemIcon}`}></i>
+                <span className={styles.subMenuItemName} onClick={() => setShowAddModal(true)}>New Todo</span>
+              </Link>
+            </li>
+            <li className={styles.subMenuItem}>
+              <Link to='/dashboard/user/labels' className={styles.subMenuItemLink}>
+                <i className={`fa-solid fa-tag ${styles.subMenuItemIcon}`}></i>
+                <span className={styles.subMenuItemName}>Label</span>
               </Link>
             </li>
             <li className={styles.subMenuItem}>

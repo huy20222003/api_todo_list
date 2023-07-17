@@ -1,0 +1,67 @@
+.container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    animation: scaleIn 0.5s linear;
+}
+
+.overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);;
+}
+
+.addLabelForm {
+    background-color: white;
+    border-radius: 0.8rem;
+    max-width: 40rem;
+    text-align: center;
+    height: fit-content;
+    padding: 2rem 4rem;
+    position: relative;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.closeButtonContainer {
+    text-align: right;
+}
+
+.closeButton {
+    font-size: 2rem;
+    line-height: 2.8rem;
+    color: rgb(100, 116, 139);
+    cursor: pointer;
+}
+
+.closeButton:hover {
+    color: black;
+}
+
+.header {
+    margin: 3rem 0;
+}
+
+.title {
+    font-size: 2.4rem;
+    line-height: 3.2rem;
+    font-weight: 700;
+    margin: 0 0 0 4px;
+}
+
+.buttonContainer {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+
+@media only screen and (max-width: 740px) {
+    .addLabelForm {
+        max-width: 34rem;
+    }
+}

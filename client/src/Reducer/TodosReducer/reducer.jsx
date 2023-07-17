@@ -3,8 +3,6 @@ import { CREATE_TODO, DELETE_TODO, EDIT_TODO, FILTER_TODO, GET_ALL_TODOS, SEARCH
 export const initTodosState = {
     todo: null,
     todos: [],
-    currentPage: 1,
-    totalPages: 3,
 }
 
 export const reducer = (state, action)=> {
@@ -47,6 +45,8 @@ export const reducer = (state, action)=> {
                 todo: payload
             }
         default: 
-            console.log('Invalid case');
+            return {
+                ...state
+            }
     }
 }

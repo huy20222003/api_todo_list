@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const Code = new Schema({
+const Codes = new Schema({
     code: {
         type: Number, 
         default: '',
@@ -12,12 +12,11 @@ const Code = new Schema({
         required: true,
     },
     userEmail: {
-        type: String,
-        default: '',
-        required: true,
+        type: Schema.Types.String,
+        ref: "users"
     }
 }, {
     timestamps: true
 });
 
-module.exports = mongoose.model('codes', Code);
+module.exports = mongoose.model('codes', Codes);

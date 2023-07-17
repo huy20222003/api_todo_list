@@ -1,22 +1,48 @@
-.filterContainer {
-    margin: 4rem 0 0 2rem;
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.filter {
-    border: 0.2rem solid;
-    border-color: rgb(156, 163, 175);
-    border-radius: 0.6rem;
-    padding: 0.6rem;
-    outline: none;
-    font-size: 1.4rem;
-    width: 9.5rem;
+.header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1;
 }
 
-.todoList {
+.content {
+    width: 70%;
+    margin: 3rem 0 0 0;
+}
+
+.backButtonContainer {
+    margin: 5.2rem 0 0.8rem 0;
+    width: 100%;
+    cursor: pointer;
+    position: relative;
+}
+
+.backButton {
+    position: absolute;
+    top: 0;
+    left: 0.8rem;
+    color: rgb(75, 85, 99);
+    font-size: 2rem;
+    line-height: 2.4rem;
+}
+
+.labelList {
     display: flex;
     flex-wrap: wrap;
     min-height: 100%;
 }
+
+.backButtonDescription {
+    margin: 0 0 0 3.6rem;
+    font-size: 1.6rem;
+    line-height: 2rem;
+} 
 
 .addButtonContainer {
     position: absolute;
@@ -141,12 +167,8 @@
 }
 
 @media only screen and (max-width: 740px) {
-    .filterContainer {
-        margin: 4rem 0 0 3rem;
-    }
-
-    .todoList {
-        justify-content: center;
-        align-items: center;
-    }
+  .labelList {
+      justify-content: center;
+      align-items: center;
+  }
 }

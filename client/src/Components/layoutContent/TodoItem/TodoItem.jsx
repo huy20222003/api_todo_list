@@ -1,7 +1,6 @@
 import { useEffect, useContext, memo } from "react";
 import { TodosContext } from "../../../Context/TodosContext";
 import styles from './TodoItem.module.css';
-import { toast } from 'react-toastify';
 import Loader from "../../Loader/Loader";
 
 const TodoItem = () => {
@@ -9,8 +8,7 @@ const TodoItem = () => {
     getAll,
     setShowEditModal,
     setId,
-    todoLoading,
-    showModalDelete,
+    loading,
     setShowModalDelete,
     setTodos,
     todoState: { todos },
@@ -32,7 +30,7 @@ const TodoItem = () => {
 
   return (
     <>
-      {todoLoading ? <Loader />
+      {loading ? <Loader />
        : todos.map((todo) => (
           <div
             key={todo._id}

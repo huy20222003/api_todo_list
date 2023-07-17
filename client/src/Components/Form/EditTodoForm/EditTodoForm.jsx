@@ -1,10 +1,12 @@
 import { useContext, useState, memo, useEffect } from "react";
 import { toast } from 'react-toastify';
 import { TodosContext } from "../../../Context/TodosContext";
+import { LabelsContext } from '../../../Context/LabelsContext';
 import styles from './EditTodoForm.module.css'
 
 const EditTodoForm = () => {
   const { showEditModal, setShowEditModal, editTodos, todoState: {todo} } = useContext(TodosContext);
+  const {labelState: {labels}} = useContext(LabelsContext);
   const initialEditFormState = {
     _id: (todo && todo._id) || '',
     name: (todo && todo.name) || '',
@@ -95,8 +97,9 @@ const EditTodoForm = () => {
               <div>
                 <select id="label" name="label" className='formElementInput' value={label} onChange={handleChangeEditForm}>
                   <optgroup label="Choose your label">
-                    <option value="pending">Pending</option>
-                    <option value="completed">Completed</option>
+                  {labels.map((label)=>(
+                    <option key={label._id} name={label.name}>{label.name}</option>
+                  ))}
                   </optgroup>
                 </select>
               </div>

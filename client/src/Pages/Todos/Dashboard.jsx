@@ -14,7 +14,7 @@ const Dashboard = ()=> {
                 <Content />
             </div>
             <AddTodoForm />
-            <EditTodoForm />      
+            <EditTodoForm />     
             <Modal />
         </div>
     );
