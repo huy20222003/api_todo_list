@@ -68,6 +68,7 @@ const Profile = () => {
   const handleCancel = (event)=> {
     event.preventDefault();
     setUpdatedButton(false);
+    setReadOnly(true);
   }
 
   const handleGoBack = () => {
