@@ -10,6 +10,7 @@
     right: 0;
     bottom: 0;
     background-color: #fff;
+    animation: forwardToLeft 10s ease-in-out;
 }
 
 .header {
@@ -32,27 +33,21 @@
 }
   
 .codeInput {
-    width: 40px;
-    height: 40px;
-    margin: 0 4px;
+    width: 26rem;
+    height: 4rem;
+    margin: 0 0.4rem;
     text-align: center;
-    font-size: 18px;
-    border: 1px solid #000;
-    border-radius: 4px;
+    font-size: 1.8rem;
+    border: 0.1rem solid #000;
+    border-radius: 0.4rem;
     outline: none;
 }
   
-.verifyButton {
-    padding: 8px 16px;
-    font-size: 16px;
-    background-color: #007bff;
-    color: #fff;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+.buttonContainer {
+    display: flex;
 }
-  
-.verifyButton:hover {
-    background-color: #0056b3;
+
+.buttonContainer > button {
+    margin: 0 1rem 0 0;
 }
   

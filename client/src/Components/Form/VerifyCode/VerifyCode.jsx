@@ -4,19 +4,17 @@ import { UserContext } from '../../../Context/UserContext';
 import styles from './VerifyCode.module.css';
 
 const VerifyCode = () => {
-  const [codes, setCodes] = useState(['', '', '', '', '', '']);
+  const [codes, setCodes] = useState('');
   const [isVerified, setIsVerified] = useState(false);
   const { showModalVerify, setShowModalVerify, verifyCode} = useContext(UserContext);
 
-  const handleChange = (event, index) => {
-    const newCodes = [...codes];
-    newCodes[index] = event.target.value;
-    setCodes(newCodes);
+  const handleChange = (event) => {
+    setCodes(event.target.value);
   };
 
   const handleVerify = async () => {
     try {
-      const verifyData  = await verifyCode(parseFloat(codes.join('')));
+      const verifyData  = await verifyCode(parseFloat(codes));
       if(!verifyData.status) {
         toast.error(verifyData.message);
       } else {
@@ -26,7 +24,7 @@ const VerifyCode = () => {
     } catch (error) {
       toast.error('Server Error');
     } finally {
-      setCodes(['', '', '', '', '', '']);
+      setCodes('');
     }
   };
 
@@ -37,19 +35,19 @@ const VerifyCode = () => {
         <p className={styles.description}>Enter your verification code</p>
       </div>
       <div className={styles.codeInputs}>
-        {codes.map((code, index) => (
-          <input
-            key={index}
-            type="text"
-            maxLength={1}
+        <input
+            type="number"
+            maxLength={6}
             className={styles.codeInput}
-            value={code}
-            onChange={(event) => handleChange(event, index)}
+            value={codes}
+            onChange={(event) => handleChange(event)}
           />
-        ))}
       </div>
-      <button onClick={handleVerify} className={styles.verifyButton}>Verify</button>
-      {isVerified && <p>Code is verified!</p>}
+      <div className={styles.buttonContainer}>
+        <button onClick={()=>setShowModalVerify(false)} className='cancelButton'>Cancel</button>
+        <button onClick={handleVerify} className='primaryButton'>Verify</button>
+        {isVerified && <p>Code is verified!</p>}
+      </div>
     </div>
   );
 };
