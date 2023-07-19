@@ -67,12 +67,6 @@ const HeaderContent = () => {
               </Link>
             </li>
             <li className={styles.subMenuItem}>
-              <Link to='/dashboard' className={styles.subMenuItemLink}>
-                <i className={`fa-solid fa-plus ${styles.subMenuItemIcon}`}></i>
-                <span className={styles.subMenuItemName} onClick={() => setShowAddModal(true)}>New Todo</span>
-              </Link>
-            </li>
-            <li className={styles.subMenuItem}>
               <Link to='/dashboard/user/labels' className={styles.subMenuItemLink}>
                 <i className={`fa-solid fa-tag ${styles.subMenuItemIcon}`}></i>
                 <span className={styles.subMenuItemName}>Label</span>

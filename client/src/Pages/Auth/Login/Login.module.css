@@ -8,7 +8,7 @@
 }
 
 .formLogin {
-    background-color: white;
+    background-color: var(--bg-white);
     border-radius: 0.8rem;
     width: 40rem;
     text-align: center;
@@ -36,11 +36,11 @@
     font-size: 1.2rem;
     line-height: 2rem;
     cursor: pointer;
-    color: black;
+    color: var(--text-black);
 }
 
 .forgotPasswordTitle:hover {
-    color: rgba(33, 164, 220, 1);
+    color: var(--primary-color-hover);
 }
 
 .loginButtonContainer {
@@ -48,10 +48,10 @@
 }
 
 .loginButton {
-    color: white;
+    color: var(--text-white);
     text-align: center;
     border-radius: 0.8rem;
-    background-color: rgba(33, 164, 220, 0.9);
+    background-color: var(--primary-color);
     width: 100%;
     height: 4.5rem;
     font-size: 1.4rem;
@@ -62,20 +62,20 @@
 }
 
 .loginButton:hover {
-    background-color: rgba(33, 164, 220, 1);
+    background-color: var(--primary-color-hover);
     transition: 0.3s linear;
 }
 
 .loginFooterDescription {
     margin: 0 0.4rem 0 0;
     font-weight: 400;
-    color: black;
+    color: var(--text-black);
     font-size: 1.4rem;
     line-height: 2rem;
 }
 
 .loginFooterDirect {
-    color: rgba(33, 164, 220, 1);
+    color: var(--primary-color);
     font-size: 1.4rem;
     line-height: 2rem;
     text-decoration: none;

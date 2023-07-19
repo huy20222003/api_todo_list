@@ -16,6 +16,7 @@ function Register() {
 
   const [isInputStarted, setIsInputStarted] = useState(false); // Thêm biến đánh dấu
   const [isInvalidPassword, setIsInvalidPassword] = useState(false); // Thêm biến kiểm tra mật khẩu không hợp lệ
+  const [isValidEmail, setIsValidEmail] = useState(false);
 
   const { registerUser } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -23,9 +24,12 @@ function Register() {
   const { fullName, username, email, password, confirmPassword } = registerForm;
 
   const handleChangeRegisterForm = (e) => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setRegisterForm({ ...registerForm, [e.target.name]: e.target.value });
     setIsInputStarted(true); // Đánh dấu khi người dùng bắt đầu nhập
     setIsInvalidPassword(e.target.value.length < 7); // Kiểm tra mật khẩu không hợp lệ
+    const isValid = emailRegex.test(email);
+    setIsValidEmail(isValid);
   };
 
   const handleSubmitRegisterForm = async (e) => {
@@ -97,7 +101,7 @@ function Register() {
               value={email}
               required={true}
               onChange={handleChangeRegisterForm}
-              className='formElementInput'
+              className={`formElementInput ${isInputStarted && !isValidEmail ? 'formElementInputError' : ''}`}
               placeholder="Enter your email"
             />
           </div>
@@ -109,7 +113,7 @@ function Register() {
               value={password}
               required={true}
               onChange={handleChangeRegisterForm}
-              className={`formElementInput ${isInputStarted && isInvalidPassword ? styles.formElementInputError : ''}`}
+              className={`formElementInput ${isInputStarted && isInvalidPassword ? 'formElementInputError' : ''}`}
               placeholder="Password minimum 7 characters"
             />
           </div>
@@ -121,7 +125,7 @@ function Register() {
               value={confirmPassword}
               required={true}
               onChange={handleChangeRegisterForm}
-              className={`formElementInput ${isInputStarted && isInvalidPassword ? styles.formElementInputError : ''}`}
+              className={`formElementInput ${isInputStarted && isInvalidPassword ? 'formElementInputError' : ''}`}
               placeholder="Password minimum 7 characters"
             />
           </div>

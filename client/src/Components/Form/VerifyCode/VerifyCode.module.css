@@ -9,9 +9,24 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #fff;
-    animation: forwardToLeft 10s ease-in-out;
+    background-color: var(--text-white);
+    animation: forwardToLeft 0.3s ease-in-out;
 }
+
+@keyframes forwardToLeft {
+    0%{
+      transform: translateX(100%);
+      opacity: 0;
+    } 
+    50% {
+      transform: translateX(50%);
+      opacity: 0.5;
+    }
+    100%{
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
 
 .header {
     margin: 2rem 0 2rem 0;
@@ -38,7 +53,7 @@
     margin: 0 0.4rem;
     text-align: center;
     font-size: 1.8rem;
-    border: 0.1rem solid #000;
+    border: 0.1rem solid var(--bg-black);
     border-radius: 0.4rem;
     outline: none;
 }

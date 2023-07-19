@@ -42,6 +42,7 @@ const Profile = () => {
       } else {
         toast.success(updateData.message);
         setUpdatedButton(false);
+        setReadOnly(true);
       }
     } catch (error) {
       toast.error('Server error');
@@ -68,6 +69,7 @@ const Profile = () => {
   const handleCancel = (event)=> {
     event.preventDefault();
     setUpdatedButton(false);
+    setReadOnly(true);
   }
 
   const handleGoBack = () => {

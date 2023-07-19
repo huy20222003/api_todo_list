@@ -8,7 +8,7 @@
 }
 
 .formRegister {
-    background-color: white;
+    background-color: var(--bg-white);
     border-radius: 0.8rem;
     width: 40rem;
     text-align: center;
@@ -27,19 +27,15 @@
     margin: 0 0 0 4px;
 }
 
-.formElementInputError {
-    border-color: rgb(239, 68, 68);
-}
-
 .registerButtonContainer {
     margin: 1.6rem 0 1.6rem 0;
 }
 
 .registerButton {
-    color: white;
+    color: var(--text-white);
     text-align: center;
     border-radius: 0.8rem;
-    background-color: rgba(33, 164, 220, 0.9);
+    background-color: var(--primary-color);
     width: 100%;
     height: 4.5rem;
     font-size: 1.4rem;
@@ -50,20 +46,20 @@
 }
 
 .registerButton:hover {
-    background-color: rgba(33, 164, 220, 1);
+    background-color: var(--primary-color-hover);
     transition: 0.3s linear;
 }
 
 .registerFooterDescription {
     margin: 0 0.4rem 0 0;
     font-weight: 400;
-    color: black;
+    color: var(--text-black);
     font-size: 1.4rem;
     line-height: 2rem;
 }
 
 .registerFooterDirect {
-    color: rgba(33, 164, 220, 1);
+    color: var(--primary-color);
     font-size: 1.4rem;
     line-height: 2rem;
     text-decoration: none;

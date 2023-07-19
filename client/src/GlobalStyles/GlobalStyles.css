@@ -1,3 +1,13 @@
+:root {
+  --primary-color: rgb(33, 164, 220);
+  --primary-color-hover: rgb(52, 152, 243);
+  --bg-white: rgb(255, 255, 255);
+  --bg-black: rgb(0, 0, 0);
+  --text-white: rgb(255, 255, 255);
+  --text-balck: rgb(0, 0, 0);
+  --error: rgb(239, 68, 68);
+}
+
 .d-none {
     display: none;
 }
@@ -40,6 +50,10 @@ a {
 .formElementInput::placeholder {
   font-size: 1.4rem;
   line-height: 2rem;
+}
+
+.formElementInputError {
+  border-color: var(--error);
 }
 
 .bgReadOnly {
@@ -86,30 +100,4 @@ a {
 
 .descriptionHeight {
   height: 10rem;
-}
-
-@keyframes scaleIn {
-  0% {
-    transform: scale(0.5);
-    opacity: 0.7;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
-
-@keyframes forwardToLeft {
-  0%{
-    transform: translateX(100%);
-    opacity: 0;
-  } 
-  50% {
-    transform: translateX(50%);
-    opacity: 0.5;
-  }
-  100%{
-    transform: translateX(0);
-    opacity: 1;
-  }
 }

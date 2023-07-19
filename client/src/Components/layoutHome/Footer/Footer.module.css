@@ -1,10 +1,10 @@
 .footerContainer {
-    background-color: rgb(96, 165, 250);
+    background-color: var(--primary-color);
     padding: 1.6rem;
 }
 
 .footerDescription {
-    color: white;
+    color: var(--text-white);
     text-align: center;
     font-size: 1.4rem;
     line-height: 2rem;

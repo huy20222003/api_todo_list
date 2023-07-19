@@ -79,8 +79,8 @@
 }
 
 .changePasswordButton {
-    background-color: rgb(59, 130, 246, 0.9);
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--text-white);
     border-radius: 0.6rem;
     padding: 0.8rem 1.6rem;
     font-size: 1.6rem;
@@ -92,7 +92,7 @@
 }
 
 .changePasswordButton:hover {
-    background-color: rgba(59, 130, 246, 1);
+    background-color: var(--primary-color-hover);
 }
 
 @media only screen and (max-width: 740px) {

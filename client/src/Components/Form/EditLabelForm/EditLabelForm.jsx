@@ -51,11 +51,11 @@ const EditLabelForm = () => {
           <div className={styles.closeButtonContainer} onClick={() => setShowEditLabel(false)}>
             <i className={`fa-solid fa-xmark ${styles.closeButton}`}></i>
           </div>
-          <div className={styles.header}>
+          {/* <div className={styles.header}>
             <h1 className={styles.title}>
               EDIT LABEL
             </h1>
-          </div>
+          </div> */}
           <div>
             <div className='formElements'>
               <label htmlFor="name" className="label">

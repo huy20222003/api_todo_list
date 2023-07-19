@@ -6,7 +6,7 @@
     font-size: 2.4rem;
     line-height: 3.2rem;
     font-weight: 600;
-    color: white;
+    color: var(--text-white);
     text-decoration: none;
 }
 
@@ -16,10 +16,10 @@
 }
 
 .buttonItem {
-    background-color: rgba(33, 164, 220, 1);
+    background-color: var(--primary-color-hover);
     border-radius: 0.4rem;
     margin: 0 0.8rem 0 0;
-    color: white;
+    color: var(--text-white);
     padding: 0.4rem 0.8rem;
     cursor: pointer;
 }
@@ -35,6 +35,6 @@
     background-color: transparent;
     border: none;
     outline: none;
-    color: white;
+    color: var(--text-white);
     cursor: pointer;
 }

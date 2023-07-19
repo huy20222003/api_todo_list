@@ -65,7 +65,7 @@
 .infoDetailTitle {
     font-size: 2.4rem;
     line-height: 3.2rem;
-    color: rgb(96, 165, 250);
+    color: var(--primary-color);
     text-transform: uppercase;
 }
 

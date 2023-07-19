@@ -53,8 +53,8 @@
     text-overflow: ellipsis;
     padding: 0.6rem 0.8rem;
     border-radius: 0.3rem;
-    background: rgba(33, 164, 220, 1);
-    color: #FFFFFF;
+    background: var(--primary-color);
+    color: var(--text-white);
     z-index: 99;
   }
   [data-tooltip]:hover:before,
@@ -82,7 +82,7 @@
   [data-tooltip][data-flow="bottom"]::before {
     top: 100%;
     border-top-width: 0;
-    border-bottom-color: rgba(33, 164, 220, 1);
+    border-bottom-color: var(--primary-color);
   }
   [data-tooltip][data-flow="bottom"]::after {
     top: calc(100% + 0.5rem);
@@ -95,7 +95,7 @@
   [data-tooltip][data-flow="left"]::before {
     top: 50%;
     border-right-width: 0;
-    border-left-color: rgba(33, 164, 220, 1);
+    border-left-color: var(--primary-color);
     left: calc(0em - 0.5rem);
     -webkit-transform: translate(-0.8rem, -50%);
             transform: translate(-0.8rem, -50%);
@@ -109,7 +109,7 @@
   [data-tooltip][data-flow="right"]::before {
     top: 50%;
     border-left-width: 0;
-    border-right-color: rgba(33, 164, 220, 1);
+    border-right-color: var(--primary-color);
     right: calc(0em - 0.5rem);
     -webkit-transform: translate(0.8rem, -50%);
             transform: translate(0.8rem, -50%);
@@ -126,8 +126,8 @@
   
 
 .addButton {
-    background-color: rgba(33, 164, 220, 1);
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--text-white);
     border-radius: 50%;
     font-size: 2rem;
     cursor: pointer;

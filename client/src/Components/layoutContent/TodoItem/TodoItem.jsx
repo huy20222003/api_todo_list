@@ -40,7 +40,7 @@ const TodoItem = () => {
               <h3 className={styles.todoName}>{todo.name}</h3>
             </div>
             <div className={styles.todoDescriptionContainer}>
-              <p className={styles.todoDescription}>{todo.description.length > 100 ? `${todo.description.substring(0, 60)}...` : todo.description}</p>
+              <p className={styles.todoDescription}>{todo.description.length > 40 ? `${todo.description.substring(0, 60)}...` : todo.description}</p>
             </div>
             <div className={styles.todoFooterContainer}>
               <p className={styles.todoLabel}>{todo.label}</p>
