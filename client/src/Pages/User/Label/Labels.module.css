@@ -12,12 +12,12 @@
 }
 
 .content {
-    width: 70%;
+    width: 80%;
     margin: 3rem 0 0 0;
 }
 
 .backButtonContainer {
-    margin: 5.2rem 0 0.8rem 0;
+    margin: 7.2rem 0 0.8rem 0;
     width: 100%;
     cursor: pointer;
     position: relative;

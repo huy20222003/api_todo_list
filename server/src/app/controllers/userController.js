@@ -112,8 +112,8 @@ class userController {
     }
 
     async updateUserInfo(req, res) {
-      const { fullName, username, email } = req.body;
-      if(!fullName || !username || !email) {
+      const { fullName, username, email, avatar } = req.body;
+      if(!fullName || !username || !email || !avatar) {
         res.status(400).json({status: false, message: 'Missing infomation'});
       } else {
         try {
@@ -128,6 +128,7 @@ class userController {
         }
       }
     }
+    
 }
 
 module.exports = new userController();

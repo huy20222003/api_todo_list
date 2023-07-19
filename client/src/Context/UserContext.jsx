@@ -8,6 +8,9 @@ export const UserContext = createContext();
 export const UserProvider = ({children}) => {
     const [showModalVerify, setShowModalVerify] = useState(false);
     const { authState: { user }} = useContext(AuthContext);
+    const [readOnly, setReadOnly] = useState(true);
+    const [updatedButton, setUpdatedButton] = useState(false);
+
     //update password
     const updatePasswords = async (updatePasswordForm)=> {
         try {
@@ -80,15 +83,18 @@ export const UserProvider = ({children}) => {
         }
       }
 
-
     const userData = {
       showModalVerify,
       setShowModalVerify,
+      readOnly,
+      setReadOnly,
+      updatedButton,
+      setUpdatedButton,
       updatePasswords,
       sendCode,
       verifyCode,
       updatePasswordAfterReset,
-      updateUserInfo
+      updateUserInfo,
     }
     return <UserContext.Provider value={userData}>{children}</UserContext.Provider>
 }

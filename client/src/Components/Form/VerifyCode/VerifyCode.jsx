@@ -6,7 +6,7 @@ import styles from './VerifyCode.module.css';
 const VerifyCode = () => {
   const [codes, setCodes] = useState('');
   const [isVerified, setIsVerified] = useState(false);
-  const { showModalVerify, setShowModalVerify, verifyCode} = useContext(UserContext);
+  const { showModalVerify, setShowModalVerify, verifyCode, setReadOnly, setUpdatedButton} = useContext(UserContext);
 
   const handleChange = (event) => {
     setCodes(event.target.value);
@@ -28,6 +28,12 @@ const VerifyCode = () => {
     }
   };
 
+  const handleCancel = ()=> {
+    setReadOnly(true);
+    setShowModalVerify(false);
+    setUpdatedButton(false);
+  }
+
   return (
     <div className={`${styles.container} ${showModalVerify ? '' : 'd-none'}`}>
       <div className={styles.header}>
@@ -36,7 +42,9 @@ const VerifyCode = () => {
       </div>
       <div className={styles.codeInputs}>
         <input
-            type="number"
+            type="text" // Sử dụng type="text" để chuyển đổi thành input văn bản thường
+            pattern="[0-9]*" // Sử dụng pattern="[0-9]*" để chỉ cho phép nhập các ký tự số
+            inputMode="numeric" // Sử dụng inputMode="numeric" để chỉ cho trình duyệt hiển thị bàn phím số trên điện thoại
             maxLength={6}
             className={styles.codeInput}
             value={codes}
@@ -44,7 +52,7 @@ const VerifyCode = () => {
           />
       </div>
       <div className={styles.buttonContainer}>
-        <button onClick={()=>setShowModalVerify(false)} className='cancelButton'>Cancel</button>
+        <button onClick={handleCancel} className='cancelButton'>Cancel</button>
         <button onClick={handleVerify} className='primaryButton'>Verify</button>
         {isVerified && <p>Code is verified!</p>}
       </div>

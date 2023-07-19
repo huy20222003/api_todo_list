@@ -45,7 +45,7 @@ const HeaderContent = () => {
         />
       </div>
       <div className={styles.userInfoContainer} onClick={() => setSubMenu(!subMenu)}>
-        <img className={styles.userInfoImage} src={user?.image} alt="avatar" />
+        <img className={styles.userInfoImage} src={user?.avatar} alt="avatar" />
         <div>
           <span className={styles.userInfoName}>Hi, {user?.username}</span>
           <i className={`fa-solid fa-caret-down ${styles.caret}`}></i>

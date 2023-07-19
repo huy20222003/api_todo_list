@@ -51,6 +51,21 @@
     margin: 0 auto;
 }
 
+.avatarContainer {
+    position: relative;
+    display: inline-block;
+}
+
+.avatarContainer > i {
+    position: absolute;
+    bottom: 2rem;
+    font-size: 2rem;
+    right: 2.5rem;
+    color: var(--primary-color);
+    cursor: pointer;
+    box-shadow: 0 2.5rem 5rem -1.2rem rgba(0, 0, 0, 0.25);
+}
+
 .userInfoName {
     margin: 0.4rem 0 0 0;
     font-size: 2rem;

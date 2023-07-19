@@ -1,4 +1,4 @@
-import { useContext, useEffect, memo, useState } from "react";
+import { useContext, useEffect, useRef, memo, useState } from "react";
 import HeaderContent from "../../../Components/layoutContent/HeaderContent";
 import { AuthContext } from "../../../Context/AuthContext";
 import { UserContext } from "../../../Context/UserContext";
@@ -7,21 +7,22 @@ import { toast } from "react-toastify";
 
 const Profile = () => {
   const { authState: { user } } = useContext(AuthContext);
-  const { updateUserInfo, sendCode, setShowModalVerify } = useContext(UserContext);
-  const [readOnly, setReadOnly] = useState(true);
-  const [updatedButton, setUpdatedButton] = useState(false);
+  const { updateUserInfo, sendCode, setShowModalVerify, readOnly, setReadOnly, updatedButton, setUpdatedButton } = useContext(UserContext);
+  const refInputFile = useRef();
 
   const [userInfo, setUserInfo] = useState({
     fullName: "",
     username: "",
-    email: ""
+    email: "",
+    avatar: ""
   });
 
   useEffect(() => {
     setUserInfo({
       fullName: user?.fullName || "",
       username: user?.username || "",
-      email: user?.email || ""
+      email: user?.email || "",
+      avatar: user?.avatar || ""
     });
   }, [user]);
 
@@ -37,7 +38,7 @@ const Profile = () => {
     event.preventDefault();
     try {
       const updateData = await updateUserInfo(userInfo);
-      if(!updateData.status) {
+      if (!updateData.status) {
         toast.error(updateData.message);
       } else {
         toast.success(updateData.message);
@@ -54,6 +55,7 @@ const Profile = () => {
     setShowModalVerify(true);
     setUpdatedButton(true);
     setReadOnly(false);
+    console.log(userInfo);
     try {
       const sendData = await sendCode({email: user?.email});
       if(!sendData.status) {
@@ -72,6 +74,27 @@ const Profile = () => {
     setReadOnly(true);
   }
 
+  const handleChooseFile = ()=> {
+    refInputFile.current.click();
+  }
+
+  const handleChangeFile = async(e)=> {
+    const file = e.target.files[0];
+    const reader = new FileReader();
+
+    reader.onloadend = async () => {
+      setUserInfo((prevUserInfo) => ({
+        ...prevUserInfo,
+        avatar: reader.result, // Update the avatar field with base64 data
+      }));
+    };
+
+
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
+
   const handleGoBack = () => {
     history.back();
   };
@@ -87,7 +110,11 @@ const Profile = () => {
           <span className={styles.backButtonDescription}>Back</span>
         </div>
         <div className={styles.userInfoContainer}>
-          <img src={user?.image} className={styles.userInfoImage} alt={user?.fullName} />
+          <div className={styles.avatarContainer}>
+            <img src={userInfo.avatar} className={styles.userInfoImage} alt={user?.fullName} />
+            <input type="file" ref={refInputFile} name="avatar" onChange={handleChangeFile} accept="image/*" hidden={true} />
+            <i className="fa-solid fa-camera" onClick={handleChooseFile}></i>
+          </div>
           <h2 className={styles.userInfoName}>{user?.fullName}</h2>
         </div>
         <div className={styles.infoDetailContainer}>
