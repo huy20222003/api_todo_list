@@ -4,8 +4,12 @@ const morgan = require('morgan');
 const PORT = process.env.PORT || 3000;
 const cors = require('cors');
 
-app.use(express.json({ limit: '10mb'}));
-app.use(express.urlencoded({ limit: '10mb', extended: true }));
+//cors
+app.use(cors());
+app.options('*', cors());
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 //router
 const route = require('./routes');
@@ -17,9 +21,6 @@ app.use(morgan('combine'));
 const database = require('./config/database');
 database.connect();
 
-//cors
-app.use(cors());
-app.options('*', cors());
 
 //router
 route(app);
