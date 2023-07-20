@@ -8,6 +8,7 @@ import { toast } from "react-toastify";
 const Profile = () => {
   const { authState: { user } } = useContext(AuthContext);
   const { updateUserInfo, sendCode, setShowModalVerify, readOnly, setReadOnly, updatedButton, setUpdatedButton } = useContext(UserContext);
+  const [camera, setCamera] = useState(false);
   const refInputFile = useRef();
 
   const [userInfo, setUserInfo] = useState({
@@ -55,7 +56,7 @@ const Profile = () => {
     setShowModalVerify(true);
     setUpdatedButton(true);
     setReadOnly(false);
-    console.log(userInfo);
+    setCamera(true);
     try {
       const sendData = await sendCode({email: user?.email});
       if(!sendData.status) {
@@ -113,7 +114,7 @@ const Profile = () => {
           <div className={styles.avatarContainer}>
             <img src={userInfo.avatar} className={styles.userInfoImage} alt={user?.fullName} />
             <input type="file" ref={refInputFile} name="avatar" onChange={handleChangeFile} accept="image/*" hidden={true} />
-            <i className="fa-solid fa-camera" onClick={handleChooseFile}></i>
+            <i className={`fa-solid fa-camera ${camera ? '' : 'd-none'}`} onClick={handleChooseFile}></i>
           </div>
           <h2 className={styles.userInfoName}>{user?.fullName}</h2>
         </div>
