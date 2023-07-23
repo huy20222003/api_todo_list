@@ -19,12 +19,12 @@ database.connect();
 
 //cors
 const corsOptions = {
-  origin: 'https://todolist-webapp-v1.netlify.app', // Replace with your allowed origin (or '*' for any)
+  origin: '*', // Replace with your allowed origin (or '*' for any)
   methods: ['GET', 'POST', 'PUT', 'DELETE'], // Set the allowed HTTP methods
   allowedHeaders: ['Content-Type', 'Authorization'] // Set the allowed request headers
 };
 app.use(cors(corsOptions));
-app.options('*', cors());
+// app.options('*', cors());
 
 //router
 route(app);
