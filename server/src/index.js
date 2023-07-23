@@ -18,12 +18,7 @@ const database = require('./config/database');
 database.connect();
 
 //cors
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://todolist-webapp-v1.netlify.app'); // Thay thế URL của ứng dụng web của bạn
-  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  next();
-});
+app.use(cors({ origin: ['http://localhost:3000', 'http://todolist-sg9c.onrender.com', 'https://todolist-sg9c.onrender.com'], credentials: true }));
 
 //router
 route(app);
