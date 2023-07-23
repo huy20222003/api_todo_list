@@ -18,13 +18,12 @@ const database = require('./config/database');
 database.connect();
 
 //cors
-const corsOptions = {
-  origin: '*', // Replace with your allowed origin (or '*' for any)
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Set the allowed HTTP methods
-  allowedHeaders: ['Content-Type', 'Authorization'] // Set the allowed request headers
-};
-app.use(cors(corsOptions));
-// app.options('*', cors());
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://todolist-webapp-v1.netlify.app'); // Thay thế URL của ứng dụng web của bạn
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  next();
+});
 
 //router
 route(app);
