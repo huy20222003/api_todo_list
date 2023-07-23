@@ -18,7 +18,13 @@ const database = require('./config/database');
 database.connect();
 
 //cors
-app.use(cors({ origin: ['http://localhost:3000', 'http://todolist-sg9c.onrender.com', 'https://todolist-sg9c.onrender.com'], credentials: true }));
+const corsOptions = {
+  origin: '*', // Replace with your allowed origin (or '*' for any)
+  methods: ['GET', 'POST', 'PUT', 'DELETE'], // Set the allowed HTTP methods
+  allowedHeaders: ['Content-Type', 'Authorization'] // Set the allowed request headers
+};
+app.use(cors(corsOptions));
+app.options('*', cors());
 
 //router
 route(app);
