@@ -12,7 +12,7 @@ app.use(express.urlencoded({ limit: '100mb', extended: true }));
 const route = require('./routes');
 
 //morgan
-app.use(morgan('dev')); 
+app.use(morgan('combine'));
 
 //connect database
 const database = require('./config/database');
@@ -25,7 +25,7 @@ const corsOptions = {
   allowedHeaders: ['Content-Type', 'Authorization'] 
 };
 app.use(cors(corsOptions));
-// app.options('*', cors());
+//app.options('*', cors());
 
 //router
 route(app);
