@@ -1,3 +1,4 @@
+require('dotenv').config();
 const Users = require('../models/Users');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
@@ -28,7 +29,7 @@ class authController {
                 return res.status(400).json({ status: false, message: 'Username or email already exists!' });
             }else {
                 const newUser = new Users({ fullName, username, email, password });
-                const accessToken = jwt.sign({ newUser }, 'TOKEN_SECRET', {expiresIn: '24h'});
+                const accessToken = jwt.sign({ newUser }, process.env.TOKEN_SECRET, {expiresIn: '24h'});
                 await newUser.save();
                 return res.status(200).json({ status: true, message: 'Register successful!', accessToken });
             }
@@ -55,7 +56,7 @@ class authController {
             if (!passwordMatch) {
                 return res.status(401).json({ status: false, message: 'Invalid username or password!' });
             }
-            const accessToken = jwt.sign({ user }, 'TOKEN_SECRET', {expiresIn: '24h'});
+            const accessToken = jwt.sign({ user }, process.env.TOKEN_SECRET, {expiresIn: '24h'});
             res.status(201).json({ status: true, message: 'Logged successfully! ', accessToken });
         } catch(error) {
             res.status(500).json({ status: false, message: error });
