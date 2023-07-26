@@ -4,6 +4,7 @@ const app = express();
 const morgan = require('morgan');
 const PORT = process.env.PORT || 3000;
 const cors = require('cors');
+const corsMiddleware = require('./middleware/corsMiddleware');
 
 app.use(express.json({ limit: '100mb' }));
 app.use(express.urlencoded({ limit: '100mb', extended: true }));
@@ -19,12 +20,7 @@ const database = require('./config/database');
 database.connect();
 
 //cors
-const corsOptions = {
-  origin: 'https://todolist-webapp-v1.netlify.app/', 
-  methods: ['GET', 'POST', 'PUT', 'DELETE'], 
-  allowedHeaders: ['Content-Type', 'Authorization'] 
-};
-app.use(cors(corsOptions));
+app.use(corsMiddleware);
 //app.options('*', cors());
 
 //router
