@@ -12,8 +12,11 @@ async function verify(req, res, next) {
         if (!token) {
           return res.status(401).json({ status: false, message: 'No token provided' });
         } else {
+          res.header('Access-Control-Allow-Origin', 'https://todolist-webapp-v1.netlify.app'); // Thay thế URL của ứng dụng web của bạn
+          res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+          res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
           // Xác thực token
-          const decoded = jwt.verify(token, 'TOKEN_SECRET');
+          const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
           req._id = decoded.user._id; // Lưu thông tin người dùng vào request
       
           // Kiểm tra và phân quyền truy cập tại đây
