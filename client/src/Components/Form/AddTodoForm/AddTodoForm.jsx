@@ -1,4 +1,4 @@
-import { useContext, useState, memo } from "react";
+import { useContext, useState, memo, useCallback } from "react";
 import { toast } from 'react-toastify';
 import { TodosContext } from "../../../Context/TodosContext";
 import { LabelsContext } from "../../../Context/LabelsContext";
@@ -6,39 +6,64 @@ import styles from './AddTodoForm.module.css';
 
 const AddTodoForm = () => {
   const { showAddModal, setShowAddModal, createTodos } = useContext(TodosContext);
-  const {labelState: { labels }} = useContext(LabelsContext);
-  const [addForm, setAddForm] = useState({
-    name: "",
-    description: "",
-    label: ""
-  });
-  const { name, description, label } = addForm;
+  const { labelState: { labels } } = useContext(LabelsContext);
+  const [name, setName] = useState('');
+  const [description, setDescription] = useState('');
+  const [label, setLabel] = useState('');
 
-  const handleChangeAddForm = (e) => {
-    setAddForm({ ...addForm, [e.target.name]: e.target.value });
-  };
+  const handleChangeName = useCallback((e) => {
+    setName(e.target.value);
+  }, []);
+
+  const handleChangeDescription = useCallback((e) => {
+    setDescription(e.target.value);
+  }, []);
+
+  const handleChangeLabel = useCallback((e) => {
+    setLabel(e.target.value);
+  }, []);
 
   const handleCreateTodo = async (e) => {
     e.preventDefault();
     try {
-      const addData = await createTodos(addForm);
+      const addData = await createTodos({ name, description, label });
       if (!addData.status) {
         toast.error('Add todo failed');
       } else {
         toast.success('Add todo successfully!');
+        setShowAddModal(false);
       }
     } catch (error) {
-      toast.error('Server Error');
+      toast.error('Server error');
     }
+    setName('');
+    setDescription('');
+    setLabel('');
+  };
+
+  const handleCloseForm = useCallback(() => {
     setShowAddModal(false);
-    setAddForm({ name: '', description: '', label: '' });
+    setName('');
+    setDescription('');
+    setLabel('');
+  }, [setShowAddModal]);
+
+  const renderLabelOptions = () => {
+    return (
+      <>
+        <option value="" disabled>Choose your label</option>
+        {labels.map((label) => (
+          <option key={label._id} value={label.name}>{label.name}</option>
+        ))}
+      </>
+    );
   };
 
   return (
     <div className={`${styles.container} ${showAddModal ? "" : "d-none"}`}>
       <div className={styles.overlay}>
         <form className={styles.addTodoForm} onSubmit={handleCreateTodo}>
-          <div className={styles.closeButtonContainer} onClick={() => setShowAddModal(false)}>
+          <div className={styles.closeButtonContainer} onClick={handleCloseForm}>
             <i className={`fa-solid fa-xmark ${styles.closeButton}`}></i>
           </div>
           <div className={styles.header}>
@@ -56,7 +81,7 @@ const AddTodoForm = () => {
                 id="name"
                 name="name"
                 value={name}
-                onChange={handleChangeAddForm}
+                onChange={handleChangeName}
                 className='formElementInput'
                 placeholder="Enter your Todo name"
               />
@@ -69,7 +94,7 @@ const AddTodoForm = () => {
                 id="description"
                 name="description"
                 value={description}
-                onChange={handleChangeAddForm}
+                onChange={handleChangeDescription}
                 className='formElementInput descriptionHeight resize-none'
                 placeholder="Enter your description"
               ></textarea>
@@ -79,11 +104,8 @@ const AddTodoForm = () => {
                 Label
               </label>
               <div>
-                <select id="label" name="label" className="formElementInput" value={label} onChange={handleChangeAddForm}>
-                  <option value="" disabled = {true}>Choose your label</option>
-                  {labels.map((label)=>(
-                    <option key={label._id} name={label.name}>{label.name}</option>
-                  ))}
+                <select id="label" name="label" className="formElementInput" value={label} onChange={handleChangeLabel}>
+                  {renderLabelOptions()}
                 </select>
               </div>
             </div>
@@ -92,7 +114,7 @@ const AddTodoForm = () => {
             <button
               type="button"
               className="cancelButton"
-              onClick={() => setShowAddModal(false)}
+              onClick={handleCloseForm}
             >
               Cancel
             </button>

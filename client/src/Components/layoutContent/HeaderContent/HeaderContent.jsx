@@ -1,5 +1,6 @@
-import { useState, useContext, memo } from 'react';
+import React, { useState, useContext, memo, startTransition } from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import { TodosContext } from '../../../Context/TodosContext';
 import { AuthContext } from '../../../Context/AuthContext';
 import styles from './HeaderContent.module.css';
@@ -9,18 +10,22 @@ const HeaderContent = () => {
   const [subMenu, setSubMenu] = useState(false);
   const { searchTodos, setShowAddModal } = useContext(TodosContext);
   const { authState: { user }, logoutUser } = useContext(AuthContext);
-  
+
   const handleSearchTodo = async (e) => {
-    setSearchValue(e.target.value);
+    startTransition(() => setSearchValue(e.target.value));
     try {
-      const searchData = await searchTodos(e.target.value);
-      if (!searchData.status) {
-        console.log('An error has occurred');
+      if (e.target.value.length <= 50) {
+        const searchData = await searchTodos(e.target.value);
+        if (!searchData.status) {
+          toast.error('An error has occurred');
+        } else {
+          // Xử lý dữ liệu sau khi tìm kiếm
+        }
       } else {
-        // Xử lý dữ liệu sau khi tìm kiếm
+        toast.error('Search value is too long');
       }
     } catch (error) {
-      console.log(error);
+      toast.error('Server Error');
     }
   };
 
@@ -42,6 +47,7 @@ const HeaderContent = () => {
           onChange={handleSearchTodo}
           className={styles.searchInput}
           placeholder="Search your Todo"
+          maxLength={50}
         />
       </div>
       <div className={styles.userInfoContainer} onClick={() => setSubMenu(!subMenu)}>

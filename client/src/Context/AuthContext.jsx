@@ -1,58 +1,48 @@
 import { createContext, useEffect, useReducer } from 'react';
+import axios from 'axios';
+import Cookies from 'js-cookie';
 import { initStateAuth, reducer } from '../Reducer/AuthReducer/reducer';
-import { Api_URL, LOCAL_STORAGE_TOKEN_NAME } from '../constant';
+import { Api_URL } from '../constant';
 import { setAuth } from '../Reducer/AuthReducer/action';
 import setAuthToken from '../utils/setAuthToken';
-import axios from 'axios';
 
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
   const [authState, dispatch] = useReducer(reducer, initStateAuth);
 
-  // Load user
+  const handleError = (error) => {
+    if (error.response && error.response.data) {
+      return error.response.data;
+    } else {
+      return { status: false, message: error.message };
+    }
+  };
+
+  const setAuthenticatedUser = (isAuthenticated, user) => {
+    dispatch(setAuth({ isAuthenticated, user }));
+  };
+
   const loadUser = async () => {
     try {
-      const localStorageToken = localStorage.getItem(LOCAL_STORAGE_TOKEN_NAME);
-
-      if (localStorageToken) {
-        setAuthToken(localStorageToken);
-      } else {
-        dispatch(
-          setAuth({
-            isAuthenticated: false,
-            user: null,
-          })
-        );
+      const accessToken = Cookies.get('user');
+      if (!accessToken) {
+        setAuthenticatedUser(false, null);
         return;
       }
 
+      setAuthToken(accessToken);
       const response = await axios.get(`${Api_URL}/auth`);
 
       if (response.data.status) {
-        dispatch(
-          setAuth({
-            isAuthenticated: true,
-            user: response.data.user,
-          })
-        );
+        setAuthenticatedUser(true, response.data.user);
       } else {
-        dispatch(
-          setAuth({
-            isAuthenticated: false,
-            user: null,
-          })
-        );
-        localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
+        setAuthenticatedUser(false, null);
+        Cookies.remove('user');
         setAuthToken(null);
       }
     } catch (error) {
-      dispatch(
-        setAuth({
-          isAuthenticated: false,
-          user: null,
-        })
-      );
+      setAuthenticatedUser(false, null);
     }
   };
 
@@ -60,51 +50,56 @@ export const AuthProvider = ({ children }) => {
     loadUser();
   }, []);
 
-  // Register User
   const registerUser = async (registerForm) => {
     try {
       const response = await axios.post(`${Api_URL}/auth/register`, registerForm);
       await loadUser();
-
       return response.data;
     } catch (error) {
-      if (error.response && error.response.data) {
-        return error.response.data;
-      } else {
-        return {
-          status: false,
-          message: error.message,
-        };
-      }
+      return handleError(error);
     }
   };
 
-  // Login User
   const loginUser = async (loginForm) => {
     try {
       const response = await axios.post(`${Api_URL}/auth/login`, loginForm);
       await loadUser();
-
       return response.data;
     } catch (error) {
-      if (error.response && error.response.data) {
-        return error.response.data;
-      } else {
-        return { status: false, message: error.message };
-      }
+      return handleError(error);
     }
   };
 
-  // Logout
   const logoutUser = () => {
-    localStorage.removeItem(LOCAL_STORAGE_TOKEN_NAME);
-    dispatch(
-      setAuth({
-        isAuthenticated: false,
-        user: null,
-      })
-    );
+    Cookies.remove('user');
+    setAuthenticatedUser(false, null);
   };
+
+  const handleRefreshToken = async () => {
+    try {
+      const refreshToken = Cookies.get('refresh');
+      if (!refreshToken) {
+        console.error('RefreshToken not found');
+        return;
+      }
+
+      const response = await axios.post(`${Api_URL}/auth/refresh`, { refreshToken });
+      if (response.data.status) {
+        console.log('Newly issued AccessToken');
+        const expiration = new Date();
+        expiration.setTime(expiration.getTime() + 15 * 60 * 1000);
+        Cookies.set('user', response.data.accessToken, { expires: expiration });
+        await loadUser();
+      }
+    } catch (error) {
+      console.error('Error! An error occurred. Please try again later! ', error);
+    }
+  };
+
+  //Tự động handle refreshToken mỗi khi loadUser
+  // useEffect(() => {
+  //   handleRefreshToken();
+  // }, []);
 
   const AuthContextData = {
     authState,
@@ -116,3 +111,4 @@ export const AuthProvider = ({ children }) => {
 
   return <AuthContext.Provider value={AuthContextData}>{children}</AuthContext.Provider>;
 };
+

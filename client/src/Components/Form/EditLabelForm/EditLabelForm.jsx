@@ -4,30 +4,31 @@ import { LabelsContext } from "../../../Context/LabelsContext";
 import styles from './EditLabelForm.module.css'
 
 const EditLabelForm = () => {
-  const { showEditLabel, setShowEditLabel, editLabels, labelState: {label} } = useContext(LabelsContext);
-  const initialEditFormState = {
-    _id: (label && label._id) || '',
-    name: (label && label.name) || '',
-  };
-  
-  const [editForm, setEditForm] = useState(initialEditFormState);
+  const { showEditLabel, setShowEditLabel, editLabels, labelState: { label } } = useContext(LabelsContext);
+  const [editForm, setEditForm] = useState({
+    _id: label?._id || '',
+    name: label?.name || '',
+  });
 
   useEffect(() => {
-    // Kiểm tra và đảm bảo todo không phải là null trước khi setEditForm
     if (label) {
       setEditForm({
-        _id: (label._id !== null) ? label._id : '',
-        name: (label.name !== null) ? label.name : '',
+        _id: label._id,
+        name: label.name,
       });
     }
   }, [label]);
-  
+
   const { name } = editForm;
 
   const handleChangeEditForm = (e) => {
     setEditForm({ ...editForm, [e.target.name]: e.target.value });
   };
-  
+
+  const handleCancel = () => {
+    setShowEditLabel(false);
+  };
+
   const handleEditLabel = async (e) => {
     e.preventDefault();
     try {
@@ -41,7 +42,6 @@ const EditLabelForm = () => {
       toast.error('Server error');
     }
     setShowEditLabel(false);
-    // setEditForm({ name: '', description: '', label: '' });
   };
 
   return (
@@ -51,11 +51,6 @@ const EditLabelForm = () => {
           <div className={styles.closeButtonContainer} onClick={() => setShowEditLabel(false)}>
             <i className={`fa-solid fa-xmark ${styles.closeButton}`}></i>
           </div>
-          {/* <div className={styles.header}>
-            <h1 className={styles.title}>
-              EDIT LABEL
-            </h1>
-          </div> */}
           <div>
             <div className='formElements'>
               <label htmlFor="name" className="label">
@@ -76,7 +71,7 @@ const EditLabelForm = () => {
             <button
               type="button"
               className="cancelButton"
-              onClick={() => setShowEditLabel(false)}
+              onClick={handleCancel}
             >
               Cancel
             </button>

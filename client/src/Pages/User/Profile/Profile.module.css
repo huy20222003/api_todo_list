@@ -73,6 +73,17 @@
     font-weight: 400;
 }
 
+.updateAvatarBtn {
+    margin: 1rem 0 0 0;
+    padding: 0.8rem 1.6rem;
+    border-radius: 0.4rem;
+    outline: none;
+    border: none;
+    background-color: rgba(52, 152, 219, 0.6);;
+    color: var(--text-white);
+    cursor: pointer;
+}
+
 .infoDetailContainer {
     margin: 6rem 0 0 0;
 }

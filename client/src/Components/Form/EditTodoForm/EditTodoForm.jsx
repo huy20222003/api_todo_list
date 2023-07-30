@@ -5,35 +5,34 @@ import { LabelsContext } from '../../../Context/LabelsContext';
 import styles from './EditTodoForm.module.css'
 
 const EditTodoForm = () => {
-  const { showEditModal, setShowEditModal, editTodos, todoState: {todo} } = useContext(TodosContext);
-  const {labelState: {labels}} = useContext(LabelsContext);
-  const initialEditFormState = {
-    _id: (todo && todo._id) || '',
-    name: (todo && todo.name) || '',
-    description: (todo && todo.description) || '',
-    label: (todo && todo.label) || 'pending',
-  };
-  
-  const [editForm, setEditForm] = useState(initialEditFormState);
+  const { showEditModal, setShowEditModal, editTodos, todoState: { todo } } = useContext(TodosContext);
+  const { labelState: { labels } } = useContext(LabelsContext);
+  const [editForm, setEditForm] = useState({
+    _id: todo?._id || '',
+    name: todo?.name || '',
+    description: todo?.description || '',
+    label: todo?.label || 'pending',
+  });
 
   useEffect(() => {
-    // Kiểm tra và đảm bảo todo không phải là null trước khi setEditForm
-    if (todo) {
-      setEditForm({
-        _id: (todo._id !== null) ? todo._id : '',
-        name: (todo.name !== null) ? todo.name : '',
-        description: (todo.description !== null) ? todo.description : '',
-        label: (todo.label !== null) ? todo.label : 'pending',
-      });
-    }
+    setEditForm({
+      _id: todo?._id || '',
+      name: todo?.name || '',
+      description: todo?.description || '',
+      label: todo?.label || 'pending',
+    });
   }, [todo]);
-  
+
   const { name, description, label } = editForm;
 
   const handleChangeEditForm = (e) => {
     setEditForm({ ...editForm, [e.target.name]: e.target.value });
   };
-  
+
+  const handleCancel = () => {
+    setShowEditModal(false);
+  };
+
   const handleEditTodo = async (e) => {
     e.preventDefault();
     try {
@@ -47,7 +46,6 @@ const EditTodoForm = () => {
       toast.error('Server error');
     }
     setShowEditModal(false);
-    // setEditForm({ name: '', description: '', label: '' });
   };
 
   return (
@@ -97,9 +95,11 @@ const EditTodoForm = () => {
               <div>
                 <select id="label" name="label" className='formElementInput' value={label} onChange={handleChangeEditForm}>
                   <optgroup label="Choose your label">
-                  {labels.map((label)=>(
-                    <option key={label._id} name={label.name}>{label.name}</option>
-                  ))}
+                    {labels.map((label) => (
+                      <option key={label._id} value={label.name}>
+                        {label.name}
+                      </option>
+                    ))}
                   </optgroup>
                 </select>
               </div>
@@ -109,7 +109,7 @@ const EditTodoForm = () => {
             <button
               type="button"
               className="cancelButton"
-              onClick={() => setShowEditModal(false)}
+              onClick={handleCancel}
             >
               Cancel
             </button>

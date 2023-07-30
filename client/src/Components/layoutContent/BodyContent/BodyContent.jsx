@@ -1,8 +1,9 @@
-import { useContext, useState, useEffect, memo } from "react";
+import React, { useContext, useState, useEffect, memo, Suspense } from "react";
 import { toast } from 'react-toastify';
 import { TodosContext } from "../../../Context/TodosContext";
 import { LabelsContext } from "../../../Context/LabelsContext";
-import TodoItem from "../TodoItem";
+const TodoItem = React.lazy(()=> import ("../TodoItem"));
+import Loader from "../../Loader/Loader";
 import styles from './BodyContent.module.css'
 
 const BodyContent = () => {
@@ -34,7 +35,9 @@ const BodyContent = () => {
         </select>
       </div>
       <div className={styles.todoList}>
-        <TodoItem />
+        <Suspense fallback = {<Loader />}>
+          <TodoItem />
+        </Suspense>
       </div>
       <div className={styles.addButtonContainer}>
         <span data-tooltip="Add new Todo!" data-flow="top">

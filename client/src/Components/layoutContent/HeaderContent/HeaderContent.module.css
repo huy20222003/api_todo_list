@@ -44,6 +44,7 @@
     justify-content: center;
     align-items: center;
     margin-right: 3.2rem;
+    cursor: pointer;
 }
 
 .userInfoImage {
@@ -85,6 +86,7 @@
     line-height: 2.4rem;
     border-bottom: 0.1rem solid rgb(156, 163, 175);
     list-style: none;
+    cursor: pointer;
 }
 
 .subMenuItem:last-child {

@@ -1,21 +1,23 @@
-import { useContext, useEffect, useRef, memo, useState } from "react";
+import { useContext, useEffect, useRef, memo, useState, useCallback } from "react";
 import HeaderContent from "../../../Components/layoutContent/HeaderContent";
 import { AuthContext } from "../../../Context/AuthContext";
 import { UserContext } from "../../../Context/UserContext";
 import styles from './Profile.module.css';
 import { toast } from "react-toastify";
+import axios from "axios";
 
 const Profile = () => {
   const { authState: { user } } = useContext(AuthContext);
-  const { updateUserInfo, sendCode, setShowModalVerify, readOnly, setReadOnly, updatedButton, setUpdatedButton } = useContext(UserContext);
-  const [camera, setCamera] = useState(false);
+  const { updateUserInfo, sendCode, setShowModalVerify, readOnly, setReadOnly, updatedButton, setUpdatedButton, uploadAvatar } = useContext(UserContext);
+  const [selectedImage, setSelectedImage] = useState(null);
+  const [updateAvatarBtn, setUpdateAvatarBtn] = useState(false);
+  const [previewImg, setPreviewImg] = useState(user?.avatar || null);
   const refInputFile = useRef();
 
   const [userInfo, setUserInfo] = useState({
-    fullName: "",
-    username: "",
-    email: "",
-    avatar: ""
+    fullName: user?.fullName || "",
+    username: user?.username || "",
+    email: user?.email || "",
   });
 
   useEffect(() => {
@@ -23,19 +25,53 @@ const Profile = () => {
       fullName: user?.fullName || "",
       username: user?.username || "",
       email: user?.email || "",
-      avatar: user?.avatar || ""
     });
   }, [user]);
 
-  const handleChange = (event) => {
+  const handleChange = useCallback((event) => {
     const { name, value } = event.target;
     setUserInfo((prevUserInfo) => ({
       ...prevUserInfo,
       [name]: value,
     }));
-  };
+  }, []);
 
-  const handleSave = async (event) => {
+  const handleChooseFile = () => {
+    refInputFile.current.click();
+  }
+
+  const handleChangeFile = useCallback(async (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setPreviewImg(URL.createObjectURL(file));
+      const reader = new FileReader();
+      reader.onload = () => {
+        setSelectedImage(reader.result);
+      };
+      reader.onerror = () => {
+        toast.error("Error occurred while reading the file.");
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setSelectedImage(null);
+    }
+  }, []);
+
+  const handleUpdateAvatar = useCallback(async () => {
+    try {
+      const resData = await uploadAvatar({ file: selectedImage });
+      if (!resData.status) {
+        toast.error('Error! An error occurred. Please try again later');
+      } else {
+        toast.success('Update avatar successfully');
+      }
+      setUpdateAvatarBtn(false);
+    } catch (error) {
+      toast.error('Server error');
+    }
+  }, [selectedImage, uploadAvatar]);
+
+  const handleSave = useCallback(async (event) => {
     event.preventDefault();
     try {
       const updateData = await updateUserInfo(userInfo);
@@ -48,18 +84,17 @@ const Profile = () => {
       }
     } catch (error) {
       toast.error('Server error');
-    } 
-  };
+    }
+  }, [updateUserInfo, userInfo]);
 
-  const handleSendCode = async (e)=> {
+  const handleSendCode = useCallback(async (e) => {
     e.preventDefault();
-    setShowModalVerify(true);
     setUpdatedButton(true);
     setReadOnly(false);
-    setCamera(true);
+    setShowModalVerify(true);
     try {
-      const sendData = await sendCode({email: user?.email});
-      if(!sendData.status) {
+      const sendData = await sendCode({ email: user?.email });
+      if (!sendData.status) {
         toast.error(sendData.message);
       } else {
         toast.success(sendData.message);
@@ -67,38 +102,18 @@ const Profile = () => {
     } catch (error) {
       toast.error('Server error');
     }
-  }
+  }, [sendCode, user]);
 
-  const handleCancel = (event)=> {
+  const handleCancel = useCallback((event) => {
     event.preventDefault();
     setUpdatedButton(false);
     setReadOnly(true);
-  }
-
-  const handleChooseFile = ()=> {
-    refInputFile.current.click();
-  }
-
-  const handleChangeFile = async(e)=> {
-    const file = e.target.files[0];
-    const reader = new FileReader();
-
-    reader.onloadend = async () => {
-      setUserInfo((prevUserInfo) => ({
-        ...prevUserInfo,
-        avatar: reader.result, // Update the avatar field with base64 data
-      }));
-    };
-
-
-    if (file) {
-      reader.readAsDataURL(file);
-    }
-  }
+  }, []);
 
   const handleGoBack = () => {
     history.back();
   };
+
 
   return (
     <div className={styles.container}>
@@ -112,11 +127,12 @@ const Profile = () => {
         </div>
         <div className={styles.userInfoContainer}>
           <div className={styles.avatarContainer}>
-            <img src={userInfo.avatar} className={styles.userInfoImage} alt={user?.fullName} />
+            <img src={previewImg ? previewImg : user?.avatar} className={styles.userInfoImage} alt={user?.fullName} />
             <input type="file" ref={refInputFile} name="avatar" onChange={handleChangeFile} accept="image/*" hidden={true} />
-            <i className={`fa-solid fa-camera ${camera ? '' : 'd-none'}`} onClick={handleChooseFile}></i>
+            <i className={'fa-solid fa-camera'} onClick={handleChooseFile}></i>
           </div>
           <h2 className={styles.userInfoName}>{user?.fullName}</h2>
+          <button className={`${styles.updateAvatarBtn} ${updateAvatarBtn ? '' : 'd-none'}`} onClick={handleUpdateAvatar}>Update Avatar</button>
         </div>
         <div className={styles.infoDetailContainer}>
           <h1 className={styles.infoDetailTitle}>Information</h1>

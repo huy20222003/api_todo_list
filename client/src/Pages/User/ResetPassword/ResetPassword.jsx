@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Cookies from 'js-cookie';
 import Header from '../../../Components/layoutHome/Header';
 import styles from './ResetPassword.module.css';
 import { UserContext } from '../../../Context/UserContext';
@@ -18,7 +19,7 @@ const ResetPassword = ()=> {
         e.preventDefault();
         try {
             const resetData = await sendCode({email: emailReset});
-            sessionStorage.setItem('email', emailReset);
+            Cookies.set('data', emailReset);
             if(!resetData.status) {
                 toast.error('Email does not exist');
             } else {

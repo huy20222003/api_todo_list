@@ -1,4 +1,4 @@
-import { useReducer, useState, createContext, useEffect } from 'react';
+import { useReducer, useState, createContext, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { initTodosState, reducer } from '../Reducer/TodosReducer/reducer';
 import { Api_URL } from '../constant';
@@ -19,108 +19,73 @@ export const TodosProvider = ({ children }) => {
   const [showEditModal, setShowEditModal] = useState(false);
   const [showModalDelete, setShowModalDelete] = useState(false);
   const [id, setId] = useState('');
-  const [todoLoading, setTodoLoading] = useState(true);
   const [todoState, dispatch] = useReducer(reducer, initTodosState);
 
-  const getAll = async () => {
+  const handleError = (error) => {
+    if (error.response && error.response.data) {
+      return error.response.data;
+    } else {
+      return { status: false, message: error.message };
+    }
+  };
+
+  const getAll = useCallback(async () => {
     try {
       const response = await axios.get(`${Api_URL}/todos/all`);
       if (response.data.status) {
         dispatch(getAllTodos(response.data.todos));
-        setTodoLoading(false);
       }
     } catch (error) {
-      setTodoLoading(true);
-      if (error.response && error.response.data) {
-        return error.response.data;
-      } else {
-        return {
-          status: false,
-          message: error.message,
-        };
-      }
+      return handleError(error);
     }
-  };
-  
+  }, []);
+
   useEffect(() => {
     getAll();
-  }, [todoState.currentPage]);
-  
-  // Create
-  const createTodos = async (TodoData) => {
+  }, [getAll]);
+
+  const createTodos = useCallback(async (TodoData) => {
     try {
       const response = await axios.post(`${Api_URL}/todos/create`, TodoData);
       dispatch(createTodo(response.data.newTodo));
       return response.data;
     } catch (error) {
-      if (error.response && error.response.data) {
-        return error.response.data;
-      } else {
-        return {
-          status: false,
-          message: error.message,
-        };
-      }
+      return handleError(error);
     }
-  };
+  }, []);
 
-  // Edit todo
-  const editTodos = async (editForm) => {
+  const editTodos = useCallback(async (editForm) => {
     try {
       const response = await axios.put(`${Api_URL}/todos/edit/${editForm._id}`, editForm);
       dispatch(editTodo(editForm));
       return response.data;
     } catch (error) {
-      if (error.response && error.response.data) {
-        return error.response.data;
-      } else {
-        return {
-          status: false,
-          message: error.message,
-        };
-      }
+      return handleError(error);
     }
-  };
+  }, []);
 
-  // Delete todo
-  const deleteTodos = async (todoId) => {
+  const deleteTodos = useCallback(async (todoId) => {
     try {
       const response = await axios.delete(`${Api_URL}/todos/delete/${todoId}`);
       dispatch(deleteTodo(todoId));
       return response.data;
     } catch (error) {
-      if (error.response && error.response.data) {
-        return error.response.data;
-      } else {
-        return {
-          status: false,
-          message: error.message,
-        };
-      }
+      return handleError(error);
     }
-  };
+  }, []);
 
-  // Search
-  const searchTodos = async (searchValue) => {
+  const searchTodos = useCallback(async (searchValue) => {
     try {
       const response = await axios.get(`${Api_URL}/todos/search?name=${searchValue}`);
       dispatch(searchTodo(response.data.todo));
       return response.data;
     } catch (error) {
-      if (error.response && error.response.data) {
-        return error.response.data;
-      } else {
-        return {
-          status: false,
-          message: error.message,
-        };
-      }
+      return handleError(error);
     }
-  };
+  }, []);
 
-  //filter
-  const filterTodos = async (label)=> {
-    if(label === 'all') {
+  const filterTodos = useCallback(async (label) => {
+    if (label === 'all') {
       await getAll();
     } else {
       try {
@@ -128,23 +93,15 @@ export const TodosProvider = ({ children }) => {
         dispatch(filterTodo(response.data.todo));
         return response.data;
       } catch (error) {
-        if (error.response && error.response.data) {
-          return error.response.data;
-        } else {
-          return {
-            status: false,
-            message: error.message,
-          };
-        }
+        return handleError(error);
       }
     }
-  }
+  }, [getAll]);
 
-  //set 
-  const setTodos = (todoId)=> {
-    const todo = todoState.todos.find((todo)=>todo._id === todoId);
+  const setTodos = useCallback((todoId) => {
+    const todo = todoState.todos.find((todo) => todo._id === todoId);
     dispatch(setTodo(todo));
-  }
+  }, [todoState.todos]);
 
   const TodosContextData = {
     showAddModal,
@@ -154,8 +111,6 @@ export const TodosProvider = ({ children }) => {
     id,
     setId,
     todoState,
-    todoLoading,
-    setTodoLoading,
     showModalDelete,
     setShowModalDelete,
     getAll,

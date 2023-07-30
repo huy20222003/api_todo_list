@@ -2,7 +2,7 @@
     display: flex;
     width: 100vw;
     height: 100vh;
-    background-image: url('../../../assets/images/anh_todo_list.png');
+    background: linear-gradient(135deg, #0984e3, #00b894);
     justify-content: center;
     align-items: center;
 }

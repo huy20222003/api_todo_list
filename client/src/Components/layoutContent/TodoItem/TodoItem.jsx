@@ -1,14 +1,12 @@
 import { useEffect, useContext, memo } from "react";
 import { TodosContext } from "../../../Context/TodosContext";
 import styles from './TodoItem.module.css';
-import Loader from "../../Loader/Loader";
 
 const TodoItem = () => {
   const {
     getAll,
     setShowEditModal,
     setId,
-    loading,
     setShowModalDelete,
     setTodos,
     todoState: { todos },
@@ -30,8 +28,7 @@ const TodoItem = () => {
 
   return (
     <>
-      {loading ? <Loader />
-       : todos.map((todo) => (
+      {todos.map((todo) => (
           <div
             key={todo._id}
             className={styles.container}

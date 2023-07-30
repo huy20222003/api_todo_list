@@ -18,26 +18,24 @@ export const LabelsProvider = ({ children }) => {
     const [showEditLabel, setShowEditLabel] = useState(false);
     const [showModalDelete, setShowModalDelete] = useState(false);
     const [id, setId] = useState('');
-    const [loading, setLoading] = useState(true);
     const [labelState, dispatch] = useReducer(reducer, initLabelState);
+
+    const handleError = (error) => {
+      if (error.response && error.response.data) {
+        return error.response.data;
+      } else {
+        return { status: false, message: error.message };
+      }
+    };
 
   const getAllLabels = async () => {
     try {
       const response = await axios.get(`${Api_URL}/label/all`);
       if (response.data.status) {
         dispatch(getAll(response.data.labels));
-        setLoading(false);
       }
     } catch (error) {
-      setLoading(true);
-      if (error.response && error.response.data) {
-        return error.response.data;
-      } else {
-        return {
-          status: false,
-          message: error.message,
-        };
-      }
+      return handleError(error);
     }
   };
   
@@ -48,14 +46,7 @@ export const LabelsProvider = ({ children }) => {
       dispatch(createLabel(response.data.newLabel));
       return response.data;
     } catch (error) {
-      if (error.response && error.response.data) {
-        return error.response.data;
-      } else {
-        return {
-          status: false,
-          message: error.message,
-        };
-      }
+      return handleError(error);
     }
   };
 
@@ -66,14 +57,7 @@ export const LabelsProvider = ({ children }) => {
       dispatch(editLabel(editForm));
       return response.data;
     } catch (error) {
-      if (error.response && error.response.data) {
-        return error.response.data;
-      } else {
-        return {
-          status: false,
-          message: error.message,
-        };
-      }
+      return handleError(error);
     }
   };
 
@@ -84,14 +68,7 @@ export const LabelsProvider = ({ children }) => {
       dispatch(deleteLabel(labelId));
       return response.data;
     } catch (error) {
-      if (error.response && error.response.data) {
-        return error.response.data;
-      } else {
-        return {
-          status: false,
-          message: error.message,
-        };
-      }
+      return handleError(error);
     }
   };
 
@@ -102,14 +79,7 @@ export const LabelsProvider = ({ children }) => {
       dispatch(searchLabel(response.data.label));
       return response.data;
     } catch (error) {
-      if (error.response && error.response.data) {
-        return error.response.data;
-      } else {
-        return {
-          status: false,
-          message: error.message,
-        };
-      }
+      return handleError(error);
     }
   };
 
@@ -123,14 +93,7 @@ export const LabelsProvider = ({ children }) => {
         dispatch(filterTodo(response.data.todo));
         return response.data;
       } catch (error) {
-        if (error.response && error.response.data) {
-          return error.response.data;
-        } else {
-          return {
-            status: false,
-            message: error.message,
-          };
-        }
+        return handleError(error);
       }
     }
   }
@@ -151,8 +114,6 @@ export const LabelsProvider = ({ children }) => {
     id,
     setId,
     labelState,
-    loading,
-    setLoading,
     getAllLabels,
     createLabels,
     editLabels,

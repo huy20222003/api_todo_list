@@ -11,7 +11,6 @@ import Labels from './Pages/User/Label';
 import ResetPassword from './Pages/User/ResetPassword';
 import UpdatePassword from './Pages/User/UpdatePassword';
 import VerifyCode from './Components/Form/VerifyCode/VerifyCode';
-import ProtectedRoute from './routes/ProtectedRoute';
 
 function App() {
 

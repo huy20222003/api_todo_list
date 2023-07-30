@@ -1,5 +1,5 @@
-import { useContext, useState, memo } from "react";
-import { toast } from 'react-toastify';
+import { useContext, useState, memo, useCallback } from "react";
+import {toast} from 'react-toastify'
 import { LabelsContext } from "../../../Context/LabelsContext";
 import styles from './AddLabelForm.module.css';
 
@@ -7,38 +7,34 @@ const AddLabelForm = () => {
   const { showAddLabel, setShowAddLabel, createLabels } = useContext(LabelsContext);
   const [name, setName] = useState('');
 
-  const handleChangeAddLabel = (e) => {
+  const handleChangeAddLabel = useCallback((e) => {
     setName(e.target.value);
-  };
+  }, []);
 
-  const handleCreateLabel = async (e) => {
+  const handleCreateLabel = useCallback(async (e) => {
     e.preventDefault();
-    try {
-      const addData = await createLabels({name});
-      if (!addData.status) {
-        toast.error('Add label failed');
-      } else {
-        toast.success('Add label successfully!');
-      }
-    } catch (error) {
-      toast.error('Server Error');
+    const addData = await createLabels({ name });
+    if (!addData.status) {
+      toast.error('Add label failed');
+    } else {
+      toast.success('Add label successfully!');
+      setShowAddLabel(false);
     }
+    setName('');
+  }, [createLabels, name, setShowAddLabel]);
+
+  const handleCloseForm = useCallback(() => {
     setShowAddLabel(false);
     setName('');
-  };
+  }, [setShowAddLabel]);
 
   return (
     <div className={`${styles.container} ${showAddLabel ? "" : "d-none"}`}>
       <div className={styles.overlay}>
         <form className={styles.addLabelForm} onSubmit={handleCreateLabel}>
-          <div className={styles.closeButtonContainer} onClick={() => setShowAddLabel(false)}>
+          <div className={styles.closeButtonContainer} onClick={handleCloseForm}>
             <i className={`fa-solid fa-xmark ${styles.closeButton}`}></i>
           </div>
-          {/* <div className={styles.header}>
-            <h1 className={styles.title}>
-              ADD LABEL
-            </h1>
-          </div> */}
           <div>
             <div className='formElements'>
               <label htmlFor="name" className='label'>
@@ -48,7 +44,7 @@ const AddLabelForm = () => {
                 type="text"
                 id="name"
                 name="name"
-                value={name}
+                defaultValue={name}
                 onChange={handleChangeAddLabel}
                 className='formElementInput'
                 placeholder="Enter your label name"
@@ -59,7 +55,7 @@ const AddLabelForm = () => {
             <button
               type="button"
               className="cancelButton"
-              onClick={() => setShowAddLabel(false)}
+              onClick={handleCloseForm}
             >
               Cancel
             </button>

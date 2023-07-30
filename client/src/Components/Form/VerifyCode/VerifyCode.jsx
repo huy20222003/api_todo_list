@@ -6,7 +6,7 @@ import styles from './VerifyCode.module.css';
 const VerifyCode = () => {
   const [codes, setCodes] = useState('');
   const [isVerified, setIsVerified] = useState(false);
-  const { showModalVerify, setShowModalVerify, verifyCode, setReadOnly, setUpdatedButton} = useContext(UserContext);
+  const { showModalVerify, setShowModalVerify, verifyCode, setReadOnly, setUpdatedButton } = useContext(UserContext);
 
   const handleChange = (event) => {
     setCodes(event.target.value);
@@ -14,12 +14,13 @@ const VerifyCode = () => {
 
   const handleVerify = async () => {
     try {
-      const verifyData  = await verifyCode(parseFloat(codes));
-      if(!verifyData.status) {
+      const verifyData = await verifyCode(parseFloat(codes));
+      if (!verifyData.status) {
         toast.error(verifyData.message);
       } else {
         toast.success(verifyData.message);
         setShowModalVerify(false);
+        setIsVerified(true); // Hiển thị thông báo "Code is verified!"
       }
     } catch (error) {
       toast.error('Server Error');
@@ -28,11 +29,11 @@ const VerifyCode = () => {
     }
   };
 
-  const handleCancel = ()=> {
+  const handleCancel = () => {
     setReadOnly(true);
     setShowModalVerify(false);
     setUpdatedButton(false);
-  }
+  };
 
   return (
     <div className={`${styles.container} ${showModalVerify ? '' : 'd-none'}`}>
@@ -42,18 +43,20 @@ const VerifyCode = () => {
       </div>
       <div className={styles.codeInputs}>
         <input
-            type="text" // Sử dụng type="text" để chuyển đổi thành input văn bản thường
-            pattern="[0-9]*" // Sử dụng pattern="[0-9]*" để chỉ cho phép nhập các ký tự số
-            inputMode="numeric" // Sử dụng inputMode="numeric" để chỉ cho trình duyệt hiển thị bàn phím số trên điện thoại
-            maxLength={6}
-            className={styles.codeInput}
-            value={codes}
-            onChange={(event) => handleChange(event)}
-          />
+          type="text"
+          pattern="[0-9]*"
+          inputMode="numeric"
+          maxLength={6}
+          className={styles.codeInput}
+          value={codes}
+          onChange={(event) => handleChange(event)}
+        />
       </div>
       <div className={styles.buttonContainer}>
-        <button onClick={handleCancel} className='cancelButton'>Cancel</button>
-        <button onClick={handleVerify} className='primaryButton'>Verify</button>
+        <button onClick={handleCancel} className='cancelButton'>
+          {isVerified ? 'Close' : 'Cancel'} {/* Hiển thị "Close" thay vì "Cancel" khi đã xác minh mã */}
+        </button>
+        {!isVerified && <button onClick={handleVerify} className='primaryButton'>Verify</button>}
         {isVerified && <p>Code is verified!</p>}
       </div>
     </div>

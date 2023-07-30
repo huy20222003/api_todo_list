@@ -1,13 +1,11 @@
 import { useEffect, useContext, memo } from "react";
 import { LabelsContext } from "../../../Context/LabelsContext";
 import styles from './LabelItem.module.css';
-import Loader from "../../Loader/Loader";
 
 const LabelItem = () => {
   const {
     getAllLabels,
     setId,
-    loading,
     setLabels,
     setShowEditLabel,
     setShowModalDelete,
@@ -30,8 +28,7 @@ const LabelItem = () => {
 
   return (
     <>
-      {loading ? <Loader />
-       : labels.map((label) => (
+      {labels.map((label) => (
           <div
             key={label._id}
             className={styles.container}

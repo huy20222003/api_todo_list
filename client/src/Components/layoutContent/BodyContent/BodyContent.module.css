@@ -16,6 +16,7 @@
     display: flex;
     flex-wrap: wrap;
     min-height: 100%;
+    overscroll-behavior: smooth;
 }
 
 .addButtonContainer {
@@ -146,7 +147,7 @@
     }
 
     .todoList {
-        justify-content: center;
         align-items: center;
+        justify-content: center;
     }
 }

@@ -1,8 +1,8 @@
 import { useState, useContext, memo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
+import Cookies from 'js-cookie';
 import { AuthContext } from '../../../Context/AuthContext';
-import { LOCAL_STORAGE_TOKEN_NAME } from '../../../constant';
 import styles from './Login.module.css';
 
 function Login() {
@@ -26,7 +26,10 @@ function Login() {
             if (!loginData.status) {
                 toast.error('Login failed!');
             } else {
-                localStorage.setItem(LOCAL_STORAGE_TOKEN_NAME, loginData.accessToken);
+                const expiration = new Date();
+                expiration.setTime(expiration.getTime() + 150 * 60 * 1000);
+                Cookies.set('user', loginData.accessToken, { expires: expiration });
+                Cookies.set('refresh', loginData.refreshToken, { expires: 365 });
                 toast.success('Logged in successfully!');
                 navigate('/dashboard');
             }
