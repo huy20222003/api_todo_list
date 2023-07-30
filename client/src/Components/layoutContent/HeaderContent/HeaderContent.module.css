@@ -49,6 +49,7 @@
 
 .userInfoImage {
     width: 4rem;
+    height: 4rem;
     border-radius: 50%;
     margin-right: 0.4rem;
 }
