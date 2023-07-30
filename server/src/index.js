@@ -13,7 +13,7 @@ app.use(express.urlencoded({ limit: '100mb', extended: true }));
 
 //cors
 const corsOptions = {
-    origin: '*', 
+    origin: 'https://todolist-webapp-v1.netlify.app', 
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], 
     allowedHeaders: ['Content-Type', 'Authorization'] 
   };
