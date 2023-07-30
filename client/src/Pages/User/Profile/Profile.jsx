@@ -43,6 +43,7 @@ const Profile = () => {
   const handleChangeFile = useCallback(async (e) => {
     const file = e.target.files[0];
     if (file) {
+      setUpdateAvatarBtn(true);
       setPreviewImg(URL.createObjectURL(file));
       const reader = new FileReader();
       reader.onload = () => {
