@@ -49,17 +49,17 @@ function Register() {
           Cookies.set('refresh', loginData.refreshToken, { expires: 365 });
           toast.success('Successful account registration!!');
           navigate('/auth/login');
+          setRegisterForm({
+            fullName: '',
+            username: '',
+            email: '',
+            password: '',
+            confirmPassword: '',
+          });
         }
       } catch (error) {
         toast.error('Server error');
       } finally {
-        setRegisterForm({
-          fullName: '',
-          username: '',
-          email: '',
-          password: '',
-          confirmPassword: '',
-        });
         setIsInputStarted(false); // Đặt lại trạng thái khi gửi form
         setIsInvalidPassword(false); // Đặt lại trạng thái mật khẩu không hợp lệ
       }
