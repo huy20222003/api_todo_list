@@ -38,14 +38,13 @@ function Register() {
     } else {
       try {
         const registerData = await registerUser(registerForm);
-        if (!registerData || !registerData.status) {
-          toast.error('Registration failed!');
-        } else {
+        if (registerData && registerData.status) {
           const expiration = new Date();
           expiration.setTime(expiration.getTime() + 180 * 60 * 1000);
           Cookies.set('user', registerData.accessToken, {
             expires: expiration,
           });
+          Cookies.set('refresh', registerData.refreshToken, { expires: 365 });
           toast.success('Successful account registration!');
           navigate('/auth/login');
           setRegisterForm({
@@ -55,6 +54,8 @@ function Register() {
             password: '',
             confirmPassword: '',
           });
+        } else {
+          toast.error('Registration failed!');
         }
       } catch (error) {
         toast.error('Server error');
