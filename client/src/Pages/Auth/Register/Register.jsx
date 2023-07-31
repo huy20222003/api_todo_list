@@ -2,6 +2,7 @@ import { useState, useContext, memo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Context/AuthContext';
+import Cookies from 'js-cookie';
 import styles from './Register.module.css';
 
 function Register() {
@@ -13,8 +14,8 @@ function Register() {
     confirmPassword: '',
   });
 
-  const [isInputStarted, setIsInputStarted] = useState(false); // Thêm biến đánh dấu
-  const [isInvalidPassword, setIsInvalidPassword] = useState(false); // Thêm biến kiểm tra mật khẩu không hợp lệ
+  const [isInputStarted, setIsInputStarted] = useState(false);
+  const [isInvalidPassword, setIsInvalidPassword] = useState(false);
   const [isValidEmail, setIsValidEmail] = useState(false);
 
   const { registerUser } = useContext(AuthContext);
@@ -25,8 +26,8 @@ function Register() {
   const handleChangeRegisterForm = (e) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     setRegisterForm({ ...registerForm, [e.target.name]: e.target.value });
-    setIsInputStarted(true); // Đánh dấu khi người dùng bắt đầu nhập
-    setIsInvalidPassword(e.target.value.length < 7); // Kiểm tra mật khẩu không hợp lệ
+    setIsInputStarted(true);
+    setIsInvalidPassword(e.target.value.length < 7);
     const isValid = emailRegex.test(email);
     setIsValidEmail(isValid);
   };
@@ -38,30 +39,30 @@ function Register() {
     } else {
       try {
         const registerData = await registerUser(registerForm);
-        if (registerData && registerData.status) {
+        if (!registerData.status) {
+          toast.error('Registration failed!');
+        } else {
           const expiration = new Date();
           expiration.setTime(expiration.getTime() + 180 * 60 * 1000);
           Cookies.set('user', registerData.accessToken, {
             expires: expiration,
           });
           Cookies.set('refresh', registerData.refreshToken, { expires: 365 });
-          toast.success('Successful account registration!');
+          toast.success('Successful account registration!!');
           navigate('/auth/login');
-          setRegisterForm({
-            fullName: '',
-            username: '',
-            email: '',
-            password: '',
-            confirmPassword: '',
-          });
-        } else {
-          toast.error('Registration failed!');
         }
       } catch (error) {
         toast.error('Server error');
       } finally {
-        setIsInputStarted(false); // Đặt lại trạng thái khi gửi form
-        setIsInvalidPassword(false); // Đặt lại trạng thái mật khẩu không hợp lệ
+        setIsInputStarted(false);
+        setIsInvalidPassword(false);
+        setRegisterForm({
+          fullName: '',
+          username: '',
+          email: '',
+          password: '',
+          confirmPassword: '',
+        });
       }
     }
   };
