@@ -1,10 +1,15 @@
-import { useContext, useState, memo, useEffect } from "react";
+import { useContext, useState, memo, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { LabelsContext } from "../../../Context/LabelsContext";
-import styles from './EditLabelForm.module.css'
+import { LabelsContext } from '../../../Context/LabelsContext';
+import styles from './EditLabelForm.module.css';
 
 const EditLabelForm = () => {
-  const { showEditLabel, setShowEditLabel, editLabels, labelState: { label } } = useContext(LabelsContext);
+  const {
+    showEditLabel,
+    setShowEditLabel,
+    editLabels,
+    labelState: { label },
+  } = useContext(LabelsContext);
   const [editForm, setEditForm] = useState({
     _id: label?._id || '',
     name: label?.name || '',
@@ -45,14 +50,17 @@ const EditLabelForm = () => {
   };
 
   return (
-    <div className={`${styles.container} ${showEditLabel ? "" : "d-none"}`}>
+    <div className={`${styles.container} ${showEditLabel ? '' : 'd-none'}`}>
       <div className={styles.overlay}>
         <form className={styles.editLabelForm} onSubmit={handleEditLabel}>
-          <div className={styles.closeButtonContainer} onClick={() => setShowEditLabel(false)}>
+          <div
+            className={styles.closeButtonContainer}
+            onClick={() => setShowEditLabel(false)}
+          >
             <i className={`fa-solid fa-xmark ${styles.closeButton}`}></i>
           </div>
           <div>
-            <div className='formElements'>
+            <div className="formElements">
               <label htmlFor="name" className="label">
                 Name
               </label>
@@ -62,7 +70,7 @@ const EditLabelForm = () => {
                 name="name"
                 value={name}
                 onChange={handleChangeEditForm}
-                className='formElementInput'
+                className="formElementInput"
                 placeholder="Enter your label name"
               />
             </div>
@@ -75,10 +83,7 @@ const EditLabelForm = () => {
             >
               Cancel
             </button>
-            <button
-              type="submit"
-              className="primaryButton"
-            >
+            <button type="submit" className="primaryButton">
               Edit
             </button>
           </div>
@@ -86,6 +91,6 @@ const EditLabelForm = () => {
       </div>
     </div>
   );
-}
+};
 
 export default memo(EditLabelForm);

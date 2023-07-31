@@ -1,88 +1,88 @@
 .container {
-    display: flex;
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(135deg, #0984e3, #00b894);
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(135deg, #0984e3, #00b894);
+  justify-content: center;
+  align-items: center;
 }
 
 .formLogin {
-    background-color: var(--bg-white);
-    border-radius: 0.8rem;
-    width: 40rem;
-    text-align: center;
-    height: fit-content;
-    padding: 2rem 4rem;
+  background-color: var(--bg-white);
+  border-radius: 0.8rem;
+  width: 40rem;
+  text-align: center;
+  height: fit-content;
+  padding: 2rem 4rem;
 }
 
 .header {
-    margin: 3rem 0;
+  margin: 3rem 0;
 }
 
 .title {
-    font-size: 2.4rem;
-    line-height: 3.2rem;
-    font-weight: 700;
-    margin: 0 0 0 4px;
+  font-size: 2.4rem;
+  line-height: 3.2rem;
+  font-weight: 700;
+  margin: 0 0 0 4px;
 }
 
 .forgotPassword {
-    text-align: right;
-    margin: -0.9rem 0 0 0;
+  text-align: right;
+  margin: -0.9rem 0 0 0;
 }
 
 .forgotPasswordTitle {
-    font-size: 1.2rem;
-    line-height: 2rem;
-    cursor: pointer;
-    color: var(--text-black);
+  font-size: 1.2rem;
+  line-height: 2rem;
+  cursor: pointer;
+  color: var(--text-black);
 }
 
 .forgotPasswordTitle:hover {
-    color: var(--primary-color-hover);
+  color: var(--primary-color-hover);
 }
 
 .loginButtonContainer {
-    margin: 1.6rem 0 1.6rem 0;
+  margin: 1.6rem 0 1.6rem 0;
 }
 
 .loginButton {
-    color: var(--text-white);
-    text-align: center;
-    border-radius: 0.8rem;
-    background-color: var(--primary-color);
-    width: 100%;
-    height: 4.5rem;
-    font-size: 1.4rem;
-    line-height: 2rem;
-    outline: none;
-    border: none;
-    cursor: pointer;
+  color: var(--text-white);
+  text-align: center;
+  border-radius: 0.8rem;
+  background-color: var(--primary-color);
+  width: 100%;
+  height: 4.5rem;
+  font-size: 1.4rem;
+  line-height: 2rem;
+  outline: none;
+  border: none;
+  cursor: pointer;
 }
 
 .loginButton:hover {
-    background-color: var(--primary-color-hover);
-    transition: 0.3s linear;
+  background-color: var(--primary-color-hover);
+  transition: 0.3s linear;
 }
 
 .loginFooterDescription {
-    margin: 0 0.4rem 0 0;
-    font-weight: 400;
-    color: var(--text-black);
-    font-size: 1.4rem;
-    line-height: 2rem;
+  margin: 0 0.4rem 0 0;
+  font-weight: 400;
+  color: var(--text-black);
+  font-size: 1.4rem;
+  line-height: 2rem;
 }
 
 .loginFooterDirect {
-    color: var(--primary-color);
-    font-size: 1.4rem;
-    line-height: 2rem;
-    text-decoration: none;
+  color: var(--primary-color);
+  font-size: 1.4rem;
+  line-height: 2rem;
+  text-decoration: none;
 }
 
 @media only screen and (max-width: 740px) {
-    .formLogin {
-        width: 34rem;
-    }
+  .formLogin {
+    width: 34rem;
+  }
 }

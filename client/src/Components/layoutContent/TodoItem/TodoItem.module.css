@@ -1,81 +1,82 @@
 .container {
-    border: 2px solid var(--primary-color-hover);
-    border-radius: 0.6rem;
-    margin: 1.2rem;
-    width: 20rem;
-    height: 14rem;
-    padding: 0.8rem;
-    position: relative;
-    box-shadow: 0 2.5rem 5rem -1.2rem rgba(0, 0, 0, 0.25);
-    animation: scaleIn 0.3s ease-in-out;
+  border: 2px solid var(--primary-color-hover);
+  border-radius: 0.6rem;
+  margin: 1.2rem;
+  width: 20rem;
+  height: 14rem;
+  padding: 0.8rem;
+  position: relative;
+  box-shadow: 0 2.5rem 5rem -1.2rem rgba(0, 0, 0, 0.25);
+  animation: scaleIn 0.3s ease-in-out;
 }
 
 @keyframes scaleIn {
-    0% {
-      transform: scale(0.7);
-      opacity: 0.7;
-    }
-    100% {
-      transform: scale(1);
-      opacity: 1;
-    }
+  0% {
+    transform: scale(0.7);
+    opacity: 0.7;
   }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
 
 .todoName {
-    font-size: 1.6rem;
-    line-height: 2.4rem;
-    font-weight: 500;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
+  font-weight: 500;
 }
 
 .todoDescriptionConatiner {
-    margin-top: 0.4rem;
+  margin-top: 0.4rem;
 }
 
 .todoDescription {
-    font-size: 1.4rem;
-    line-height: 2rem;
+  font-size: 1.4rem;
+  line-height: 2rem;
 }
 
 .todoFooterContainer {
-    position: absolute;
-    bottom: 0.4rem;
-    display: flex;
-    align-items: center;
-    text-align: center;
+  position: absolute;
+  bottom: 0.4rem;
+  display: flex;
+  align-items: center;
+  text-align: center;
 }
 
 .todoLabel {
-    background-color: rgb(96, 165, 250);
-    border-radius: 0.4rem;
-    padding: 0.2rem 0.8rem;
-    color: var(--text-white);
-    font-size: 1.4rem;
+  background-color: rgb(96, 165, 250);
+  border-radius: 0.4rem;
+  padding: 0.2rem 0.8rem;
+  color: var(--text-white);
+  font-size: 1.4rem;
 }
 
 .todoPencil {
-    margin: 0 2.8rem;
-    cursor: pointer;
-    font-size: 1.4rem;
-    color: var(--primary-color);
+  margin: 0 2.8rem;
+  cursor: pointer;
+  font-size: 1.4rem;
+  color: var(--primary-color);
 }
 
 .todoTrash {
-    color: var(--error);
-    cursor: pointer;
-    font-size: 1.4rem;
+  color: var(--error);
+  cursor: pointer;
+  font-size: 1.4rem;
 }
 
 @media only screen and (max-width: 740px) {
-    .container {
-        width: 32rem;
-    }
+  .container {
+    width: 32rem;
+  }
 
-    .todoLabel {
-        padding: 0.3rem 0.8rem;
-    }
+  .todoLabel {
+    padding: 0.3rem 0.8rem;
+  }
 
-    .todoPencil, .todoTrash {
-        font-size: 1.6rem;
-        line-height: 2rem;
-    }
+  .todoPencil,
+  .todoTrash {
+    font-size: 1.6rem;
+    line-height: 2rem;
+  }
 }

@@ -52,7 +52,10 @@ export const AuthProvider = ({ children }) => {
 
   const registerUser = async (registerForm) => {
     try {
-      const response = await axios.post(`${Api_URL}/auth/register`, registerForm);
+      const response = await axios.post(
+        `${Api_URL}/auth/register`,
+        registerForm
+      );
       await loadUser();
       return response.data;
     } catch (error) {
@@ -83,7 +86,9 @@ export const AuthProvider = ({ children }) => {
         return;
       }
 
-      const response = await axios.post(`${Api_URL}/auth/refresh`, { refreshToken });
+      const response = await axios.post(`${Api_URL}/auth/refresh`, {
+        refreshToken,
+      });
       if (response.data.status) {
         console.log('Newly issued AccessToken');
         const expiration = new Date();
@@ -92,7 +97,10 @@ export const AuthProvider = ({ children }) => {
         await loadUser();
       }
     } catch (error) {
-      console.error('Error! An error occurred. Please try again later! ', error);
+      console.error(
+        'Error! An error occurred. Please try again later! ',
+        error
+      );
     }
   };
 
@@ -109,6 +117,9 @@ export const AuthProvider = ({ children }) => {
     logoutUser,
   };
 
-  return <AuthContext.Provider value={AuthContextData}>{children}</AuthContext.Provider>;
+  return (
+    <AuthContext.Provider value={AuthContextData}>
+      {children}
+    </AuthContext.Provider>
+  );
 };
-

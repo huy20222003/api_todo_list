@@ -1,68 +1,67 @@
 .container {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    margin: 6rem 0 0 0;
-    position: fixed;
-    z-index: 1;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: var(--text-white);
-    animation: forwardToLeft 0.3s ease-in-out;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin: 6rem 0 0 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: var(--text-white);
+  animation: forwardToLeft 0.3s ease-in-out;
 }
 
 @keyframes forwardToLeft {
-    0%{
-      transform: translateX(100%);
-      opacity: 0;
-    } 
-    50% {
-      transform: translateX(50%);
-      opacity: 0.5;
-    }
-    100%{
-      transform: translateX(0);
-      opacity: 1;
-    }
+  0% {
+    transform: translateX(100%);
+    opacity: 0;
   }
+  50% {
+    transform: translateX(50%);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
 
 .header {
-    margin: 2rem 0 2rem 0;
-    text-align: center;
+  margin: 2rem 0 2rem 0;
+  text-align: center;
 }
 
 .title {
-    font-size: 1.6rem;
-    line-height: 2.4rem;
+  font-size: 1.6rem;
+  line-height: 2.4rem;
 }
 
 .description {
-    font-size: 1.4rem;
-    line-height: 2rem;
+  font-size: 1.4rem;
+  line-height: 2rem;
 }
 
-.codeInputs {  
-    margin-bottom: 16px;
+.codeInputs {
+  margin-bottom: 16px;
 }
-  
+
 .codeInput {
-    width: 26rem;
-    height: 4rem;
-    margin: 0 0.4rem;
-    text-align: center;
-    font-size: 1.8rem;
-    border: 0.1rem solid var(--bg-black);
-    border-radius: 0.4rem;
-    outline: none;
+  width: 26rem;
+  height: 4rem;
+  margin: 0 0.4rem;
+  text-align: center;
+  font-size: 1.8rem;
+  border: 0.1rem solid var(--bg-black);
+  border-radius: 0.4rem;
+  outline: none;
 }
-  
+
 .buttonContainer {
-    display: flex;
+  display: flex;
 }
 
 .buttonContainer > button {
-    margin: 0 1rem 0 0;
+  width: 26rem;
 }
-  

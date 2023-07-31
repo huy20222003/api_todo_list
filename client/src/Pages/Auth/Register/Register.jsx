@@ -10,7 +10,7 @@ function Register() {
     username: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
   });
 
   const [isInputStarted, setIsInputStarted] = useState(false); // Thêm biến đánh dấu
@@ -42,8 +42,10 @@ function Register() {
           toast.error('Register failed!');
         } else {
           const expiration = new Date();
-          expiration.setTime(expiration.getTime() + 150 * 60 * 1000);
-          Cookies.set('user', registerData.accessToken, { expires: expiration });
+          expiration.setTime(expiration.getTime() + 180 * 60 * 1000);
+          Cookies.set('user', registerData.accessToken, {
+            expires: expiration,
+          });
           Cookies.set('refresh', loginData.refreshToken, { expires: 365 });
           toast.success('Successful account registration!!');
           navigate('/auth/login');
@@ -56,7 +58,7 @@ function Register() {
           username: '',
           email: '',
           password: '',
-          confirmPassword: ''
+          confirmPassword: '',
         });
         setIsInputStarted(false); // Đặt lại trạng thái khi gửi form
         setIsInvalidPassword(false); // Đặt lại trạng thái mật khẩu không hợp lệ
@@ -71,63 +73,73 @@ function Register() {
           <h1 className={styles.title}>Register</h1>
         </div>
         <div>
-          <div className='formElements'>
-            <span className='label'>FullName:</span>
+          <div className="formElements">
+            <span className="label">FullName:</span>
             <input
               type="text"
               name="fullName"
               value={fullName}
               required={true}
               onChange={handleChangeRegisterForm}
-              className='formElementInput'
+              className="formElementInput"
               placeholder="Enter your fullname"
             />
           </div>
-          <div className='formElements'>
-            <span className='label'>Username:</span>
+          <div className="formElements">
+            <span className="label">Username:</span>
             <input
               type="text"
               name="username"
               value={username}
               required={true}
               onChange={handleChangeRegisterForm}
-              className= 'formElementInput'
+              className="formElementInput"
               placeholder="Enter your username"
             />
           </div>
-          <div className='formElements'>
-            <span className='label'>Email:</span>
+          <div className="formElements">
+            <span className="label">Email:</span>
             <input
               type="email"
               name="email"
               value={email}
               required={true}
               onChange={handleChangeRegisterForm}
-              className={`formElementInput ${isInputStarted && !isValidEmail ? 'formElementInputError' : ''}`}
+              className={`formElementInput ${
+                isInputStarted && !isValidEmail ? 'formElementInputError' : ''
+              }`}
               placeholder="Enter your email"
             />
           </div>
-          <div className='formElements'>
-            <span className='label'>Password:</span>
+          <div className="formElements">
+            <span className="label">Password:</span>
             <input
               type="password"
               name="password"
               value={password}
               required={true}
               onChange={handleChangeRegisterForm}
-              className={`formElementInput ${isInputStarted && isInvalidPassword ? 'formElementInputError' : ''}`}
+              className={`formElementInput ${
+                isInputStarted && isInvalidPassword
+                  ? 'formElementInputError'
+                  : ''
+              }`}
               placeholder="Password minimum 7 characters"
             />
           </div>
-          <div className='formElements'>
-            <span className='label'>Confirm Password:</span>
+          <div className="formElements">
+            <span className="label">Confirm Password:</span>
             <input
               type="password"
               name="confirmPassword"
               value={confirmPassword}
               required={true}
               onChange={handleChangeRegisterForm}
-              className={`formElementInput ${isInputStarted && isInvalidPassword ? 'formElementInputError' : ''}`}
+              className={`formElementInput ${
+                isInputStarted && isInvalidPassword
+                  ? 'formElementInputError'
+                  : ''
+              }`}
               placeholder="Password minimum 7 characters"
             />
           </div>
@@ -138,7 +150,9 @@ function Register() {
           </button>
         </div>
         <div>
-          <span className={styles.registerFooterDescription}>Do you already have an account?</span>
+          <span className={styles.registerFooterDescription}>
+            Do you already have an account?
+          </span>
           <Link to="/auth/login" className={styles.registerFooterDirect}>
             Login
           </Link>

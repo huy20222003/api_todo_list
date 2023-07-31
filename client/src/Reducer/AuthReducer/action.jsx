@@ -1,8 +1,8 @@
-import { SET_AUTH } from "./constants";
+import { SET_AUTH } from './constants';
 
-export const setAuth = (payload)=> {
-    return {
-        type: SET_AUTH,
-        payload
-    }
-}
+export const setAuth = (payload) => {
+  return {
+    type: SET_AUTH,
+    payload,
+  };
+};

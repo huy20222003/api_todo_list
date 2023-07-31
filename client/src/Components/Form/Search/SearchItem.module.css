@@ -1,0 +1,21 @@
+.searchInput {
+  height: 4.4rem;
+  border-radius: 3rem;
+  border: 2px solid;
+  border-color: rgb(209, 213, 219);
+  width: 35rem;
+  outline: none;
+  padding-left: 1.5rem;
+  font-size: 1.4rem;
+}
+
+.searchInput:focus {
+  border-color: var(--primary-color);
+}
+
+@media only screen and (max-width: 740px) {
+  .searchInput {
+    width: 28rem;
+    height: 4rem;
+  }
+}

@@ -1,12 +1,19 @@
-import { useContext, useState, memo, useEffect } from "react";
+import { useContext, useState, memo, useEffect } from 'react';
 import { toast } from 'react-toastify';
-import { TodosContext } from "../../../Context/TodosContext";
+import { TodosContext } from '../../../Context/TodosContext';
 import { LabelsContext } from '../../../Context/LabelsContext';
-import styles from './EditTodoForm.module.css'
+import styles from './EditTodoForm.module.css';
 
 const EditTodoForm = () => {
-  const { showEditModal, setShowEditModal, editTodos, todoState: { todo } } = useContext(TodosContext);
-  const { labelState: { labels } } = useContext(LabelsContext);
+  const {
+    showEditModal,
+    setShowEditModal,
+    editTodos,
+    todoState: { todo },
+  } = useContext(TodosContext);
+  const {
+    labelState: { labels },
+  } = useContext(LabelsContext);
   const [editForm, setEditForm] = useState({
     _id: todo?._id || '',
     name: todo?.name || '',
@@ -49,19 +56,20 @@ const EditTodoForm = () => {
   };
 
   return (
-    <div className={`${styles.container} ${showEditModal ? "" : "d-none"}`}>
+    <div className={`${styles.container} ${showEditModal ? '' : 'd-none'}`}>
       <div className={styles.overlay}>
         <form className={styles.editTodoForm} onSubmit={handleEditTodo}>
-          <div className={styles.closeButtonContainer} onClick={() => setShowEditModal(false)}>
+          <div
+            className={styles.closeButtonContainer}
+            onClick={() => setShowEditModal(false)}
+          >
             <i className={`fa-solid fa-xmark ${styles.closeButton}`}></i>
           </div>
           <div className={styles.header}>
-            <h1 className={styles.title}>
-              EDIT TODO
-            </h1>
+            <h1 className={styles.title}>EDIT TODO</h1>
           </div>
           <div>
-            <div className='formElements'>
+            <div className="formElements">
               <label htmlFor="name" className="label">
                 Name
               </label>
@@ -71,11 +79,11 @@ const EditTodoForm = () => {
                 name="name"
                 value={name}
                 onChange={handleChangeEditForm}
-                className='formElementInput'
+                className="formElementInput"
                 placeholder="Enter your Todo name"
               />
             </div>
-            <div className='formElements'>
+            <div className="formElements">
               <label htmlFor="description" className="label">
                 Description
               </label>
@@ -84,16 +92,22 @@ const EditTodoForm = () => {
                 name="description"
                 value={description}
                 onChange={handleChangeEditForm}
-                className='formElementInput descriptionHeight resize-none'
+                className="formElementInput descriptionHeight resize-none"
                 placeholder="Enter your description"
               ></textarea>
             </div>
-            <div className='formElements'>
+            <div className="formElements">
               <label htmlFor="label" className="label">
                 Label
               </label>
               <div>
-                <select id="label" name="label" className='formElementInput' value={label} onChange={handleChangeEditForm}>
+                <select
+                  id="label"
+                  name="label"
+                  className="formElementInput"
+                  value={label}
+                  onChange={handleChangeEditForm}
+                >
                   <optgroup label="Choose your label">
                     {labels.map((label) => (
                       <option key={label._id} value={label.name}>
@@ -113,10 +127,7 @@ const EditTodoForm = () => {
             >
               Cancel
             </button>
-            <button
-              type="submit"
-              className="primaryButton"
-            >
+            <button type="submit" className="primaryButton">
               Edit
             </button>
           </div>
@@ -124,6 +135,6 @@ const EditTodoForm = () => {
       </div>
     </div>
   );
-}
+};
 
 export default memo(EditTodoForm);

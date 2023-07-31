@@ -1,6 +1,5 @@
 import { useState, createContext, useContext } from 'react';
 import axios from 'axios';
-import { AuthContext } from '../Context/AuthContext';
 import { Api_URL } from '../constant';
 import Cookies from 'js-cookie';
 
@@ -19,16 +18,6 @@ export const UserProvider = ({ children }) => {
     }
   };
 
-  // Update password
-  const updatePasswords = async (updatePasswordForm) => {
-    try {
-      const response = await axios.put(`${Api_URL}/user/password/update`, updatePasswordForm);
-      return response.data;
-    } catch (error) {
-      return handleError(error);
-    }
-  };
-
   // Send verification code
   const sendCode = async (form) => {
     try {
@@ -41,9 +30,14 @@ export const UserProvider = ({ children }) => {
   };
 
   // Update password after reset
-  const updatePasswordAfterReset = async (updateForm) => {
+  const updatePassword = async (updateForm) => {
+    updateForm.email = Cookies.get('data');
+    console.log(updateForm);
     try {
-      const response = await axios.post(`${Api_URL}/user/password/reset-password`, updateForm);
+      const response = await axios.patch(
+        `${Api_URL}/user/password/reset-password`,
+        updateForm
+      );
       return response.data;
     } catch (error) {
       return handleError(error);
@@ -56,9 +50,12 @@ export const UserProvider = ({ children }) => {
       const emailCookie = Cookies.get('data');
       const verifyData = {
         code,
-        email: emailCookie
+        email: emailCookie,
       };
-      const response = await axios.post(`${Api_URL}/user/verify-code`, verifyData);
+      const response = await axios.post(
+        `${Api_URL}/user/verify-code`,
+        verifyData
+      );
       return response.data;
     } catch (error) {
       return handleError(error);
@@ -68,7 +65,10 @@ export const UserProvider = ({ children }) => {
   // Update user info
   const updateUserInfo = async (userInfo) => {
     try {
-      const response = await axios.put(`${Api_URL}/user/profile/update`, userInfo);
+      const response = await axios.put(
+        `${Api_URL}/user/profile/update`,
+        userInfo
+      );
       return response.data;
     } catch (error) {
       return handleError(error);
@@ -78,7 +78,10 @@ export const UserProvider = ({ children }) => {
   // Upload avatar
   const uploadAvatar = async (base64) => {
     try {
-      const response = await axios.patch(`${Api_URL}/user/upload-avatar`, base64);
+      const response = await axios.patch(
+        `${Api_URL}/user/upload-avatar`,
+        base64
+      );
       return response.data;
     } catch (error) {
       return handleError(error);
@@ -92,13 +95,14 @@ export const UserProvider = ({ children }) => {
     setReadOnly,
     updatedButton,
     setUpdatedButton,
-    updatePasswords,
     sendCode,
     verifyCode,
-    updatePasswordAfterReset,
+    updatePassword,
     updateUserInfo,
-    uploadAvatar
+    uploadAvatar,
   };
 
-  return <UserContext.Provider value={userData}>{children}</UserContext.Provider>;
+  return (
+    <UserContext.Provider value={userData}>{children}</UserContext.Provider>
+  );
 };

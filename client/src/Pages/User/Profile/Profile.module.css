@@ -1,111 +1,121 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .header {
-    width: 100%;
-    position: fixed;
-    top: 0;
-    z-index: 1;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 1;
 }
 
 .content {
-    width: 70%;
-    margin: 3rem 0 0 0;
+  width: 70%;
+  margin: 3rem 0 0 0;
 }
 
 .backButtonContainer {
-    margin: 5.2rem 0 0.8rem 0;
-    width: 100%;
-    cursor: pointer;
-    position: relative;
+  margin: 5.2rem 0 0.8rem 0;
+  width: 100%;
+  cursor: pointer;
+  position: relative;
 }
 
 .backButton {
-    position: absolute;
-    top: 0;
-    left: 0.8rem;
-    color: rgb(75, 85, 99);
-    font-size: 2rem;
-    line-height: 2.4rem;
+  position: absolute;
+  top: 0;
+  left: 0.8rem;
+  color: rgb(75, 85, 99);
+  font-size: 2rem;
+  line-height: 2.4rem;
 }
 
 .backButtonDescription {
-    margin: 0 0 0 3.6rem;
-    font-size: 1.6rem;
-    line-height: 2rem;
-} 
+  margin: 0 0 0 3.6rem;
+  font-size: 1.6rem;
+  line-height: 2rem;
+}
 
 .userInfoContainer {
-    width: 100%;
-    text-align: center;
-    margin: 6rem 0 1rem 0;
+  width: 100%;
+  text-align: center;
+  margin: 6rem 0 1rem 0;
 }
 
 .userInfoImage {
-    width: 14rem;
-    height: 14rem;
-    border-radius: 50%;
-    margin: 0 auto;
+  width: 14rem;
+  height: 14rem;
+  border-radius: 50%;
+  margin: 0 auto;
 }
 
 .avatarContainer {
-    position: relative;
-    display: inline-block;
+  position: relative;
+  display: inline-block;
 }
 
 .avatarContainer > i {
-    position: absolute;
-    bottom: 2rem;
-    font-size: 2rem;
-    right: 2.5rem;
-    color: var(--primary-color);
-    cursor: pointer;
-    box-shadow: 0 2.5rem 5rem -1.2rem rgba(0, 0, 0, 0.25);
+  position: absolute;
+  bottom: 2rem;
+  right: 2.5rem;
+  font-size: 2rem;
+  color: var(--primary-color);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.avatarContainer > i:hover {
+  color: var(--primary-color-hover);
 }
 
 .userInfoName {
-    margin: 0.4rem 0 0 0;
-    font-size: 2rem;
-    line-height: 2.4rem;
-    font-weight: 400;
+  margin: 0.4rem 0 0 0;
+  font-size: 2rem;
+  line-height: 2.4rem;
+  font-weight: 400;
 }
 
 .updateAvatarBtn {
-    margin: 1rem 0 0 0;
-    padding: 0.8rem 1.6rem;
-    border-radius: 0.4rem;
-    outline: none;
-    border: none;
-    background-color: rgba(52, 152, 219, 0.6);;
-    color: var(--text-white);
-    cursor: pointer;
+  padding: 0.8rem 1.6rem;
+  margin: 1rem 0 0 0;
+  background-color: var(--primary-color);
+  color: #fff;
+  border: none;
+  outline: none;
+  border-radius: 0.4rem;
+  cursor: pointer;
+  font-size: 1.4rem;
+  transition: background-color 0.3s ease;
+}
+
+.updateAvatarBtn:hover {
+  background-color: var(--primary-color-hover);
 }
 
 .infoDetailContainer {
-    margin: 6rem 0 0 0;
+  margin: 6rem 0 0 0;
 }
 
 .infoDetailTitle {
-    font-size: 2.4rem;
-    line-height: 3.2rem;
-    color: var(--primary-color);
-    text-transform: uppercase;
+  font-size: 2.4rem;
+  line-height: 3.2rem;
+  color: var(--primary-color);
+  text-transform: uppercase;
 }
 
 .infoDetailForm {
-    margin: 1.6rem 0 0 0;
+  margin: 1.6rem 0 0 0;
 }
 
 .updateButtonContainer {
-    text-align: right;
-    margin-bottom: 5rem;
+  text-align: right;
+  margin-bottom: 5rem;
 }
 
 @media only screen and (max-width: 740px) {
-    .backButtonContainer {
-        margin: 0;
-    }
+  .backButtonContainer {
+    margin: 0;
+  }
 }

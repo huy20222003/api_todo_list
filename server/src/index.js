@@ -13,14 +13,13 @@ app.use(express.urlencoded({ limit: '100mb', extended: true }));
 
 //cors
 const corsOptions = {
-    origin: 'https://todolist-webapp-v1.netlify.app', 
-    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'], 
-    allowedHeaders: ['Content-Type', 'Authorization'] 
-  };
-  app.use(cors(corsOptions));
-  app.options('*', cors());
-  
-  
+  origin: 'https://todolist-webapp-v1.netlify.app',
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+};
+app.use(cors(corsOptions));
+app.options('*', cors());
+
 //morgan
 app.use(morgan('dev'));
 

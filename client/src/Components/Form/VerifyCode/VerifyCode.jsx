@@ -5,8 +5,13 @@ import styles from './VerifyCode.module.css';
 
 const VerifyCode = () => {
   const [codes, setCodes] = useState('');
-  const [isVerified, setIsVerified] = useState(false);
-  const { showModalVerify, setShowModalVerify, verifyCode, setReadOnly, setUpdatedButton } = useContext(UserContext);
+  const {
+    showModalVerify,
+    setShowModalVerify,
+    verifyCode,
+    setReadOnly,
+    setUpdatedButton,
+  } = useContext(UserContext);
 
   const handleChange = (event) => {
     setCodes(event.target.value);
@@ -20,19 +25,14 @@ const VerifyCode = () => {
       } else {
         toast.success(verifyData.message);
         setShowModalVerify(false);
-        setIsVerified(true); // Hiển thị thông báo "Code is verified!"
+        setReadOnly(true);
+        setUpdatedButton(true);
       }
     } catch (error) {
       toast.error('Server Error');
     } finally {
       setCodes('');
     }
-  };
-
-  const handleCancel = () => {
-    setReadOnly(true);
-    setShowModalVerify(false);
-    setUpdatedButton(false);
   };
 
   return (
@@ -53,11 +53,9 @@ const VerifyCode = () => {
         />
       </div>
       <div className={styles.buttonContainer}>
-        <button onClick={handleCancel} className='cancelButton'>
-          {isVerified ? 'Close' : 'Cancel'} {/* Hiển thị "Close" thay vì "Cancel" khi đã xác minh mã */}
+        <button onClick={handleVerify} className="primaryButton">
+          Verify
         </button>
-        {!isVerified && <button onClick={handleVerify} className='primaryButton'>Verify</button>}
-        {isVerified && <p>Code is verified!</p>}
       </div>
     </div>
   );

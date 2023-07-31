@@ -1,33 +1,15 @@
-import React, { useState, useContext, memo, startTransition } from 'react';
+import React, { useState, useContext, memo } from 'react';
 import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import { TodosContext } from '../../../Context/TodosContext';
+import SearchItem from '../../Form/Search/Search';
 import { AuthContext } from '../../../Context/AuthContext';
 import styles from './HeaderContent.module.css';
 
 const HeaderContent = () => {
-  const [searchValue, setSearchValue] = useState('');
   const [subMenu, setSubMenu] = useState(false);
-  const { searchTodos, setShowAddModal } = useContext(TodosContext);
-  const { authState: { user }, logoutUser } = useContext(AuthContext);
-
-  const handleSearchTodo = async (e) => {
-    startTransition(() => setSearchValue(e.target.value));
-    try {
-      if (e.target.value.length <= 50) {
-        const searchData = await searchTodos(e.target.value);
-        if (!searchData.status) {
-          toast.error('An error has occurred');
-        } else {
-          // Xử lý dữ liệu sau khi tìm kiếm
-        }
-      } else {
-        toast.error('Search value is too long');
-      }
-    } catch (error) {
-      toast.error('Server Error');
-    }
-  };
+  const {
+    authState: { user },
+    logoutUser,
+  } = useContext(AuthContext);
 
   const handleLogout = () => {
     logoutUser();
@@ -41,52 +23,59 @@ const HeaderContent = () => {
         </Link>
       </div>
       <div className={styles.searchContainer}>
-        <input
-          type="text"
-          value={searchValue}
-          onChange={handleSearchTodo}
-          className={styles.searchInput}
-          placeholder="Search your Todo"
-          maxLength={50}
-        />
+        <SearchItem />
       </div>
-      <div className={styles.userInfoContainer} onClick={() => setSubMenu(!subMenu)}>
+      <div
+        className={styles.userInfoContainer}
+        onClick={() => setSubMenu(!subMenu)}
+      >
         <img className={styles.userInfoImage} src={user?.avatar} alt="avatar" />
         <div>
           <span className={styles.userInfoName}>Hi, {user?.username}</span>
           <i className={`fa-solid fa-caret-down ${styles.caret}`}></i>
           <ul
-            className={`${styles.subMenuContainer} ${
-              subMenu ? '' : 'd-none'
-            }`}
+            className={`${styles.subMenuContainer} ${subMenu ? '' : 'd-none'}`}
           >
             <li className={styles.subMenuItem}>
               <Link to="/dashboard" className={styles.subMenuItemLink}>
-                <i className={`fa-solid fa-house ${styles.subMenuItemIcon}`}></i>
+                <i
+                  className={`fa-solid fa-house ${styles.subMenuItemIcon}`}
+                ></i>
                 <span className={styles.subMenuItemName}>Dashboard</span>
               </Link>
             </li>
             <li className={styles.subMenuItem}>
-              <Link to="/dashboard/user/profile" className={styles.subMenuItemLink}>
+              <Link
+                to="/dashboard/user/profile"
+                className={styles.subMenuItemLink}
+              >
                 <i className={`fa-solid fa-user ${styles.subMenuItemIcon}`}></i>
                 <span className={styles.subMenuItemName}>Account</span>
               </Link>
             </li>
             <li className={styles.subMenuItem}>
-              <Link to='/dashboard/user/labels' className={styles.subMenuItemLink}>
+              <Link
+                to="/dashboard/user/labels"
+                className={styles.subMenuItemLink}
+              >
                 <i className={`fa-solid fa-tag ${styles.subMenuItemIcon}`}></i>
                 <span className={styles.subMenuItemName}>Label</span>
               </Link>
             </li>
             <li className={styles.subMenuItem}>
-              <Link to='/dashboard/user/setting' className={styles.subMenuItemLink}>
+              <Link
+                to="/dashboard/user/setting"
+                className={styles.subMenuItemLink}
+              >
                 <i className={`fa-solid fa-gear ${styles.subMenuItemIcon}`}></i>
                 <span className={styles.subMenuItemName}>Settings</span>
               </Link>
             </li>
             <li className={styles.subMenuItem} onClick={handleLogout}>
               <Link to="/" className={styles.subMenuItemLink}>
-                <i className={`fa-solid fa-right-from-bracket ${styles.subMenuItemIcon}`}></i>
+                <i
+                  className={`fa-solid fa-right-from-bracket ${styles.subMenuItemIcon}`}
+                ></i>
                 <span className={styles.subMenuItemName}>Logout</span>
               </Link>
             </li>

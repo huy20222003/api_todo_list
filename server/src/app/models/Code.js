@@ -1,22 +1,25 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const Codes = new Schema({
+const Codes = new Schema(
+  {
     code: {
-        type: Number, 
-        default: '',
-        required: true,
+      type: Number,
+      default: '',
+      required: true,
     },
     codeExpiration: {
-        type: Date,
-        required: true,
+      type: Date,
+      required: true,
     },
     userEmail: {
-        type: Schema.Types.String,
-        ref: "users"
-    }
-}, {
-    timestamps: true
-});
+      type: Schema.Types.String,
+      ref: 'users',
+    },
+  },
+  {
+    timestamps: true,
+  }
+);
 
 module.exports = mongoose.model('codes', Codes);
