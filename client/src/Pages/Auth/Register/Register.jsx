@@ -34,20 +34,19 @@ function Register() {
   const handleSubmitRegisterForm = async (e) => {
     e.preventDefault();
     if (password !== confirmPassword) {
-      toast.info('Password incorrect!');
+      toast.info('Passwords do not match!');
     } else {
       try {
         const registerData = await registerUser(registerForm);
-        if (!registerData.status) {
-          toast.error('Register failed!');
+        if (!registerData || !registerData.status) {
+          toast.error('Registration failed!');
         } else {
           const expiration = new Date();
           expiration.setTime(expiration.getTime() + 180 * 60 * 1000);
           Cookies.set('user', registerData.accessToken, {
             expires: expiration,
           });
-          Cookies.set('refresh', loginData.refreshToken, { expires: 365 });
-          toast.success('Successful account registration!!');
+          toast.success('Successful account registration!');
           navigate('/auth/login');
           setRegisterForm({
             fullName: '',
