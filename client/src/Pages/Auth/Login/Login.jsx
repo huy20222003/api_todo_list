@@ -70,7 +70,7 @@ function Login() {
   };
 
   return (
-    <div className={styles.container} style={backgroundStyle}>
+    <div className={styles.container} style={{backgroundStyle}}>
       <form className={styles.formLogin} onSubmit={handleSubmitLoginForm}>
         <div className={styles.header}>
           <h1 className={styles.title}>Login</h1>
