@@ -29,17 +29,17 @@ export const AuthProvider = ({ children }) => {
       if (!accessToken) {
         setAuthenticatedUser(false, null);
         return;
-      }
-
-      setAuthToken(accessToken);
-      const response = await axios.get(`${Api_URL}/auth`);
-
-      if (response.data.status) {
-        setAuthenticatedUser(true, response.data.user);
       } else {
-        setAuthenticatedUser(false, null);
-        Cookies.remove('user');
-        setAuthToken(null);
+        setAuthToken(accessToken);
+        const response = await axios.get(`${Api_URL}/auth`);
+
+        if (response.data.status) {
+          setAuthenticatedUser(true, response.data.user);
+        } else {
+          setAuthenticatedUser(false, null);
+          Cookies.remove('user');
+          setAuthToken(null);
+        }
       }
     } catch (error) {
       setAuthenticatedUser(false, null);
@@ -82,32 +82,30 @@ export const AuthProvider = ({ children }) => {
     try {
       const refreshToken = Cookies.get('refresh');
       if (!refreshToken) {
-        console.error('RefreshToken not found');
         return;
-      }
+      } else {
+        const response = await axios.post(`${Api_URL}/auth/refresh`, {
+          refreshToken,
+        });
 
-      const response = await axios.post(`${Api_URL}/auth/refresh`, {
-        refreshToken,
-      });
-      if (response.data.status) {
-        console.log('Newly issued AccessToken');
-        const expiration = new Date();
-        expiration.setTime(expiration.getTime() + 15 * 60 * 1000);
-        Cookies.set('user', response.data.accessToken, { expires: expiration });
-        await loadUser();
+        if (response.data.status) {
+          const expiration = new Date();
+          expiration.setTime(expiration.getTime() + 180 * 60 * 1000);
+          Cookies.set('user', response.data.accessToken, {
+            expires: expiration,
+          });
+          await loadUser();
+        }
       }
     } catch (error) {
-      console.error(
-        'Error! An error occurred. Please try again later! ',
-        error
-      );
+      return handleError(error);
     }
   };
 
   //Tự động handle refreshToken mỗi khi loadUser
-  // useEffect(() => {
-  //   handleRefreshToken();
-  // }, []);
+  useEffect(() => {
+    handleRefreshToken();
+  }, []);
 
   const AuthContextData = {
     authState,

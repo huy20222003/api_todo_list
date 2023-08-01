@@ -20,37 +20,31 @@ class authController {
   async register(req, res) {
     const { fullName, username, email, password } = req.body;
     if (!username || !fullName || !email || !password) {
-      return res
-        .status(400)
-        .json({
-          status: false,
-          message: 'Please check the information again!',
-        });
+      return res.status(400).json({
+        status: false,
+        message: 'Please check the information again!',
+      });
     }
     try {
       const user = await Users.findOne({ username, email });
       if (user) {
-        return res
-          .status(400)
-          .json({
-            status: false,
-            message: 'Username or email already exists!',
-          });
+        return res.status(400).json({
+          status: false,
+          message: 'Username or email already exists!',
+        });
       } else {
         const newUser = new Users({ fullName, username, email, password });
         const accessToken = jwt.sign({ newUser }, process.env.TOKEN_SECRET, {
-          expiresIn: '15m',
+          expiresIn: '3h',
         });
         const refreshToken = jwt.sign({ user }, process.env.TOKEN_SECRET);
         await newUser.save();
-        return res
-          .status(200)
-          .json({
-            status: true,
-            message: 'Register successful!',
-            accessToken,
-            refreshToken,
-          });
+        return res.status(200).json({
+          status: true,
+          message: 'Register successful!',
+          accessToken,
+          refreshToken,
+        });
       }
     } catch (error) {
       res.status(500).json({ status: false, message: error });
@@ -60,12 +54,10 @@ class authController {
   async login(req, res) {
     const { username, password } = req.body;
     if (!username || !password) {
-      return res
-        .status(400)
-        .json({
-          status: false,
-          message: 'Please check the information again!',
-        });
+      return res.status(400).json({
+        status: false,
+        message: 'Please check the information again!',
+      });
     }
 
     try {
@@ -84,14 +76,12 @@ class authController {
             expiresIn: '3h',
           });
           const refreshToken = jwt.sign({ user }, process.env.TOKEN_SECRET);
-          res
-            .status(201)
-            .json({
-              status: true,
-              message: 'Logged successfully! ',
-              accessToken,
-              refreshToken,
-            });
+          res.status(201).json({
+            status: true,
+            message: 'Logged successfully! ',
+            accessToken,
+            refreshToken,
+          });
         }
       }
     } catch (error) {
@@ -100,35 +90,32 @@ class authController {
   }
 
   async refreshToken(req, res) {
-    const refreshToken = req.body.refreshToken;
-    if (!refreshToken) {
-      return res
-        .status(401)
-        .json({ status: false, message: 'RefreshToken not found' });
-    }
-
-    jwt.verify(refreshToken, process.env.TOKEN_SECRET, (err, decoded) => {
-      if (err) {
-        return res
-          .status(403)
-          .json({ status: false, message: 'RefreshToken is invalid' });
-      } else {
-        // Tạo mới AccessToken từ decoded data của RefreshToken
-        const user = { id: decoded.id };
-        const accessToken = jwt.sign(user, process.env.TOKEN_SECRET, {
-          expiresIn: '3h',
-        });
-
-        // Gửi AccessToken mới về cho client
+    try {
+      const refreshToken = req.body.refreshToken;
+      if (!refreshToken) {
         res
-          .status(200)
-          .json({
+          .status(401)
+          .json({ status: false, message: 'RefreshToken not found' });
+      } else {
+        const decoded = jwt.verify(refreshToken, process.env.TOKEN_SECRET);
+        if (!decoded) {
+          res
+            .status(403)
+            .json({ status: false, message: 'RefreshToken is invalid' });
+        } else {
+          const accessToken = jwt.sign(decoded.user, process.env.TOKEN_SECRET, {
+            expiresIn: '3h',
+          });
+          res.status(200).json({
             status: true,
             message: 'Newly issued AccessToken!',
             accessToken: accessToken,
           });
+        }
       }
-    });
+    } catch (error) {
+      res.status(500).json({ status: false, message: error });
+    }
   }
 }
 
