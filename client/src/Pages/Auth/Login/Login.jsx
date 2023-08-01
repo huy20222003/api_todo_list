@@ -1,4 +1,4 @@
-import { useState, useContext, memo } from 'react';
+import { useState, useContext, useEffect, memo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
@@ -13,6 +13,7 @@ function Login() {
 
   const { username, password } = loginForm;
   const { loginUser } = useContext(AuthContext);
+  const [backgroundStyle, setBackgroundStyle] = useState({});
   const navigate = useNavigate();
 
   const handleChangeLoginForm = (e) => {
@@ -40,8 +41,35 @@ function Login() {
     }
   };
 
+  useEffect(() => {
+    const updateBackground = () => {
+      const now = new Date();
+      const hour = now.getHours();
+      const gradientColor = getGradientColor(hour);
+      const newBackgroundStyle = {
+        background: `linear-gradient(to bottom, ${gradientColor.start}, ${gradientColor.end})`,
+      };
+      setBackgroundStyle(newBackgroundStyle);
+    };
+
+    updateBackground(); 
+    const intervalId = setInterval(updateBackground, 6000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+  const getGradientColor = (hour) => {
+    if (hour >= 6 && hour < 12) {
+      return { start: '#f0e68c', end: '#ffa500' };
+    } else if (hour >= 12 && hour < 18) {
+      return { start: '#ffa500', end: '#ff4500' };
+    } else {
+      return { start: '#87cefa', end: '#8a2be2' };
+    }
+  };
+
   return (
-    <div className={styles.container}>
+    <div className={styles.container} style={backgroundStyle}>
       <form className={styles.formLogin} onSubmit={handleSubmitLoginForm}>
         <div className={styles.header}>
           <h1 className={styles.title}>Login</h1>
