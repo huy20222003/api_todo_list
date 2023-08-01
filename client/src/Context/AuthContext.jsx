@@ -103,9 +103,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   //Tự động handle refreshToken mỗi khi loadUser
-  useEffect(() => {
-    handleRefreshToken();
-  }, []);
+  // useEffect(() => {
+  //   handleRefreshToken();
+  // }, []);
 
   const AuthContextData = {
     authState,
