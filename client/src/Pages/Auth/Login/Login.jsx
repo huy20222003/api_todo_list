@@ -47,56 +47,45 @@ function Login() {
     const updateBackground = () => {
       const now = new Date();
       const hour = now.getHours();
-      const gradientColor = getGradientColor(hour);
+      const minute = now.getMinutes();
+      const second = now.getSeconds();
+      const timeInterval = 24 / 7; // Divide the day into 7 intervals
+      const intervalIndex = Math.floor((hour * 60 + minute) / (timeInterval * 60));
+      const gradientColor = getGradientColor(intervalIndex);
       const newBackgroundStyle = {
         background: `linear-gradient(to bottom, ${gradientColor.start}, ${gradientColor.end})`,
       };
       setBackgroundStyle(newBackgroundStyle);
     };
 
-    updateBackground(); 
-    const intervalId = setInterval(updateBackground, 6000);
+    updateBackground(); // Update background on initial render
+    const intervalId = setInterval(updateBackground, 1000); // Update background every 1 second
 
     return () => clearInterval(intervalId);
   }, []);
 
-  const getGradientColor = (hour) => {
-    if (hour >= 6 && hour < 12) {
-      return { start: '#f0e68c', end: '#ffa500' };
-    } else if (hour >= 12 && hour < 18) {
-      return { start: '#ffa500', end: '#ff4500' };
-    } else {
-      return { start: '#87cefa', end: '#8a2be2' };
+  const getGradientColor = (intervalIndex) => {
+    // Define color schemes for different time intervals
+    // Customize the colors based on your preferences
+    switch (intervalIndex) {
+      case 0: // 00:00 - 03:25
+        return { start: '#000000', end: '#00008B' }; // Black to DarkBlue
+      case 1: // 03:26 - 06:50
+        return { start: '#00008B', end: '#4169E1' }; // DarkBlue to RoyalBlue
+      case 2: // 06:51 - 10:15
+        return { start: '#4169E1', end: '#00BFFF' }; // RoyalBlue to DeepSkyBlue
+      case 3: // 10:16 - 13:40
+        return { start: '#00BFFF', end: '#87CEEB' }; // DeepSkyBlue to SkyBlue
+      case 4: // 13:41 - 17:05
+        return { start: '#87CEEB', end: '#1E90FF' }; // SkyBlue to DodgerBlue
+      case 5: // 17:06 - 20:30
+        return { start: '#1E90FF', end: '#00CED1' }; // DodgerBlue to DarkTurquoise
+      case 6: // 20:31 - 23:55
+        return { start: '#00CED1', end: '#000000' }; // DarkTurquoise to Black
+      default: // In case of unexpected value
+        return { start: '#FFFFFF', end: '#FFFFFF' }; // White to White
     }
   };
-
-  useEffect(() => {
-    const updateBackground = () => {
-      const now = new Date();
-      const hour = now.getHours();
-      const gradientColor = getGradientColor(hour);
-      const newBackgroundStyle = {
-        background: `linear-gradient(to bottom, ${gradientColor.start}, ${gradientColor.end})`,
-      };
-      setBackgroundStyle(newBackgroundStyle);
-    };
-
-    updateBackground(); 
-    const intervalId = setInterval(updateBackground, 6000);
-
-    return () => clearInterval(intervalId);
-  }, []);
-
-  const getGradientColor = (hour) => {
-    if (hour >= 6 && hour < 12) {
-      return { start: '#f0e68c', end: '#ffa500' };
-    } else if (hour >= 12 && hour < 18) {
-      return { start: '#ffa500', end: '#ff4500' };
-    } else {
-      return { start: '#87cefa', end: '#8a2be2' };
-    }
-  };
-
   return (
     <div className={styles.container} style={backgroundStyle}>
       <form className={styles.formLogin} onSubmit={handleSubmitLoginForm}>
