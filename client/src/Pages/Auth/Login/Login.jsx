@@ -85,7 +85,6 @@ function Login() {
         return { start: '#FFFFFF', end: '#FFFFFF' }; // White to White
     }
   };
-
   return (
     <div className={styles.container} style={backgroundStyle}>
       <form className={styles.formLogin} onSubmit={handleSubmitLoginForm}>
