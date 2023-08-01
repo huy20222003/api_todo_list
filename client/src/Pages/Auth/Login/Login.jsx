@@ -1,4 +1,4 @@
-import { useState, useContext, memo } from 'react';
+import { useState, useContext, useEffect, memo } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
@@ -70,7 +70,7 @@ function Login() {
   };
 
   return (
-    <div className={styles.container} style={{backgroundStyle}}>
+    <div className={styles.container} style={backgroundStyle}>
       <form className={styles.formLogin} onSubmit={handleSubmitLoginForm}>
         <div className={styles.header}>
           <h1 className={styles.title}>Login</h1>
