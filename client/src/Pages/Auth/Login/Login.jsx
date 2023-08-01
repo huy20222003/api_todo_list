@@ -15,7 +15,6 @@ function Login() {
   const { loginUser } = useContext(AuthContext);
   const [backgroundStyle, setBackgroundStyle] = useState({});
   const navigate = useNavigate();
-  const [backgroundStyle, setBackgroundStyle] = useState({});
   
 
   const handleChangeLoginForm = (e) => {
