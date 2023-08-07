@@ -26,7 +26,7 @@
 }
 
 .addTodoForm {
-  background-color: var(--bg-white);
+  background-color: rgb(255, 255, 255);;
   border-radius: 0.8rem;
   max-width: 40rem;
   text-align: center;
@@ -49,7 +49,7 @@
 }
 
 .closeButton:hover {
-  color: var(--text-black);
+  color: black;
 }
 
 .header {

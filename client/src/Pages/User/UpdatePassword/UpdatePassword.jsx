@@ -2,9 +2,10 @@ import { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Header from '../../../Components/layoutHome/Header';
-import Footer from '../../../Components/layoutHome/Footer';
 import styles from './UpdatePassword.module.css';
 import { UserContext } from '../../../Context/UserContext';
+import FormInput from '../../../Components/Form/FormInput';
+import Button from '../../../Components/Button';
 
 const UpdatePassword = () => {
   const { updatePassword } = useContext(UserContext);
@@ -52,30 +53,29 @@ const UpdatePassword = () => {
           className={styles.updateForm}
           onSubmit={handleUpdatePasswordAfterReset}
         >
-          <div className="formElements">
-            <span className="label">New Password:</span>
-            <input
-              type="password"
-              name="newPassword"
-              className="formElementInput"
-              value={newPassword}
-              onChange={handleChangeUpdatePasswordForm}
-              placeholder="Your new Password"
-            />
-          </div>
-          <div className="formElements">
-            <span className="label">Confirm new Password:</span>
-            <input
-              type="password"
-              name="confirmPassword"
-              className="formElementInput"
-              value={confirmPassword}
-              onChange={handleChangeUpdatePasswordForm}
-              placeholder="Your Confirm Password"
-            />
-          </div>
+          <FormInput
+            textName="newPassword"
+            type="password"
+            icon="fa-solid fa-lock"
+            onChange={handleChangeUpdatePasswordForm}
+            value={newPassword}
+            placeholder="Enter your new password"
+          />
+          <FormInput
+            textName="conFirmPassword"
+            type="password"
+            icon="fa-solid fa-lock"
+            onChange={handleChangeUpdatePasswordForm}
+            value={confirmPassword}
+            placeholder="Confirm your new password"
+          />
           <div>
-            <button className="primaryButton">Update</button>
+            <Button
+              textName="Save"
+              type="submit"
+              size="large"
+              color="primary"
+            />
           </div>
         </form>
       </div>

@@ -4,6 +4,8 @@ import { toast } from 'react-toastify';
 import { AuthContext } from '../../../Context/AuthContext';
 import Cookies from 'js-cookie';
 import styles from './Register.module.css';
+import FormInput from '../../../Components/Form/FormInput';
+import Button from '../../../Components/Button';
 
 function Register() {
   const [registerForm, setRegisterForm] = useState({
@@ -75,7 +77,9 @@ function Register() {
       const minute = now.getMinutes();
       const second = now.getSeconds();
       const timeInterval = 24 / 7; // Divide the day into 7 intervals
-      const intervalIndex = Math.floor((hour * 60 + minute) / (timeInterval * 60));
+      const intervalIndex = Math.floor(
+        (hour * 60 + minute) / (timeInterval * 60)
+      );
       const gradientColor = getGradientColor(intervalIndex);
       const newBackgroundStyle = {
         background: `linear-gradient(to bottom, ${gradientColor.start}, ${gradientColor.end})`,
@@ -119,81 +123,59 @@ function Register() {
           <h1 className={styles.title}>Register</h1>
         </div>
         <div>
-          <div className="formElements">
-            <span className="label">FullName:</span>
-            <input
-              type="text"
-              name="fullName"
-              value={fullName}
-              required={true}
-              onChange={handleChangeRegisterForm}
-              className="formElementInput"
-              placeholder="Enter your fullname"
-            />
-          </div>
-          <div className="formElements">
-            <span className="label">Username:</span>
-            <input
-              type="text"
-              name="username"
-              value={username}
-              required={true}
-              onChange={handleChangeRegisterForm}
-              className="formElementInput"
-              placeholder="Enter your username"
-            />
-          </div>
-          <div className="formElements">
-            <span className="label">Email:</span>
-            <input
-              type="email"
-              name="email"
-              value={email}
-              required={true}
-              onChange={handleChangeRegisterForm}
-              className={`formElementInput ${
-                isInputStarted && !isValidEmail ? 'formElementInputError' : ''
-              }`}
-              placeholder="Enter your email"
-            />
-          </div>
-          <div className="formElements">
-            <span className="label">Password:</span>
-            <input
-              type="password"
-              name="password"
-              value={password}
-              required={true}
-              onChange={handleChangeRegisterForm}
-              className={`formElementInput ${
-                isInputStarted && isInvalidPassword
-                  ? 'formElementInputError'
-                  : ''
-              }`}
-              placeholder="Password minimum 7 characters"
-            />
-          </div>
-          <div className="formElements">
-            <span className="label">Confirm Password:</span>
-            <input
-              type="password"
-              name="confirmPassword"
-              value={confirmPassword}
-              required={true}
-              onChange={handleChangeRegisterForm}
-              className={`formElementInput ${
-                isInputStarted && isInvalidPassword
-                  ? 'formElementInputError'
-                  : ''
-              }`}
-              placeholder="Password minimum 7 characters"
-            />
-          </div>
+          <FormInput
+            textName='fullName'
+            type='text'
+            icon='fa-solid fa-user'
+            value={fullName}
+            required={true}
+            onChange={handleChangeRegisterForm}
+            placeholder='Enter your fullName'
+          />
+          <FormInput
+            textName='username'
+            type='text'
+            icon='fa-solid fa-user'
+            value={username}
+            required={true}
+            onChange={handleChangeRegisterForm}
+            placeholder='Enter your username'
+          />
+          <FormInput
+            textName='email'
+            type='email'
+            icon='fa-solid fa-envelope'
+            value={email}
+            required={true}
+            onChange={handleChangeRegisterForm}
+            placeholder='Enter your email'
+          />
+          <FormInput
+            textName='password'
+            type='password'
+            icon='fa-solid fa-lock'
+            value={password}
+            required={true}
+            onChange={handleChangeRegisterForm}
+            placeholder='Enter your password'
+          />
+          <FormInput
+            textName='confirmPassword'
+            type='password'
+            icon='fa-solid fa-lock'
+            value={confirmPassword}
+            required={true}
+            onChange={handleChangeRegisterForm}
+            placeholder='Enter your confirmPassword'
+          />
         </div>
         <div className={styles.registerButtonContainer}>
-          <button type="submit" className={styles.registerButton}>
-            Register
-          </button>
+          <Button
+            textName='Register'
+            type='submit'
+            size='large'
+            color='primary'
+          />
         </div>
         <div>
           <span className={styles.registerFooterDescription}>

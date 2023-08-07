@@ -2,6 +2,8 @@ import { useContext, useState, memo, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import { LabelsContext } from '../../../Context/LabelsContext';
 import styles from './EditLabelForm.module.css';
+import FormInput from '../FormInput';
+import Button from '../../Button';
 
 const EditLabelForm = () => {
   const {
@@ -60,32 +62,30 @@ const EditLabelForm = () => {
             <i className={`fa-solid fa-xmark ${styles.closeButton}`}></i>
           </div>
           <div>
-            <div className="formElements">
-              <label htmlFor="name" className="label">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={name}
-                onChange={handleChangeEditForm}
-                className="formElementInput"
-                placeholder="Enter your label name"
-              />
-            </div>
+            <FormInput
+              textName='name'
+              type='text'
+              icon='fa-solid fa-tag'
+              value={name}
+              required={true}
+              onChange={handleChangeEditForm}
+              placeholder='Enter your label name'
+            />
           </div>
           <div className={styles.buttonContainer}>
-            <button
-              type="button"
-              className="cancelButton"
+            <Button
+              textName='Cancel'
+              type='button'
               onClick={handleCancel}
-            >
-              Cancel
-            </button>
-            <button type="submit" className="primaryButton">
-              Edit
-            </button>
+              size='small'
+              color='error'
+            />
+            <Button
+              textName='Edit'
+              type='submit'
+              size='small'
+              color='primary'
+            />
           </div>
         </form>
       </div>

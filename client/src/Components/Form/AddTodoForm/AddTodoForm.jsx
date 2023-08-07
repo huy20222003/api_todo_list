@@ -3,6 +3,8 @@ import { toast } from 'react-toastify';
 import { TodosContext } from '../../../Context/TodosContext';
 import { LabelsContext } from '../../../Context/LabelsContext';
 import styles from './AddTodoForm.module.css';
+import FormInput from '../FormInput';
+import Button from '../../Button';
 
 const AddTodoForm = () => {
   const { showAddModal, setShowAddModal, createTodos } =
@@ -72,33 +74,24 @@ const AddTodoForm = () => {
             <h1 className={styles.title}>ADD TODO</h1>
           </div>
           <div>
-            <div className="formElements">
-              <label htmlFor="name" className="label">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={name}
-                onChange={handleChange}
-                className="formElementInput"
-                placeholder="Enter your Todo name"
-              />
-            </div>
-            <div className="formElements">
-              <label htmlFor="description" className="label">
-                Description
-              </label>
-              <textarea
-                id="description"
-                name="description"
-                value={description}
-                onChange={handleChange}
-                className="formElementInput descriptionHeight resize-none"
-                placeholder="Enter your description"
-              ></textarea>
-            </div>
+            <FormInput
+              textName='name'
+              type='text'
+              icon='fa-solid fa-list-ol'
+              value={name}
+              required={true}
+              onChange={handleChange}
+              placeholder='Enter your todo name'
+            />
+            <FormInput
+              textName='description'
+              type='text'
+              icon='fa-solid fa-paragraph'
+              value={description}
+              textarea={true}
+              onChange={handleChange}
+              placeholder='Enter your description'
+            />
             <div className="formElements">
               <label htmlFor="label" className="label">
                 Label
@@ -109,6 +102,7 @@ const AddTodoForm = () => {
                   name="label"
                   className="formElementInput"
                   value={label}
+                  required={true}
                   onChange={handleChange}
                 >
                   {renderLabelOptions()}
@@ -117,16 +111,19 @@ const AddTodoForm = () => {
             </div>
           </div>
           <div className={styles.buttonContainer}>
-            <button
-              type="button"
-              className="cancelButton"
+            <Button
+              textName='Cancel'
+              type='button'
               onClick={handleCloseForm}
-            >
-              Cancel
-            </button>
-            <button type="submit" className="primaryButton">
-              Add
-            </button>
+              size='small'
+              color='error'
+            />
+            <Button
+              textName='Add'
+              type='submit'
+              size='small'
+              color='primary'
+            />
           </div>
         </form>
       </div>

@@ -1,5 +1,6 @@
 import { memo } from 'react';
 import styles from './Modal.module.css';
+import Button from '../../Button';
 
 const Modal = ({
   header,
@@ -22,12 +23,20 @@ const Modal = ({
             <p className={styles.description}>{message}</p>
           </div>
           <div className={styles.footer}>
-            <button className="cancelButton" onClick={handleClose}>
-              Cancel
-            </button>
-            <button className="primaryButton" onClick={handleDelete}>
-              Delete
-            </button>
+            <Button
+              textName='Cancel'
+              type='button'
+              onClick={handleClose}
+              size='small'
+              color='error'
+            />
+            <Button
+              textName='Delete'
+              type='button'
+              onClick={handleDelete}
+              size='small'
+              color='primary'
+            />
           </div>
         </div>
       </div>

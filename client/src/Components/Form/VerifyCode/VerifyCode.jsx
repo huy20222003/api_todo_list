@@ -2,6 +2,8 @@ import { useState, useContext } from 'react';
 import { toast } from 'react-toastify';
 import { UserContext } from '../../../Context/UserContext';
 import styles from './VerifyCode.module.css';
+import FormInput from '../../../Components/Form/FormInput';
+import Button from '../../Button';
 
 const VerifyCode = () => {
   const [codes, setCodes] = useState('');
@@ -25,8 +27,8 @@ const VerifyCode = () => {
       } else {
         toast.success(verifyData.message);
         setShowModalVerify(false);
-        setReadOnly(true);
-        setUpdatedButton(true);
+        setReadOnly(false);
+        setUpdatedButton(false);
       }
     } catch (error) {
       toast.error('Server Error');
@@ -42,20 +44,26 @@ const VerifyCode = () => {
         <p className={styles.description}>Enter your verification code</p>
       </div>
       <div className={styles.codeInputs}>
-        <input
-          type="text"
-          pattern="[0-9]*"
-          inputMode="numeric"
+        <FormInput
+          textName='code'
+          icon='fa-solid fa-code'
+          type='text'
+          pattern = '[0-9]*'
+          inputMode='numeric'
           maxLength={6}
-          className={styles.codeInput}
           value={codes}
-          onChange={(event) => handleChange(event)}
+          placeholder='Enter your verification code'
+          onChange={handleChange}
         />
       </div>
       <div className={styles.buttonContainer}>
-        <button onClick={handleVerify} className="primaryButton">
-          Verify
-        </button>
+        <Button
+          textName='Verify'
+          type='button'
+          onClick={handleVerify}
+          size='large'
+          color='primary'
+        />
       </div>
     </div>
   );

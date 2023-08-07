@@ -1,0 +1,37 @@
+.inputContainer {
+  border: 1px solid rgb(110, 116, 139);
+  border-radius: 0.4rem;
+  padding: 0 0 0 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.inputContainer > i {
+  font-size: 1.4rem;
+  margin-right: 1rem;
+  font-weight: 600;
+  opacity: 0.75;
+}
+
+.formElementInput {
+  border: 0.1rem solid;
+  border-color: rgb(110, 116, 139);
+  width: 100%;
+  border-top: transparent;
+  border-right: transparent;
+  border-bottom: transparent;
+  padding: 1rem 0 1rem 0.4rem;
+  border-top-right-radius: 0.4rem;
+  border-bottom-right-radius: 0.4rem;
+  outline: none;
+}
+
+.formElementInput::placeholder {
+  font-size: 1.4rem;
+  line-height: 2rem;
+}
+
+.bgReadOnly {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+

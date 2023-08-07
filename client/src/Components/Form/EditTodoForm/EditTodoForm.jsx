@@ -3,6 +3,8 @@ import { toast } from 'react-toastify';
 import { TodosContext } from '../../../Context/TodosContext';
 import { LabelsContext } from '../../../Context/LabelsContext';
 import styles from './EditTodoForm.module.css';
+import FormInput from '../FormInput';
+import Button from '../../Button';
 
 const EditTodoForm = () => {
   const {
@@ -69,33 +71,25 @@ const EditTodoForm = () => {
             <h1 className={styles.title}>EDIT TODO</h1>
           </div>
           <div>
-            <div className="formElements">
-              <label htmlFor="name" className="label">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                value={name}
-                onChange={handleChangeEditForm}
-                className="formElementInput"
-                placeholder="Enter your Todo name"
-              />
-            </div>
-            <div className="formElements">
-              <label htmlFor="description" className="label">
-                Description
-              </label>
-              <textarea
-                id="description"
-                name="description"
-                value={description}
-                onChange={handleChangeEditForm}
-                className="formElementInput descriptionHeight resize-none"
-                placeholder="Enter your description"
-              ></textarea>
-            </div>
+            <FormInput
+              textName='name'
+              type='text'
+              icon='fa-solid fa-list-ol'
+              value={name}
+              required={true}
+              onChange={handleChangeEditForm}
+              placeholder='Enter your todo name'
+            />
+            <FormInput
+              textName='description'
+              type='text'
+              icon='fa-solid fa-paragraph'
+              value={description}
+              required={true}
+              textarea={true}
+              onChange={handleChangeEditForm}
+              placeholder='Enter your todo description'
+            />
             <div className="formElements">
               <label htmlFor="label" className="label">
                 Label
@@ -120,16 +114,19 @@ const EditTodoForm = () => {
             </div>
           </div>
           <div className={styles.buttonContainer}>
-            <button
-              type="button"
-              className="cancelButton"
+            <Button
+              textName='Cancel'
+              type='button'
               onClick={handleCancel}
-            >
-              Cancel
-            </button>
-            <button type="submit" className="primaryButton">
-              Edit
-            </button>
+              size='small'
+              color='error'
+            />
+            <Button
+              textName='Edit'
+              type='submit'
+              size='small'
+              color='primary'
+            />
           </div>
         </form>
       </div>

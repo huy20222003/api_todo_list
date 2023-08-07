@@ -55,7 +55,7 @@
 
 .subMenuContainer {
   position: absolute;
-  background-color: var(--bg-white);
+  background-color: rgb(255, 255, 255);;
   padding: 1.2rem;
   border-radius: 0.6rem;
   z-index: 10;

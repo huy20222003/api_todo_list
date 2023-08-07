@@ -1,19 +1,18 @@
 :root {
   --primary-color: rgb(33, 164, 220);
   --primary-color-hover: rgb(52, 152, 243);
-  --bg-white: rgb(255, 255, 255);
   --bg-black: rgb(0, 0, 0);
   --text-white: rgb(255, 255, 255);
-  --text-balck: rgb(0, 0, 0);
   --error: rgb(239, 68, 68);
+}
+
+.darkMode {
+  background-color: rgb(18, 18, 18, 0.84);
+  color: rgb(255, 255, 255);
 }
 
 .d-none {
   display: none;
-}
-
-.resize-none {
-  resize: none;
 }
 
 a {
@@ -31,7 +30,6 @@ a {
 .label {
   display: block;
   font-weight: 400;
-  color: black;
   text-align: left;
   font-size: 1.4rem;
   line-height: 2rem;
@@ -56,48 +54,7 @@ a {
   border-color: var(--error);
 }
 
-.bgReadOnly {
-  background-color: rgba(0, 0, 0, 0.15);
-}
-
-.cancelButton {
-  color: white;
-  background-color: rgb(239, 68, 68);
-  text-align: center;
-  border-radius: 0.6rem;
-  margin: 0 0.4rem 0 0;
-  height: 4rem;
-  width: 7rem;
-  font-size: 1.4rem;
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
-
-.cancelButton:hover {
-  background-color: rgb(220, 38, 38);
-  transition: 0.3s linear;
-}
-
-.primaryButton {
-  color: white;
-  background-color: rgba(33, 164, 220, 0.9);
-  text-align: center;
-  border-radius: 0.6rem;
-  height: 4rem;
-  width: 7rem;
-  font-size: 1.4rem;
-  margin: 0 0 0 0.5rem;
-  border: none;
-  outline: none;
-  cursor: pointer;
-}
-
-.primaryButton:hover {
-  background-color: rgba(33, 164, 220, 1);
-  transition: 0.3s linear;
-}
-
-.descriptionHeight {
+textarea {
   height: 10rem;
+  resize: none;
 }

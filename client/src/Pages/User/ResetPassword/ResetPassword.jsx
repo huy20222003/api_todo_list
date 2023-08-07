@@ -5,6 +5,8 @@ import Cookies from 'js-cookie';
 import Header from '../../../Components/layoutHome/Header';
 import styles from './ResetPassword.module.css';
 import { UserContext } from '../../../Context/UserContext';
+import FormInput from '../../../Components/Form/FormInput';
+import Button from '../../../Components/Button';
 
 const ResetPassword = () => {
   const [emailReset, setEmailReset] = useState('');
@@ -42,19 +44,21 @@ const ResetPassword = () => {
           <h3 className={styles.title}>Reset Password</h3>
         </div>
         <form className={styles.resetForm} onSubmit={handleResetPassword}>
-          <div className="formElements">
-            <span className="label">Email:</span>
-            <input
-              type="email"
-              name="email"
-              className="formElementInput"
-              value={emailReset}
-              onChange={handleChangeresetPasswordForm}
-              placeholder="Your Email"
-            />
-          </div>
+          <FormInput
+            textName="email"
+            type="email"
+            icon="fa-solid fa-envelope"
+            onChange={handleChangeresetPasswordForm}
+            value={emailReset}
+            placeholder="Enter your old password"
+          />
           <div className={styles.buttonContainer}>
-            <button className="primaryButton">Send</button>
+            <Button
+              textName="Save"
+              type="submit"
+              size="large"
+              color="primary"
+            />
           </div>
         </form>
       </div>

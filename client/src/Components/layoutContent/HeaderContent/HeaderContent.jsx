@@ -1,6 +1,6 @@
-import React, { useState, useContext, memo } from 'react';
+import React, { useState, useContext, memo, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import SearchItem from '../../Form/Search/Search';
+import SearchItem from '../../Form/SearchItem';
 import { AuthContext } from '../../../Context/AuthContext';
 import styles from './HeaderContent.module.css';
 

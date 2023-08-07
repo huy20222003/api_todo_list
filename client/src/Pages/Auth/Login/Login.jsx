@@ -4,6 +4,8 @@ import { toast } from 'react-toastify';
 import Cookies from 'js-cookie';
 import { AuthContext } from '../../../Context/AuthContext';
 import styles from './Login.module.css';
+import FormInput from '../../../Components/Form/FormInput';
+import Button from '../../../Components/Button';
 
 function Login() {
   const [loginForm, setLoginForm] = useState({
@@ -15,7 +17,6 @@ function Login() {
   const { loginUser } = useContext(AuthContext);
   const [backgroundStyle, setBackgroundStyle] = useState({});
   const navigate = useNavigate();
-  
 
   const handleChangeLoginForm = (e) => {
     setLoginForm({ ...loginForm, [e.target.name]: e.target.value });
@@ -40,7 +41,7 @@ function Login() {
     } finally {
       setLoginForm({ username: '', password: '' });
     }
-  }
+  };
 
   useEffect(() => {
     const updateBackground = () => {
@@ -49,7 +50,9 @@ function Login() {
       const minute = now.getMinutes();
       const second = now.getSeconds();
       const timeInterval = 24 / 7; // Divide the day into 7 intervals
-      const intervalIndex = Math.floor((hour * 60 + minute) / (timeInterval * 60));
+      const intervalIndex = Math.floor(
+        (hour * 60 + minute) / (timeInterval * 60)
+      );
       const gradientColor = getGradientColor(intervalIndex);
       const newBackgroundStyle = {
         background: `linear-gradient(to bottom, ${gradientColor.start}, ${gradientColor.end})`,
@@ -92,29 +95,24 @@ function Login() {
           <h1 className={styles.title}>Login</h1>
         </div>
         <div>
-          <div className="formElements">
-            <span className="label">Username:</span>
-            <input
-              type="text"
-              name="username"
-              value={username}
-              onChange={handleChangeLoginForm}
-              className="formElementInput"
-              placeholder="Enter your username"
-            />
-          </div>
-          <div className="formElements">
-            <span className="label">Password:</span>
-            <input
-              type="password"
-              name="password"
-              value={password}
-              required={true}
-              onChange={handleChangeLoginForm}
-              className="formElementInput"
-              placeholder="Enter your password"
-            />
-          </div>
+          <FormInput
+            textName='username'
+            type='text'
+            icon='fa-solid fa-user'
+            value={username}
+            required={true}
+            onChange={handleChangeLoginForm}
+            placeholder='Enter your username'
+          />
+          <FormInput
+            textName='password'
+            type='password'
+            icon='fa-solid fa-lock'
+            value={password}
+            required={true}
+            onChange={handleChangeLoginForm}
+            placeholder='Enter your password'
+          />
           <div className={styles.forgotPassword}>
             <Link
               to="/user/reset-password"
@@ -125,9 +123,12 @@ function Login() {
           </div>
         </div>
         <div className={styles.loginButtonContainer}>
-          <button type="submit" className={styles.loginButton}>
-            Login
-          </button>
+          <Button
+            textName='Login'
+            type='submit'
+            size='large'
+            color='primary'
+          />
         </div>
         <div>
           <span className={styles.loginFooterDescription}>

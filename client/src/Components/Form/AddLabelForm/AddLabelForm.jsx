@@ -1,20 +1,22 @@
 import { useContext, useState, memo, useCallback } from 'react';
 import { toast } from 'react-toastify';
+import FormInput from '../FormInput';
 import { LabelsContext } from '../../../Context/LabelsContext';
 import styles from './AddLabelForm.module.css';
+import Button from '../../Button';
 
 const AddLabelForm = () => {
   const { showAddLabel, setShowAddLabel, createLabels } =
     useContext(LabelsContext);
   const [addLabelForm, setAddLabelForm] = useState({
-    name: ''
+    name: '',
   });
 
   const handleChangeAddLabel = useCallback((e) => {
-    setAddLabelForm({...addLabelForm, [e.target.name]: e.target.value});
+    setAddLabelForm({ ...addLabelForm, [e.target.name]: e.target.value });
   });
 
-  const {name} = addLabelForm;
+  const { name } = addLabelForm;
 
   const handleCreateLabel = useCallback(
     async (e) => {
@@ -26,14 +28,14 @@ const AddLabelForm = () => {
         toast.success('Add label successfully!');
         setShowAddLabel(false);
       }
-      setAddLabelForm({name: ''});
+      setAddLabelForm({ name: '' });
     },
     [createLabels, name, setShowAddLabel]
   );
 
   const handleCloseForm = useCallback(() => {
     setShowAddLabel(false);
-    setAddLabelForm({name: ''});
+    setAddLabelForm({ name: '' });
   }, [setShowAddLabel]);
 
   return (
@@ -47,32 +49,30 @@ const AddLabelForm = () => {
             <i className={`fa-solid fa-xmark ${styles.closeButton}`}></i>
           </div>
           <div>
-            <div className="formElements">
-              <label htmlFor="name" className="label">
-                Name
-              </label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                defaultValue={name}
-                onChange={handleChangeAddLabel}
-                className="formElementInput"
-                placeholder="Enter your label name"
-              />
-            </div>
+            <FormInput
+              textName='name'
+              type='text'
+              icon='fa-solid fa-tag'
+              value={name}
+              required={true}
+              onChange={handleChangeAddLabel}
+              placeholder='Enter your label name'
+            />
           </div>
           <div className={styles.buttonContainer}>
-            <button
-              type="button"
-              className="cancelButton"
+            <Button
+              textName='Cancel'
+              type='button'
               onClick={handleCloseForm}
-            >
-              Cancel
-            </button>
-            <button type="submit" className="primaryButton">
-              Add
-            </button>
+              size='small'
+              color='error'
+            />
+            <Button
+              textName='Add'
+              type='submit'
+              size='small'
+              color='primary'
+            />
           </div>
         </form>
       </div>

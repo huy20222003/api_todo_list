@@ -11,7 +11,8 @@ import { AuthContext } from '../../../Context/AuthContext';
 import { UserContext } from '../../../Context/UserContext';
 import styles from './Profile.module.css';
 import { toast } from 'react-toastify';
-import axios from 'axios';
+import FormInput from '../../../Components/Form/FormInput';
+import Button from '../../../Components/Button';
 
 const Profile = () => {
   const {
@@ -99,7 +100,7 @@ const Profile = () => {
           toast.error(updateData.message);
         } else {
           toast.success(updateData.message);
-          setUpdatedButton(false);
+          setUpdatedButton(true);
           setReadOnly(true);
         }
       } catch (error) {
@@ -112,7 +113,7 @@ const Profile = () => {
   const handleSendCode = useCallback(
     async (e) => {
       e.preventDefault();
-      setUpdatedButton(true);
+      setUpdatedButton(false);
       setReadOnly(false);
       setShowModalVerify(true);
       try {
@@ -131,13 +132,9 @@ const Profile = () => {
 
   const handleCancel = useCallback((event) => {
     event.preventDefault();
-    setUpdatedButton(false);
+    setUpdatedButton(true);
     setReadOnly(true);
   }, []);
-
-  const handleGoBack = () => {
-    history.back();
-  };
 
   return (
     <div className={styles.container}>
@@ -145,10 +142,6 @@ const Profile = () => {
         <HeaderContent />
       </div>
       <div className={styles.content}>
-        <div className={styles.backButtonContainer} onClick={handleGoBack}>
-          <i className={`fa-solid fa-arrow-left ${styles.backButton}`}></i>
-          <span className={styles.backButtonDescription}>Back</span>
-        </div>
         <div className={styles.userInfoContainer}>
           <div className={styles.avatarContainer}>
             <img
@@ -179,52 +172,56 @@ const Profile = () => {
         <div className={styles.infoDetailContainer}>
           <h1 className={styles.infoDetailTitle}>Information</h1>
           <form className={styles.infoDetailForm} onSubmit={handleSave}>
-            <div className="formElements">
-              <p className="label">Full Name:</p>
-              <input
-                type="text"
-                name="fullName"
-                className={`formElementInput ${readOnly ? 'bgReadOnly' : ''}`}
-                value={userInfo.fullName}
-                onChange={handleChange}
-                readOnly={readOnly}
-              />
-            </div>
-            <div className="formElements">
-              <p className="label">Username:</p>
-              <input
-                type="text"
-                name="username"
-                className={`formElementInput ${readOnly ? 'bgReadOnly' : ''}`}
-                value={userInfo.username}
-                onChange={handleChange}
-                readOnly={readOnly}
-              />
-            </div>
-            <div className="formElements">
-              <p className="label">Email:</p>
-              <input
-                type="email"
-                name="email"
-                className={`formElementInput ${readOnly ? 'bgReadOnly' : ''}`}
-                value={userInfo.email}
-                onChange={handleChange}
-                readOnly={readOnly}
-              />
-            </div>
+            <FormInput
+              textName='fullName'
+              icon='fa-solid fa-user'
+              type='text'
+              value={userInfo?.fullName}
+              onChange={handleChange}
+              readOnly={readOnly}
+            />
+            <FormInput
+              textName='username'
+              icon='fa-solid fa-user'
+              type='text'
+              value={userInfo?.username}
+              onChange={handleChange}
+              readOnly={readOnly}
+            />
+            <FormInput
+              textName='email'
+              icon='fa-solid fa-envelope'
+              type='email'
+              value={userInfo?.email}
+              onChange={handleChange}
+              readOnly={readOnly}
+            />
             <div className={styles.updateButtonContainer}>
-              <button
-                className={`${updatedButton ? 'd-none' : ''} primaryButton`}
-                onClick={handleSendCode}
-              >
-                Update
-              </button>
-              <div className={`${updatedButton ? '' : 'd-none'}`}>
-                <button className="cancelButton" onClick={handleCancel}>
-                  Cancel
-                </button>
-                <button className="primaryButton">Save</button>
-              </div>
+              {updatedButton ? (
+                <Button
+                  textName='Update'
+                  type='button'
+                  onClick={handleSendCode}
+                  size='small'
+                  color='primary'
+                />
+              ) : (
+                <>
+                  <Button
+                    textName='Cancel'
+                    type='button'
+                    onClick={handleCancel}
+                    size='small'
+                    color='error'
+                  />
+                  <Button
+                    textName='Save'
+                    type='submit'
+                    size='small'
+                    color='primary'
+                  />
+                </>
+              )}
             </div>
           </form>
         </div>

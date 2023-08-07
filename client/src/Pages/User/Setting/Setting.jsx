@@ -1,9 +1,11 @@
-import { useState, useContext, memo } from 'react';
+import { useState, useContext, memo, useEffect } from 'react';
 import { toast } from 'react-toastify';
 import HeaderContent from '../../../Components/layoutContent/HeaderContent';
 import { UserContext } from '../../../Context/UserContext';
 import styles from './Setting.module.css';
 import { AuthContext } from '../../../Context/AuthContext';
+import FormInput from '../../../Components/Form/FormInput';
+import Button from '../../../Components/Button';
 
 const Setting = () => {
   const [passwordForm, setPasswordForm] = useState({
@@ -11,13 +13,34 @@ const Setting = () => {
     newPassword: '',
     confirmPassword: '',
   });
+  const storedIsChecked = localStorage.getItem('darkMode') === 'true';
+  const [isChecked, setIsChecked] = useState(false);
 
   const { oldPassword, newPassword, confirmPassword } = passwordForm;
   const {
     authState: { user },
   } = useContext(AuthContext);
-  const { updatePassword, setShowModalVerify, sendCode, updatedButton, setUpdatedButton } =
-    useContext(UserContext);
+  const {
+    updatePassword,
+    setShowModalVerify,
+    sendCode,
+    updatedButton,
+    setUpdatedButton,
+  } = useContext(UserContext);
+
+  const handleToggle = () => {
+    const newChecked = !isChecked;
+    setIsChecked(newChecked);
+    localStorage.setItem('darkMode', newChecked);
+  };
+
+  useEffect(()=> {
+    if(storedIsChecked) {
+      document.body.classList.add('darkMode');
+    } else {
+      document.body.classList.remove('darkMode');
+    }
+  }, [storedIsChecked]);
 
   const handleChangePasswordForm = (e) => {
     setPasswordForm({ ...passwordForm, [e.target.name]: e.target.value });
@@ -70,73 +93,82 @@ const Setting = () => {
     setUpdatedButton(false);
   };
 
-  const handleGoBack = () => {
-    history.back();
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <HeaderContent />
       </div>
       <div className={styles.content}>
-        <div className={styles.backButtonContainer} onClick={handleGoBack}>
-          <i className={`fa-solid fa-arrow-left ${styles.backButton}`}></i>
-          <span className={styles.backButtonDescription}>Back</span>
+        <h1 className={styles.title}>Setting</h1>
+        <div className={styles.ItemContainer}>
+          <h2 className={styles.ItemTitle}>Theme</h2>
+          <div className={styles.ItemButtonContainer}>
+            <span>{storedIsChecked ? 'Light Mode' : 'Dark Mode'}</span>
+            <label className= {styles.toggleSwitch}>
+              <input type="checkbox"  checked = {storedIsChecked} onChange={handleToggle}/>
+              <span className={styles.slider}></span>
+            </label>
+          </div>
         </div>
-        <h1 className={styles.title}>Change Password</h1>
-        <form
-          className={styles.settingForm}
-          onSubmit={handleSubmitPasswordForm}
-        >
-          <div className='formElements'>
-            <p className='label'>Old Password:</p>
-            <input
-              type="password"
-              name="oldPassword"
+        <div className={styles.ItemContainer}>
+          <h2 className={styles.ItemTitle}>Change Password</h2>
+          <form
+            className={styles.settingFormContainer}
+            onSubmit={handleSubmitPasswordForm}
+          >
+            <FormInput
+              textName={'oldPassword'}
+              type={'password'}
+              icon={'fa-solid fa-lock'}
+              onChange={handleChangePasswordForm}
               value={oldPassword}
-              onChange={handleChangePasswordForm}
-              className='formElementInput'
-              placeholder="Enter your old password"
+              placeholder={'Enter your old password'}
             />
-          </div>
-          <div className='formElements'>
-            <p className='label'>New Password:</p>
-            <input
-              type="password"
-              name="newPassword"
+            <FormInput
+              textName={'newPassword'}
+              type={'password'}
+              icon={'fa-solid fa-lock'}
+              onChange={handleChangePasswordForm}
               value={newPassword}
-              onChange={handleChangePasswordForm}
-              className='formElementInput'
-              placeholder="Enter your new password"
+              placeholder={'Enter your new password'}
             />
-          </div>
-          <div className='formElements'>
-            <p className='label'>Confirm Password:</p>
-            <input
-              type="password"
-              name="confirmPassword"
+            <FormInput
+              textName={'confirmPassword'}
+              type={'password'}
+              icon={'fa-solid fa-lock'}
+              onChange={handleChangePasswordForm}
               value={confirmPassword}
-              onChange={handleChangePasswordForm}
-              className='formElementInput'
-              placeholder="Confirm your new password"
+              placeholder={'Confirm your new password'}
             />
-          </div>
-          <div className={styles.changePasswordButtonContainer}>
-            <button
-              className={`${updatedButton ? 'd-none' : ''} primaryButton`}
-              onClick={handleSendCode}
-            >
-              Update
-            </button>
-            <div className={`${updatedButton ? '' : 'd-none'}`}>
-              <button className="cancelButton" onClick={handleCancel}>
-                Cancel
-              </button>
-              <button className="primaryButton">Save</button>
+            <div className={styles.changePasswordButtonContainer}>
+              {updatedButton ? (
+                <Button
+                  textName="Update"
+                  type="button"
+                  onClick={handleSendCode}
+                  size="small"
+                  color="primary"
+                />
+              ) : (
+                <>
+                  <Button
+                    textName="Cancel"
+                    type="button"
+                    onClick={handleCancel}
+                    size="small"
+                    color="error"
+                  />
+                  <Button
+                    textName="Save"
+                    type="submit"
+                    size="small"
+                    color="primary"
+                  />
+                </>
+              )}
             </div>
-          </div>
-        </form>
+          </form>
+        </div>
       </div>
     </div>
   );

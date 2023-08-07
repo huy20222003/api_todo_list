@@ -16,28 +16,6 @@
   margin: 3rem 0 0 0;
 }
 
-.backButtonContainer {
-  margin: 5.2rem 0 0.8rem 0;
-  width: 100%;
-  cursor: pointer;
-  position: relative;
-}
-
-.backButton {
-  position: absolute;
-  top: 0;
-  left: 0.8rem;
-  color: rgb(75, 85, 99);
-  font-size: 2rem;
-  line-height: 2.4rem;
-}
-
-.backButtonDescription {
-  margin: 0 0 0 3.6rem;
-  font-size: 1.6rem;
-  line-height: 2rem;
-}
-
 .title {
   text-align: center;
   margin: 5rem 0 1.6rem 0;
@@ -46,17 +24,87 @@
   font-weight: 600;
 }
 
+.ItemButtonContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.ItemButtonContainer > span {
+  font-size: 1.6rem;
+}
+
+.toggleSwitch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+}
+
+.toggleSwitch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 1.5rem;
+}
+
+.slider::before {
+  position: absolute;
+  content: '';
+  height: 2.6rem;
+  width: 2.6rem;
+  left: 0.2rem;
+  bottom: 0.2rem;
+  background-color: rgb(255, 255, 255);
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.toggleSwitch input:checked + .slider {
+  background-color: var(--primary-color);
+}
+
+.toggleSwitch input:checked + .slider::before {
+  transform: translateX(3rem);
+}
+
+.ItemContainer {
+  margin-bottom: 4rem;
+  padding-bottom: 1rem;
+  border-bottom: 0.1rem solid gray;
+}
+
+.ItemContainer:last-child {
+  border: none;
+}
+
 .settingFormContainer {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
 
+.ItemTitle {
+  margin-bottom: 1rem;
+  color: var(--primary-color);
+  font-size: 1.8rem;
+  text-transform: uppercase;
+}
+
 .changePasswordButtonContainer {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  margin: 3.2rem 0 0 0;
+  margin: 1rem 0 0 0;
 }
 
 .changePasswordButton {
@@ -77,7 +125,15 @@
 }
 
 @media only screen and (max-width: 740px) {
-  .backButtonContainer {
-    margin: 0;
+  .toggle-switch {
+    width: 4rem;
+    height: 2rem;
+  }
+
+  .slider:before {
+    height: 1.8rem;
+    width: 1.8rem;
+    left: 0.1rem;
+    bottom: 0.1rem;
   }
 }
