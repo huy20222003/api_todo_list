@@ -47,7 +47,7 @@ export const TodosProvider = ({ children }) => {
 
   useEffect(() => {
     getAll();
-  }, []);
+  }, [getAll]);
 
   const createTodos = useCallback(async (TodoData) => {
     try {
