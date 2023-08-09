@@ -13,35 +13,13 @@
 
 .content {
   width: 80%;
-  margin: 3rem 0 0 0;
-}
-
-.backButtonContainer {
-  margin: 7.2rem 0 0.8rem 2rem;
-  width: 100%;
-  cursor: pointer;
-  position: relative;
-}
-
-.backButton {
-  position: absolute;
-  top: 0;
-  left: 0.8rem;
-  color: rgb(75, 85, 99);
-  font-size: 2rem;
-  line-height: 2.4rem;
+  margin: 8rem 0 0 0;
 }
 
 .labelList {
   display: flex;
   flex-wrap: wrap;
   min-height: 100%;
-}
-
-.backButtonDescription {
-  margin: 0 0 0 3.6rem;
-  font-size: 1.6rem;
-  line-height: 2rem;
 }
 
 .addButtonContainer {
