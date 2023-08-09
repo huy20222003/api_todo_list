@@ -12,20 +12,12 @@ import styles from './Labels.module.css';
 const Labels = () => {
   const { setShowAddLabel } = useContext(LabelsContext);
 
-  const handleGoBack = () => {
-    history.back();
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <HeaderContent />
       </div>
       <div className={styles.content}>
-        <div className={styles.backButtonContainer} onClick={handleGoBack}>
-          <i className={`fa-solid fa-arrow-left ${styles.backButton}`}></i>
-          <span className={styles.backButtonDescription}>Back</span>
-        </div>
         <div className={styles.labelList}>
           <Suspense fallback={<Loader />}>
             <LabelItem />
