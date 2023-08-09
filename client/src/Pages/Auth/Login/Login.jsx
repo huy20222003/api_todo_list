@@ -26,11 +26,11 @@ function Login() {
     e.preventDefault();
     try {
       const loginData = await loginUser(loginForm);
-      if (!loginData.status) {
+      if (!loginData.success) {
         toast.error('Login failed!');
       } else {
         const expiration = new Date();
-        expiration.setTime(expiration.getTime() + 180 * 60 * 1000);
+        expiration.setTime(expiration.getTime() + 15 * 60 * 1000);
         Cookies.set('user', loginData.accessToken, { expires: expiration });
         Cookies.set('refresh', loginData.refreshToken, { expires: 365 });
         toast.success('Logged in successfully!');
@@ -99,7 +99,7 @@ function Login() {
             textName='username'
             type='text'
             icon='fa-solid fa-user'
-            value={username}
+            value={username.trim()}
             required={true}
             onChange={handleChangeLoginForm}
             placeholder='Enter your username'
@@ -108,7 +108,7 @@ function Login() {
             textName='password'
             type='password'
             icon='fa-solid fa-lock'
-            value={password}
+            value={password.trim()}
             required={true}
             onChange={handleChangeLoginForm}
             placeholder='Enter your password'

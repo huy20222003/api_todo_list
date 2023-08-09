@@ -16,7 +16,7 @@ const SearchItem = () => {
     try {
       if (e.target.value.length <= 100) {
         const searchData = await searchTodos(e.target.value);
-        if (!searchData.status) {
+        if (!searchData.success) {
           toast.error('An error has occurred');
         } else {
           // Xử lý dữ liệu sau khi tìm kiếm

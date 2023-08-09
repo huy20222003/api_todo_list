@@ -28,7 +28,7 @@ const UpdatePassword = () => {
     } else {
       try {
         const updateData = await updatePassword(updateForm);
-        if (!updateData.status) {
+        if (!updateData.success) {
           toast.error('Your verification code has expired');
         } else {
           toast.success(updateData.message);

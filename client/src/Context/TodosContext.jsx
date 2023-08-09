@@ -30,15 +30,15 @@ export const TodosProvider = ({ children }) => {
     if (error.response && error.response.data) {
       return error.response.data;
     } else {
-      return { status: false, message: error.message };
+      return { success: false, message: error.message };
     }
   };
 
   const getAll = useCallback(async () => {
     try {
       const response = await axios.get(`${Api_URL}/todos/all`);
-      if (response.data.status) {
-        dispatch(getAllTodos(response.data.todos));
+      if (response.data.success) {
+        dispatch(getAllTodos(response.data.data));
       }
     } catch (error) {
       return handleError(error);
@@ -47,12 +47,12 @@ export const TodosProvider = ({ children }) => {
 
   useEffect(() => {
     getAll();
-  }, [getAll]);
+  }, []);
 
   const createTodos = useCallback(async (TodoData) => {
     try {
       const response = await axios.post(`${Api_URL}/todos/create`, TodoData);
-      dispatch(createTodo(response.data.newTodo));
+      dispatch(createTodo(response.data.data));
       return response.data;
     } catch (error) {
       return handleError(error);
@@ -87,7 +87,7 @@ export const TodosProvider = ({ children }) => {
       const response = await axios.get(
         `${Api_URL}/todos/search?name=${searchValue}`
       );
-      dispatch(searchTodo(response.data.todo));
+      dispatch(searchTodo(response.data.data));
       return response.data;
     } catch (error) {
       return handleError(error);
@@ -103,7 +103,7 @@ export const TodosProvider = ({ children }) => {
           const response = await axios.get(
             `${Api_URL}/todos/filter?label=${label}`
           );
-          dispatch(filterTodo(response.data.todo));
+          dispatch(filterTodo(response.data.data));
           return response.data;
         } catch (error) {
           return handleError(error);

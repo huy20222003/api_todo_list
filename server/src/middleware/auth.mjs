@@ -1,7 +1,8 @@
-require('dotenv').config();
-const jwt = require('jsonwebtoken');
+import dotenv from 'dotenv';
+dotenv.config();
+import jwt from 'jsonwebtoken';
 
-async function verify(req, res, next) {
+async function authVerify(req, res, next) {
   try {
     // Lấy token từ header Authorization
     const authHeader = req.header('Authorization');
@@ -14,11 +15,9 @@ async function verify(req, res, next) {
         .json({ status: false, message: 'No token provided' });
     } else {
       // Xác thực token
-      const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
-      req._id = decoded.user._id; // Lưu thông tin người dùng vào request
+      const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+      req._id = decoded._id; 
 
-      // Kiểm tra và phân quyền truy cập tại đây
-      // ...
       next(); // Cho phép đi tiếp tới middleware hoặc route tiếp theo
     }
   } catch (error) {
@@ -26,4 +25,4 @@ async function verify(req, res, next) {
   }
 }
 
-module.exports = verify;
+export default authVerify;

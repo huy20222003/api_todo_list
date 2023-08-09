@@ -26,10 +26,11 @@ const Profile = () => {
     setReadOnly,
     updatedButton,
     setUpdatedButton,
-    uploadAvatar,
+    camera,
+    setCamera,
+    uploadFile,
   } = useContext(UserContext);
   const [selectedImage, setSelectedImage] = useState(null);
-  const [updateAvatarBtn, setUpdateAvatarBtn] = useState(false);
   const [previewImg, setPreviewImg] = useState(user?.avatar || null);
   const refInputFile = useRef();
 
@@ -37,6 +38,7 @@ const Profile = () => {
     fullName: user?.fullName || '',
     username: user?.username || '',
     email: user?.email || '',
+    avatar: user?.avatar || selectedImage,
   });
 
   useEffect(() => {
@@ -44,6 +46,7 @@ const Profile = () => {
       fullName: user?.fullName || '',
       username: user?.username || '',
       email: user?.email || '',
+      avatar: user?.avatar || selectedImage,
     });
   }, [user]);
 
@@ -62,7 +65,6 @@ const Profile = () => {
   const handleChangeFile = useCallback(async (e) => {
     const file = e.target.files[0];
     if (file) {
-      setUpdateAvatarBtn(true);
       setPreviewImg(URL.createObjectURL(file));
       const reader = new FileReader();
       reader.onload = () => {
@@ -77,48 +79,38 @@ const Profile = () => {
     }
   }, []);
 
-  const handleUpdateAvatar = useCallback(async () => {
-    try {
-      const resData = await uploadAvatar({ file: selectedImage });
-      if (!resData.status) {
-        toast.error('Error! An error occurred. Please try again later');
-      } else {
-        toast.success('Update avatar successfully');
-      }
-      setUpdateAvatarBtn(false);
-    } catch (error) {
-      toast.error('Server error');
-    }
-  }, [selectedImage, uploadAvatar]);
-
   const handleSave = useCallback(
     async (event) => {
       event.preventDefault();
       try {
+        // If a new image was selected, update the user's avatar
+        if (selectedImage) {
+          userInfo.avatar = selectedImage;
+        }
+
         const updateData = await updateUserInfo(userInfo);
-        if (!updateData.status) {
+        if (!updateData.success) {
           toast.error(updateData.message);
         } else {
           toast.success(updateData.message);
           setUpdatedButton(true);
           setReadOnly(true);
+          setCamera(false);
         }
       } catch (error) {
         toast.error('Server error');
       }
     },
-    [updateUserInfo, userInfo]
+    [updateUserInfo, userInfo, selectedImage]
   );
 
   const handleSendCode = useCallback(
     async (e) => {
       e.preventDefault();
-      setUpdatedButton(false);
-      setReadOnly(false);
       setShowModalVerify(true);
       try {
         const sendData = await sendCode({ email: user?.email });
-        if (!sendData.status) {
+        if (!sendData.success) {
           toast.error(sendData.message);
         } else {
           toast.success(sendData.message);
@@ -134,6 +126,7 @@ const Profile = () => {
     event.preventDefault();
     setUpdatedButton(true);
     setReadOnly(true);
+    setCamera(false);
   }, []);
 
   return (
@@ -157,41 +150,36 @@ const Profile = () => {
               accept="image/*"
               hidden={true}
             />
-            <i className={'fa-solid fa-camera'} onClick={handleChooseFile}></i>
+            <i
+              className={camera ? 'fa-solid fa-camera' : 'd-none'}
+              onClick={handleChooseFile}
+            ></i>
           </div>
           <h2 className={styles.userInfoName}>{user?.fullName}</h2>
-          <button
-            className={`${styles.updateAvatarBtn} ${
-              updateAvatarBtn ? '' : 'd-none'
-            }`}
-            onClick={handleUpdateAvatar}
-          >
-            Update Avatar
-          </button>
         </div>
         <div className={styles.infoDetailContainer}>
           <h1 className={styles.infoDetailTitle}>Information</h1>
           <form className={styles.infoDetailForm} onSubmit={handleSave}>
             <FormInput
-              textName='fullName'
-              icon='fa-solid fa-user'
-              type='text'
+              textName="fullName"
+              icon="fa-solid fa-user"
+              type="text"
               value={userInfo?.fullName}
               onChange={handleChange}
               readOnly={readOnly}
             />
             <FormInput
-              textName='username'
-              icon='fa-solid fa-user'
-              type='text'
+              textName="username"
+              icon="fa-solid fa-user"
+              type="text"
               value={userInfo?.username}
               onChange={handleChange}
               readOnly={readOnly}
             />
             <FormInput
-              textName='email'
-              icon='fa-solid fa-envelope'
-              type='email'
+              textName="email"
+              icon="fa-solid fa-envelope"
+              type="email"
               value={userInfo?.email}
               onChange={handleChange}
               readOnly={readOnly}
@@ -199,26 +187,26 @@ const Profile = () => {
             <div className={styles.updateButtonContainer}>
               {updatedButton ? (
                 <Button
-                  textName='Update'
-                  type='button'
+                  textName="Update"
+                  type="button"
                   onClick={handleSendCode}
-                  size='small'
-                  color='primary'
+                  size="small"
+                  color="primary"
                 />
               ) : (
                 <>
                   <Button
-                    textName='Cancel'
-                    type='button'
+                    textName="Cancel"
+                    type="button"
                     onClick={handleCancel}
-                    size='small'
-                    color='error'
+                    size="small"
+                    color="error"
                   />
                   <Button
-                    textName='Save'
-                    type='submit'
-                    size='small'
-                    color='primary'
+                    textName="Save"
+                    type="submit"
+                    size="small"
+                    color="primary"
                   />
                 </>
               )}

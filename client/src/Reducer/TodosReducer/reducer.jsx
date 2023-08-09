@@ -21,7 +21,6 @@ export const reducer = (state, action) => {
       return {
         ...state,
         todos: payload,
-        totalPages: action.payload.totalPages,
       };
     case CREATE_TODO:
       return {

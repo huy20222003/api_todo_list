@@ -22,7 +22,7 @@ const AddLabelForm = () => {
     async (e) => {
       e.preventDefault();
       const addData = await createLabels({ name });
-      if (!addData.status) {
+      if (!addData.success) {
         toast.error('Add label failed');
       } else {
         toast.success('Add label successfully!');

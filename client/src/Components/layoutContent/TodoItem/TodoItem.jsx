@@ -6,7 +6,6 @@ import styles from './TodoItem.module.css';
 
 const TodoItem = () => {
   const {
-    getAll,
     deleteTodos,
     setShowEditModal,
     setTodos,
@@ -15,10 +14,6 @@ const TodoItem = () => {
 
   const containerRef = useRef();
   const [borderColors, setBorderColors] = useState([]);
-
-  useEffect(() => {
-    getAll();
-  }, [getAll]);
 
   const [id, setId] = useState('');
   const [showModalDelete, setShowModalDelete] = useState(false);
@@ -31,7 +26,7 @@ const TodoItem = () => {
   const handleSubmitDelete = useCallback(async () => {
     try {
       const deleteData = await deleteTodos(id);
-      if (!deleteData.status) {
+      if (!deleteData.success) {
         toast.error('Delete Failed!');
       } else {
         toast.success('Deleted Successfully!');

@@ -2,9 +2,10 @@
   "name": "api_todo_list",
   "version": "1.0.0",
   "description": "api for todo list",
-  "main": "index.js",
+  "type": "module",
+  "main": "index.mjs",
   "scripts": {
-    "start": "nodemon src/index.js",
+    "start": "nodemon src/index.mjs",
     "build": "npm i",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -31,6 +32,9 @@
   },
   "homepage": "https://github.com/huy20222003/api_todo_list#readme",
   "dependencies": {
+    "@adminjs/express": "^6.0.0",
+    "@adminjs/mongoose": "^4.0.0",
+    "adminjs": "^7.2.0",
     "bcryptjs": "^2.4.3",
     "cloudinary": "^1.39.0",
     "cors": "^2.8.5",

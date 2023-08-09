@@ -17,7 +17,7 @@
 }
 
 .modal {
-  background-color: rgb(255, 255, 255);
+  background-color: var(--bg-color);
   border-radius: 0.5rem;
   width: 40rem;
   height: fit-content;

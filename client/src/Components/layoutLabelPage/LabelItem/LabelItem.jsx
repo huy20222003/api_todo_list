@@ -13,10 +13,6 @@ const LabelItem = () => {
     labelState: { labels },
   } = useContext(LabelsContext);
 
-  useEffect(() => {
-    getAllLabels();
-  }, []);
-
   const [id, setId] = useState('');
   const [showModalDelete, setShowModalDelete] = useState(false);
 
@@ -28,7 +24,7 @@ const LabelItem = () => {
   const handleSubmitDelete = useCallback(async () => {
     try {
       const deleteData = await deleteLabels(id); // Make sure to import or define deleteLabels function
-      if (!deleteData.status) {
+      if (!deleteData.success) {
         toast.error('Delete Failed!');
       } else {
         toast.success('Deleted Successfully!');

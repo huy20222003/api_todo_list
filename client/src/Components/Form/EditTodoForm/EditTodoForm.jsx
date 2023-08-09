@@ -46,7 +46,7 @@ const EditTodoForm = () => {
     e.preventDefault();
     try {
       const editData = await editTodos(editForm);
-      if (!editData.status) {
+      if (!editData.success) {
         toast.error('Edit todo failed');
       } else {
         toast.success('Edit todo successfully!');

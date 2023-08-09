@@ -26,7 +26,7 @@
 }
 
 .addTodoForm {
-  background-color: rgb(255, 255, 255);;
+  background-color: var(--bg-color);
   border-radius: 0.8rem;
   max-width: 40rem;
   text-align: center;

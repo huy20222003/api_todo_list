@@ -9,12 +9,13 @@ export const UserProvider = ({ children }) => {
   const [showModalVerify, setShowModalVerify] = useState(false);
   const [readOnly, setReadOnly] = useState(true);
   const [updatedButton, setUpdatedButton] = useState(true);
+  const [camera, setCamera] = useState(false);
 
   const handleError = (error) => {
     if (error.response && error.response.data) {
       return error.response.data;
     } else {
-      return { status: false, message: error.message };
+      return { success: false, message: error.message };
     }
   };
 
@@ -32,7 +33,6 @@ export const UserProvider = ({ children }) => {
   // Update password after reset
   const updatePassword = async (updateForm) => {
     updateForm.email = Cookies.get('data');
-    console.log(updateForm);
     try {
       const response = await axios.patch(
         `${Api_URL}/user/password/reset-password`,
@@ -76,10 +76,10 @@ export const UserProvider = ({ children }) => {
   };
 
   // Upload avatar
-  const uploadAvatar = async (base64) => {
+  const uploadFile = async (base64) => {
     try {
-      const response = await axios.patch(
-        `${Api_URL}/user/upload-avatar`,
+      const response = await axios.post(
+        `${Api_URL}/user/upload-file`,
         base64
       );
       return response.data;
@@ -99,7 +99,9 @@ export const UserProvider = ({ children }) => {
     verifyCode,
     updatePassword,
     updateUserInfo,
-    uploadAvatar,
+    uploadFile,
+    camera,
+    setCamera
   };
 
   return (

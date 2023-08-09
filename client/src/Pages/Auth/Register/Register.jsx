@@ -42,11 +42,11 @@ function Register() {
     } else {
       try {
         const registerData = await registerUser(registerForm);
-        if (!registerData.status) {
+        if (!registerData.success) {
           toast.error('Registration failed!');
         } else {
           const expiration = new Date();
-          expiration.setTime(expiration.getTime() + 180 * 60 * 1000);
+          expiration.setTime(expiration.getTime() + 15 * 60 * 1000);
           Cookies.set('user', registerData.accessToken, {
             expires: expiration,
           });
@@ -127,7 +127,7 @@ function Register() {
             textName='fullName'
             type='text'
             icon='fa-solid fa-user'
-            value={fullName}
+            value={fullName.trim()}
             required={true}
             onChange={handleChangeRegisterForm}
             placeholder='Enter your fullName'
@@ -136,7 +136,7 @@ function Register() {
             textName='username'
             type='text'
             icon='fa-solid fa-user'
-            value={username}
+            value={username.trim()}
             required={true}
             onChange={handleChangeRegisterForm}
             placeholder='Enter your username'
@@ -145,7 +145,7 @@ function Register() {
             textName='email'
             type='email'
             icon='fa-solid fa-envelope'
-            value={email}
+            value={email.trim()}
             required={true}
             onChange={handleChangeRegisterForm}
             placeholder='Enter your email'
@@ -154,7 +154,7 @@ function Register() {
             textName='password'
             type='password'
             icon='fa-solid fa-lock'
-            value={password}
+            value={password.trim()}
             required={true}
             onChange={handleChangeRegisterForm}
             placeholder='Enter your password'
@@ -163,7 +163,7 @@ function Register() {
             textName='confirmPassword'
             type='password'
             icon='fa-solid fa-lock'
-            value={confirmPassword}
+            value={confirmPassword.trim()}
             required={true}
             onChange={handleChangeRegisterForm}
             placeholder='Enter your confirmPassword'

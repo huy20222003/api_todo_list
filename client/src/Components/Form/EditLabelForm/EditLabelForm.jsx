@@ -40,7 +40,7 @@ const EditLabelForm = () => {
     e.preventDefault();
     try {
       const editData = await editLabels(editForm);
-      if (!editData.status) {
+      if (!editData.success) {
         toast.error('Edit label failed');
       } else {
         toast.success('Edit label successfully!');

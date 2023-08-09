@@ -28,7 +28,7 @@ const AddTodoForm = () => {
     e.preventDefault();
     try {
       const addData = await createTodos(addTodoForm);
-      if (!addData.status) {
+      if (!addData.success) {
         toast.error('Add todo failed');
       } else {
         toast.success('Add todo successfully!');

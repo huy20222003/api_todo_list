@@ -13,6 +13,7 @@ const VerifyCode = () => {
     verifyCode,
     setReadOnly,
     setUpdatedButton,
+    setCamera
   } = useContext(UserContext);
 
   const handleChange = (event) => {
@@ -22,13 +23,14 @@ const VerifyCode = () => {
   const handleVerify = async () => {
     try {
       const verifyData = await verifyCode(parseFloat(codes));
-      if (!verifyData.status) {
+      if (!verifyData.success) {
         toast.error(verifyData.message);
       } else {
         toast.success(verifyData.message);
         setShowModalVerify(false);
         setReadOnly(false);
         setUpdatedButton(false);
+        setCamera(true);
       }
     } catch (error) {
       toast.error('Server Error');

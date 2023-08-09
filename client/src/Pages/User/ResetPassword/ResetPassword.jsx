@@ -22,7 +22,7 @@ const ResetPassword = () => {
     try {
       const resetData = await sendCode({ email: emailReset });
       Cookies.set('data', emailReset);
-      if (!resetData.status) {
+      if (!resetData.success) {
         toast.error('Email does not exist');
       } else {
         toast.success('Password reset email has been sent');

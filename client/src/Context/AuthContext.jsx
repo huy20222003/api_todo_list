@@ -15,7 +15,7 @@ export const AuthProvider = ({ children }) => {
     if (error.response && error.response.data) {
       return error.response.data;
     } else {
-      return { status: false, message: error.message };
+      return { success: false, message: error.message };
     }
   };
 
@@ -31,10 +31,10 @@ export const AuthProvider = ({ children }) => {
         return;
       } else {
         setAuthToken(accessToken);
-        const response = await axios.get(`${Api_URL}/auth`);
+        const response = await axios.get(`${Api_URL}/auth/getUser`);
 
-        if (response.data.status) {
-          setAuthenticatedUser(true, response.data.user);
+        if (response.data.success) {
+          setAuthenticatedUser(true, response.data.data);
         } else {
           setAuthenticatedUser(false, null);
           Cookies.remove('user');
@@ -88,10 +88,10 @@ export const AuthProvider = ({ children }) => {
           refreshToken,
         });
 
-        if (response.data.status) {
+        if (response.data.success) {
           const expiration = new Date();
-          expiration.setTime(expiration.getTime() + 180 * 60 * 1000);
-          Cookies.set('user', response.data.accessToken, {
+          expiration.setTime(expiration.getTime() + 15 * 60 * 1000);
+          Cookies.set('user', response.data.data, {
             expires: expiration,
           });
           await loadUser();
@@ -103,9 +103,9 @@ export const AuthProvider = ({ children }) => {
   };
 
   //Tự động handle refreshToken mỗi khi loadUser
-  // useEffect(() => {
-  //   handleRefreshToken();
-  // }, []);
+  useEffect(() => {
+    handleRefreshToken();
+  }, []);
 
   const AuthContextData = {
     authState,

@@ -35,10 +35,11 @@ const Setting = () => {
   };
 
   useEffect(()=> {
+    const rootElement = document.documentElement;
     if(storedIsChecked) {
-      document.body.classList.add('darkMode');
+      rootElement.classList.add('darkMode');
     } else {
-      document.body.classList.remove('darkMode');
+      rootElement.classList.remove('darkMode');
     }
   }, [storedIsChecked]);
 
@@ -51,7 +52,7 @@ const Setting = () => {
     setShowModalVerify(true);
     try {
       const sendData = await sendCode({ email: user?.email });
-      if (!sendData.status) {
+      if (!sendData.success) {
         toast.error(sendData.message);
       } else {
         toast.success(sendData.message);
@@ -70,7 +71,7 @@ const Setting = () => {
 
     try {
       const updatePasswordData = await updatePassword(passwordForm);
-      if (!updatePasswordData.status) {
+      if (!updatePasswordData.success) {
         toast.error('Password update failed');
       } else {
         toast.success('Password update successful');

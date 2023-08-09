@@ -1,5 +1,4 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+import { Schema, model } from 'mongoose';
 
 const Labels = new Schema(
   {
@@ -18,4 +17,4 @@ const Labels = new Schema(
   }
 );
 
-module.exports = mongoose.model('labels', Labels);
+export default model('labels', Labels);

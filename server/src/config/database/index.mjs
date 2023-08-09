@@ -1,8 +1,10 @@
-const mongoose = require('mongoose');
+import dotenv from 'dotenv';
+dotenv.config();
+import { connect } from 'mongoose';
 
-async function connect() {
+async function connectDB() {
   try {
-    await mongoose.connect(
+    connect(
       `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@todolist.2upbpt5.mongodb.net/?retryWrites=true&w=majority`,
       {
         useNewUrlParser: true,
@@ -14,4 +16,4 @@ async function connect() {
   }
 }
 
-module.exports = { connect };
+export default connectDB;
