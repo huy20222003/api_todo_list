@@ -34,7 +34,7 @@ const SearchItem = () => {
     try {
       if (e.target.value.length <= 100) {
         const searchData = await searchLabels(e.target.value);
-        if (!searchData.status) {
+        if (!searchData.success) {
           toast.error('An error has occurred');
         }
       } else {
