@@ -10,6 +10,7 @@ export const UserProvider = ({ children }) => {
   const [readOnly, setReadOnly] = useState(true);
   const [updatedButton, setUpdatedButton] = useState(true);
   const [camera, setCamera] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
 
   const handleError = (error) => {
     if (error.response && error.response.data) {
@@ -88,6 +89,15 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const encodeDesc = async (desc) => {
+    try {
+      const response = await axios.post(`${Api_URL}/user/encode-desc`, desc);
+      return response.data;
+    } catch (error) {
+      return handleError(error);
+    }
+  }
+
   const userData = {
     showModalVerify,
     setShowModalVerify,
@@ -101,7 +111,10 @@ export const UserProvider = ({ children }) => {
     updateUserInfo,
     uploadFile,
     camera,
-    setCamera
+    setCamera,
+    encodeDesc,
+    isVerified,
+    setIsVerified
   };
 
   return (

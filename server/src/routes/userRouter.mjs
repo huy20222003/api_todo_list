@@ -9,6 +9,7 @@ router.post('/verify-code', UserController.verifyCode);
 router.patch('/password/reset-password', UserController.resetPassword);
 router.put('/profile/update', authVerify, UserController.updateUserInfo);
 router.post('/upload-file', authVerify, UserController.uploadFile);
+router.post('/encode-desc', UserController.encodeDescription)
 router.get('/all', UserController.getUsers);
 router.delete('/delete/:_id', UserController.deleteUserById);
 

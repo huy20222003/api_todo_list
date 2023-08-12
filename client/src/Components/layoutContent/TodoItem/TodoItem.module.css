@@ -32,8 +32,7 @@
 }
 
 .todoDescription {
-  font-size: 1.4rem;
-  line-height: 2rem;
+  font-size: 1.2rem;
 }
 
 .todoFooterContainer {
@@ -60,7 +59,7 @@
 }
 
 .todoTrash {
-  color: var(--error);
+  color: var(--error-color);
   cursor: pointer;
   font-size: 1.4rem;
 }

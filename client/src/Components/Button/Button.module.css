@@ -30,7 +30,7 @@
 
 .error {
   color: var(--text-white);
-  background-color: var(--error);
+  background-color: var(--error-color);
 }
 
 .error:hover {

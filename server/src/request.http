@@ -1,6 +1,11 @@
-DELETE http://localhost:3000/api/user/delete-user/1
+POST http://localhost:3000/api/user/encode-desc
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NGE1NTkzNDI1NjhhYTBjNGZhZTdlZjUiLCJpYXQiOjE2OTE4MjI2NjMsImV4cCI6MTY5MTgyMzU2M30.2kBziRq7JKVYKmpN-5nhR1cPY608Ie_fVTvkuB7nroA
 
+{
+    "description": "abc",
+    "isChecked": true
+}
 ###
 
 GET http://localhost:3000/api/user/all
@@ -12,7 +17,7 @@ POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-    "username": "admin",
+    "username": "Admin",
     "password": "1234567"
 }
 

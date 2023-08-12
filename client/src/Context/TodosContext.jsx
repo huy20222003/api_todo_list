@@ -34,7 +34,7 @@ export const TodosProvider = ({ children }) => {
     }
   };
 
-  const getAll = useCallback(async () => {
+  const getAll = async () => {
     try {
       const response = await axios.get(`${Api_URL}/todos/all`);
       if (response.data.success) {
@@ -43,7 +43,7 @@ export const TodosProvider = ({ children }) => {
     } catch (error) {
       return handleError(error);
     }
-  }, []);
+  };
 
   useEffect(() => {
     getAll();

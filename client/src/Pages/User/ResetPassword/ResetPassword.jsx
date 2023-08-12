@@ -10,8 +10,38 @@ import Button from '../../../Components/Button';
 
 const ResetPassword = () => {
   const [emailReset, setEmailReset] = useState('');
-  const { sendCode, setShowModalVerify } = useContext(UserContext);
+  const { sendCode, setShowModalVerify, updatePassword, isVerified } =
+    useContext(UserContext);
+  const [updateForm, setUpdateForm] = useState({
+    newPassword: '',
+    confirmPassword: '',
+  });
   const navigate = useNavigate();
+
+  const { newPassword, confirmPassword } = updateForm;
+
+  const handleChangeUpdatePasswordForm = (e) => {
+    setUpdateForm({ ...updateForm, [e.target.name]: e.target.value });
+  };
+
+  const handleUpdatePasswordAfterReset = async (e) => {
+    e.preventDefault();
+    if (newPassword != confirmPassword) {
+      toast.info('Password incorrect!');
+    } else {
+      try {
+        const updateData = await updatePassword(updateForm);
+        if (!updateData.success) {
+          toast.error('Your verification code has expired');
+        } else {
+          toast.success(updateData.message);
+          navigate('/auth/login');
+        }
+      } catch (error) {
+        toast.error('Server error');
+      }
+    }
+  };
 
   const handleChangeresetPasswordForm = (e) => {
     setEmailReset(e.target.value);
@@ -26,7 +56,6 @@ const ResetPassword = () => {
         toast.error('Email does not exist');
       } else {
         toast.success('Password reset email has been sent');
-        navigate('/user/update-password');
         setShowModalVerify(true);
       }
     } catch (error) {
@@ -43,24 +72,56 @@ const ResetPassword = () => {
         <div className={styles.titleContainer}>
           <h3 className={styles.title}>Reset Password</h3>
         </div>
-        <form className={styles.resetForm} onSubmit={handleResetPassword}>
-          <FormInput
-            textName="email"
-            type="email"
-            icon="fa-solid fa-envelope"
-            onChange={handleChangeresetPasswordForm}
-            value={emailReset}
-            placeholder="Enter your old password"
-          />
-          <div className={styles.buttonContainer}>
-            <Button
-              textName="Save"
-              type="submit"
-              size="large"
-              color="primary"
+        {isVerified ? (
+          <form
+            className={styles.resetForm}
+            onSubmit={handleUpdatePasswordAfterReset}
+          >
+            <FormInput
+              textName="newPassword"
+              type="password"
+              icon="fa-solid fa-lock"
+              onChange={handleChangeUpdatePasswordForm}
+              value={newPassword}
+              placeholder="Enter your new password"
             />
-          </div>
-        </form>
+            <FormInput
+              textName="confirmPassword"
+              type="password"
+              icon="fa-solid fa-lock"
+              onChange={handleChangeUpdatePasswordForm}
+              value={confirmPassword}
+              placeholder="Confirm your new password"
+            />
+            <div>
+              <Button
+                textName="Save"
+                type="submit"
+                size="large"
+                color="primary"
+              />
+            </div>
+          </form>
+        ) : (
+          <form className={styles.resetForm} onSubmit={handleResetPassword}>
+            <FormInput
+              textName="email"
+              type="email"
+              icon="fa-solid fa-envelope"
+              onChange={handleChangeresetPasswordForm}
+              value={emailReset}
+              placeholder="Enter your old password"
+            />
+            <div className={styles.buttonContainer}>
+              <Button
+                textName="Save"
+                type="submit"
+                size="large"
+                color="primary"
+              />
+            </div>
+          </form>
+        )}
       </div>
     </div>
   );

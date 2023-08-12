@@ -26,7 +26,7 @@ export const LabelsProvider = ({ children }) => {
     }
   };
 
-  const getAllLabels = useCallback(async () => {
+  const getAllLabels = async () => {
     try {
       const response = await axios.get(`${Api_URL}/label/all`);
       if (response.data.success) {
@@ -35,7 +35,7 @@ export const LabelsProvider = ({ children }) => {
     } catch (error) {
       return handleError(error);
     }
-  }, []);
+  };
 
   useEffect(() => {
     getAllLabels();

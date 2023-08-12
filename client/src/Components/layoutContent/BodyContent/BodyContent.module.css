@@ -10,6 +10,8 @@
   outline: none;
   font-size: 1.4rem;
   width: 9.5rem;
+  background-color: var(--bg-color);
+  color: var(--text-color);
 }
 
 .todoList {

@@ -13,7 +13,8 @@ const VerifyCode = () => {
     verifyCode,
     setReadOnly,
     setUpdatedButton,
-    setCamera
+    setCamera,
+    setIsVerified
   } = useContext(UserContext);
 
   const handleChange = (event) => {
@@ -31,6 +32,7 @@ const VerifyCode = () => {
         setReadOnly(false);
         setUpdatedButton(false);
         setCamera(true);
+        setIsVerified(true);
       }
     } catch (error) {
       toast.error('Server Error');

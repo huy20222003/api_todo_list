@@ -19,7 +19,7 @@ const HeaderContent = () => {
     <div className={styles.container}>
       <div className={styles.logoContainer}>
         <Link to="/dashboard" className={styles.logo}>
-          Todo List
+          Note App
         </Link>
       </div>
       <div className={styles.searchContainer}>

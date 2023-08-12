@@ -49,7 +49,7 @@
 }
 
 .closeButton:hover {
-  color: black;
+  color: var(--text-color);
 }
 
 .header {
@@ -61,6 +61,49 @@
   line-height: 3.2rem;
   font-weight: 700;
   margin: 0 0 0 4px;
+}
+
+.toggleSwitch {
+  position: relative;
+  display: inline-block;
+  width: 5rem;
+  height: 2.5rem;
+}
+
+.toggleSwitch input {
+  display: none;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  transition: 0.4s;
+  border-radius: 1.5rem;
+}
+
+.slider::before {
+  position: absolute;
+  content: '';
+  height: 2rem;
+  width: 2rem;
+  left: 0.1rem;
+  bottom: 0.2rem;
+  background-color: rgb(255, 255, 255);
+  transition: 0.4s;
+  border-radius: 50%;
+}
+
+.toggleSwitch input:checked + .slider {
+  background-color: var(--primary-color);
+}
+
+.toggleSwitch input:checked + .slider::before {
+  transform: translateX(3rem);
 }
 
 .buttonContainer {

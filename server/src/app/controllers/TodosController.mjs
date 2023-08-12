@@ -45,7 +45,7 @@ class TodosController {
   }
 
   async editTodo(req, res) {
-    const { name, label } = req.body;
+    const { name, description, label } = req.body;
     if (!name || !label) {
       return res
         .status(400)
@@ -55,7 +55,7 @@ class TodosController {
     try {
       const todo = await Todos.findOneAndUpdate(
         { _id: req.params._id, userId: req._id },
-        { name, label },
+        { name, description, label },
         { new: true }
       );
 

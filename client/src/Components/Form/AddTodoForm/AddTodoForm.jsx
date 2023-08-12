@@ -2,6 +2,7 @@ import { useContext, useState, memo, useCallback } from 'react';
 import { toast } from 'react-toastify';
 import { TodosContext } from '../../../Context/TodosContext';
 import { LabelsContext } from '../../../Context/LabelsContext';
+import { UserContext } from '../../../Context/UserContext';
 import styles from './AddTodoForm.module.css';
 import FormInput from '../FormInput';
 import Button from '../../Button';
@@ -9,6 +10,7 @@ import Button from '../../Button';
 const AddTodoForm = () => {
   const { showAddModal, setShowAddModal, createTodos } =
     useContext(TodosContext);
+  const { encodeDesc } = useContext(UserContext);
   const {
     labelState: { labels },
   } = useContext(LabelsContext);
@@ -17,6 +19,11 @@ const AddTodoForm = () => {
     description: '',
     label: '',
   });
+  const [isChecked, setIsChecked] = useState(false);
+
+  const handleToggle = async () => {
+    setIsChecked(!isChecked);
+  };
 
   const handleChange = useCallback((e) => {
     setAddTodoForm({ ...addTodoForm, [e.target.name]: e.target.value });
@@ -29,9 +36,9 @@ const AddTodoForm = () => {
     try {
       const addData = await createTodos(addTodoForm);
       if (!addData.success) {
-        toast.error('Add todo failed');
+        toast.error('Add Todo failed');
       } else {
-        toast.success('Add todo successfully!');
+        toast.success('Add Todo successfully!');
         setShowAddModal(false);
       }
     } catch (error) {
@@ -71,26 +78,26 @@ const AddTodoForm = () => {
             <i className={`fa-solid fa-xmark ${styles.closeButton}`}></i>
           </div>
           <div className={styles.header}>
-            <h1 className={styles.title}>ADD TODO</h1>
+            <h1 className={styles.title}>ADD Todo</h1>
           </div>
           <div>
             <FormInput
-              textName='name'
-              type='text'
-              icon='fa-solid fa-list-ol'
+              textName="name"
+              type="text"
+              icon="fa-solid fa-list-ol"
               value={name}
               required={true}
               onChange={handleChange}
-              placeholder='Enter your todo name'
+              placeholder="Enter your Todo name"
             />
             <FormInput
-              textName='description'
-              type='text'
-              icon='fa-solid fa-paragraph'
+              textName="description"
+              type="text"
+              icon="fa-solid fa-paragraph"
               value={description}
               textarea={true}
               onChange={handleChange}
-              placeholder='Enter your description'
+              placeholder="Enter your description"
             />
             <div className="formElements">
               <label htmlFor="label" className="label">
@@ -112,18 +119,13 @@ const AddTodoForm = () => {
           </div>
           <div className={styles.buttonContainer}>
             <Button
-              textName='Cancel'
-              type='button'
+              textName="Cancel"
+              type="button"
               onClick={handleCloseForm}
-              size='small'
-              color='error'
+              size="small"
+              color="error"
             />
-            <Button
-              textName='Add'
-              type='submit'
-              size='small'
-              color='primary'
-            />
+            <Button textName="Add" type="submit" size="small" color="primary" />
           </div>
         </form>
       </div>

@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import bcryptjs from 'bcryptjs';
 import { createTransport } from 'nodemailer';
 import cloudinary from '../../config/cloudinary/index.mjs';
+import { Base64 } from 'js-base64';
 import Users from '../models/Users.mjs';
 import Codes from '../models/Code.mjs';
 
@@ -46,13 +47,11 @@ class UserController {
         .status(200)
         .json({ success: true, message: 'An email has been sent.' });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          success: false,
-          message: 'An error occurred while processing the request.',
-          error: error.message
-        });
+      return res.status(500).json({
+        success: false,
+        message: 'An error occurred while processing the request.',
+        error: error.message,
+      });
     }
   }
 
@@ -81,13 +80,11 @@ class UserController {
         .status(404)
         .json({ success: false, message: 'Verification code is incorrect' });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          success: false,
-          message: 'An error occurred while processing the request.',
-          error: error.message
-        });
+      return res.status(500).json({
+        success: false,
+        message: 'An error occurred while processing the request.',
+        error: error.message,
+      });
     }
   }
 
@@ -95,12 +92,10 @@ class UserController {
     const { newPassword, email } = req.body;
     try {
       if (!newPassword || !email) {
-        return res
-          .status(400)
-          .json({
-            success: false,
-            message: 'Missing password or new password',
-          });
+        return res.status(400).json({
+          success: false,
+          message: 'Missing password or new password',
+        });
       }
 
       const hashedNewPassword = await bcryptjs.hash(newPassword, 10);
@@ -115,20 +110,16 @@ class UserController {
           .json({ success: false, message: 'Invalid user' });
       }
 
-      return res
-        .status(200)
-        .json({
-          success: true,
-          message: 'Password has been reset successfully.',
-        });
+      return res.status(200).json({
+        success: true,
+        message: 'Password has been reset successfully.',
+      });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          success: false,
-          message: 'An error occurred while processing the request.',
-          error: error.message
-        });
+      return res.status(500).json({
+        success: false,
+        message: 'An error occurred while processing the request.',
+        error: error.message,
+      });
     }
   }
 
@@ -165,13 +156,11 @@ class UserController {
 
       return res.status(200).json({ success: true, message: 'User updated' });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          success: false,
-          message: 'An error occurred while processing the request.',
-          error: error.message
-        });
+      return res.status(500).json({
+        success: false,
+        message: 'An error occurred while processing the request.',
+        error: error.message,
+      });
     }
   }
 
@@ -179,7 +168,7 @@ class UserController {
     const { file } = req.file;
     try {
       if (!file) {
-        return res.status(400).json( {
+        return res.status(400).json({
           success: false,
           message: 'Missing information',
         });
@@ -189,16 +178,35 @@ class UserController {
         upload_preset: process.env.UPLOAD_PRESET,
       });
 
-      return res.status(200).json( {
+      return res.status(200).json({
         success: true,
         message: 'Upload successful',
         imageUrl: result.secure_url,
       });
     } catch (error) {
-      return res.status(500).json( {
+      return res.status(500).json({
         success: false,
         message: 'Error uploading image',
-        error: error.message
+        error: error.message,
+      });
+    }
+  }
+
+  async encodeDescription(req, res) {
+    const { description, isChecked } = req.body;
+    try {
+      if (!isChecked) {
+        const encode = Base64.encode(description);
+        return res.status(200).json({ success: true, message: 'OK', data: encode });
+      } else {
+        const encode = Base64.encode(description);
+        return res.status(200).json({ success: true, message: 'OK', data: encode });
+      }
+    } catch (error) {
+      return res.status(500).json({
+        success: false,
+        message: 'Error uploading image',
+        error: error.message,
       });
     }
   }
@@ -210,13 +218,11 @@ class UserController {
         .status(200)
         .json({ success: true, message: 'Get Successful!', data: users });
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          success: false,
-          message: 'An error occurred while processing the request.',
-          error: error.message
-        });
+      return res.status(500).json({
+        success: false,
+        message: 'An error occurred while processing the request.',
+        error: error.message,
+      });
     }
   }
 
@@ -233,13 +239,11 @@ class UserController {
           .json({ success: true, message: 'Delete user successful!' });
       }
     } catch (error) {
-      return res
-        .status(500)
-        .json({
-          success: false,
-          message: 'An error occurred while processing the request.',
-          error: error.message
-        });
+      return res.status(500).json({
+        success: false,
+        message: 'An error occurred while processing the request.',
+        error: error.message,
+      });
     }
   }
 }
