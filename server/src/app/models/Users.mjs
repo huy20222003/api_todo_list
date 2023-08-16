@@ -38,6 +38,12 @@ const Users = new Schema({
     default:
       'https://antimatter.vn/wp-content/uploads/2022/11/anh-avatar-trang-fb-mac-dinh.jpg',
   },
+  roles: {
+    type: Schema.Types.ObjectId,
+    ref: 'roles'
+  }
+}, {
+  timestamps: true
 });
 
 Users.pre('save', async function (next) {
@@ -83,5 +89,26 @@ Users.methods.generateAccessToken = function () {
 Users.methods.generateRefreshToken = function () { 
   return jwt.sign({ _id: this._id }, process.env.REFRESH_TOKEN_SECRET, { expiresIn: '365d' });
 };
+
+Users.methods.addRole = async function (role) {
+  try {
+    this.roles = role._id;
+    await this.save();
+
+    role.userId = this._id;
+    await role.save();
+
+    return {
+      status: true,
+      message: 'Role added successfully',
+    };
+  } catch (error) {
+    return {
+      status: false,
+      message: 'Error adding role',
+    };
+  }
+};
+
 
 export default model('users', Users);

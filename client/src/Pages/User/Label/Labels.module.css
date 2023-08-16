@@ -16,6 +16,17 @@
   margin: 10rem 0 0 0;
 }
 
+.titleContainer {
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 1.6rem;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  text-align: center;
+}
+
 .labelList {
   display: flex;
   flex-wrap: wrap;

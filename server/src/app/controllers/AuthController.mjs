@@ -2,6 +2,7 @@ import dotenv from 'dotenv';
 import Users from '../models/Users.mjs';
 import jwt from 'jsonwebtoken';
 import bcryptjs from 'bcryptjs';
+import Roles from '../models/Roles.mjs';
 
 dotenv.config();
 
@@ -46,7 +47,8 @@ class AuthController {
       }
 
       const newUser = new Users({ fullName, username, email, password });
-      await newUser.save();
+      const role = new Roles({name: 'user'});
+      newUser.addRole(role);
 
       const accessToken = newUser.generateAccessToken();
       const refreshToken = newUser.generateRefreshToken();
@@ -150,6 +152,30 @@ class AuthController {
         message: 'An error occurred while processing the request.',
         error: error.message,
       });
+    }
+  }
+
+  async updateRoles(req, res){
+    try {
+      const { name } = req.body;
+  
+      const user = await Users.findById(req._id);
+      
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+  
+      const role = await Roles.findById(user.roles);
+      if (!role) {
+        return res.status(404).json({ message: 'Role not found' });
+      }
+  
+      role.name = name;
+      await role.save();
+  
+      return res.json({ message: 'Updated role successfully' });
+    } catch (error) {
+      return res.status(500).json({ message: 'Internal server error' });
     }
   }
 }

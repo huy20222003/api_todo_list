@@ -1,63 +1,66 @@
-import dotenv from 'dotenv';
-dotenv.config();
-import express from 'express';
 import AdminJS from 'adminjs';
 import AdminJSExpress from '@adminjs/express';
-import * as AdminJSMongoose from '@adminjs/mongoose';
+import { Database, Resource } from '@adminjs/mongoose';
+import express from 'express';
 import Users from './app/models/Users.mjs';
+import Label from './app/models/Label.mjs';
+import Todos from './app/models/Todos.mjs';
+import Code from './app/models/Code.mjs';
 import connectDB from './config/database/index.mjs';
 
 const PORT = 5000;
 
-const DEFAULT_ADMIN = {
-  email: 'huy20222003@gmail.com',
-  password: '1234567',
-};
-
-const authenticate = async (email, password) => {
-  if (email === DEFAULT_ADMIN.email && password === DEFAULT_ADMIN.password) {
-    return Promise.resolve(DEFAULT_ADMIN);
-  }
-  return null;
-};
-
-AdminJS.registerAdapter({
-  Resource: AdminJSMongoose.Resource,
-  Database: AdminJSMongoose.Database,
-});
+AdminJS.registerAdapter({ Database, Resource });
 
 const start = async () => {
+  const app = express();
   await connectDB();
 
-  const adminOptions = {
-    resources: [Users],
-  };
+  const usersNavigation = {
+    name: 'Users',
+    icon: 'User',
+  }
 
-  const admin = new AdminJS(adminOptions);
+  const todosNavigation = {
+    name: 'Todos',
+    icon: 'Todo',
+  }
 
-  const adminRouter = AdminJSExpress.buildAuthenticatedRouter(
-    admin,
-    {
-      authenticate,
-      cookieName: 'adminjs',
-      cookiePassword: 'sessionsecret',
-    },
-    null,
-    {
-      resave: true,
-      saveUninitialized: true,
-      secret: 'sessionsecret',
-      cookie: {
-        httpOnly: process.env.NODE_ENV === 'dev',
-        secure: process.env.NODE_ENV === 'dev',
+  const labelsNavigation = {
+    name: 'Labels',
+    icon: 'Label',
+  }
+
+  const codesNavigation = {
+    name: 'Code',
+    icon: 'Code',
+  }
+
+  const admin = new AdminJS({
+    resources: [
+      {
+        resource: Users,
+        options: {
+          navigation: usersNavigation,
+        },
       },
-      name: 'adminjs',
-    }
-  );
+      {
+        resource: Todos,
+        options: {
+          navigation: todosNavigation,
+        },
+      },
+      {
+        resource: Label,
+        options: {
+          navigation: labelsNavigation,
+        },
+      },
+    ],
+    rootPath: '/admin',
+  });
 
-  const app = express();
-
-  // Sử dụng router của AdminJS
+  const adminRouter = AdminJSExpress.buildRouter(admin);
   app.use(admin.options.rootPath, adminRouter);
 
   app.listen(PORT, () => {

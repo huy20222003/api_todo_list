@@ -1,5 +1,4 @@
-import { Schema as _Schema, model } from 'mongoose';
-const Schema = _Schema;
+import { Schema, model } from 'mongoose';
 
 const Todos = new Schema(
   {

@@ -18,6 +18,9 @@ const Labels = () => {
         <HeaderContent />
       </div>
       <div className={styles.content}>
+        <div className={styles.titleContainer}>
+          <h2 className={styles.title}>List Label</h2>
+        </div>
         <div className={styles.labelList}>
           <Suspense fallback={<Loader />}>
             <LabelItem />
