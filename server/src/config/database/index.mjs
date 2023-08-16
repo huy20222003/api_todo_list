@@ -5,7 +5,7 @@ import { connect } from 'mongoose';
 async function connectDB() {
   try {
     connect(
-      `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@todolist.2upbpt5.mongodb.net/myappdb?retryWrites=true&w=majority`,
+      `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@todolist.2upbpt5.mongodb.net/todolist?retryWrites=true&w=majority`,
       {
         useNewUrlParser: true,
       }
